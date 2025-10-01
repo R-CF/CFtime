@@ -1,6 +1,6 @@
 Package: CFtime
 Title: Using CF-Compliant Calendars with Climate Projection Data
-Version: 1.7.1
+Version: 1.7.1.9000
 Authors@R: 
     person("Patrick", "Van Laake", , "patrick@vanlaake.net", role = c("aut", "cre", "cph"))
 Description: Support for all calendars as specified in the Climate and Forecast 
@@ -22,7 +22,7 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     stringr
-URL: https://github.com/R-CF/CFtime, https://r-cf.github.io/CFtime/
+URL: https://github.com/R-CF/CFtime
 BugReports: https://github.com/R-CF/CFtime/issues
 Config/testthat/edition: 3
 Collate: 

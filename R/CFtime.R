@@ -186,8 +186,8 @@ CFTime <- R6::R6Class("CFTime",
         stop("Format specifier not recognized", call. = FALSE) # nocov
 
       if (asPOSIX) {
-        if (format == "date") ISOdate(time$year, time$month, time$day, 0L)
-        else ISOdatetime(time$year, time$month, time$day, time$hour, time$minute, time$second, "UTC")
+        if (format == "date") ISOdate(time$year, time$month, time$day, 0L, tz = "UTC")
+        else ISOdatetime(time$year, time$month, time$day, time$hour, time$minute, time$second, tz = "UTC")
       } else .format_format(time, self$cal$timezone, format)
     },
 
@@ -279,8 +279,8 @@ CFTime <- R6::R6Class("CFTime",
     #' @param rightmost.closed Whether or not to include the upper limit of
     #'   argument `x`. Default is `FALSE`. This argument is ignored when
     #'   argument `x` contains index values.
-    #' @return A numeric vector giving indices into `self` for the values of
-    #'   `x`. If there is at least 1 valid index, then attribute "CFTime"
+    #' @return A numeric vector giving indices into `self` for the valid values
+    #'   of `x`. If there is at least 1 valid index, then attribute "CFTime"
     #'   contains an instance of `CFTime` that describes the dimension of
     #'   filtering the dataset associated with `self` with the result of this
     #'   method, excluding any `NA` values.
@@ -977,3 +977,21 @@ str.CFTime <- function(object, ...) {
       "] having ", length(object$offsets), " offset values", sep = "")
 }
 
+#' Subset a `CFTime` instance by position in the time series
+#'
+#' @param x A `CFTime` instance.
+#' @param i A vector a positive integer values to indicate which values to
+#'   extract from the time series by position. If negative values are passed,
+#'   their positive counterparts will be excluded and then the remainder
+#'   returned. Positive and negative values may not be mixed.
+#' @param ... Ignored.
+#' @return A numeric vector with those values of `i` (or the inverse, when
+#'   negative) that are valid in `x`. If there is at least 1 valid result, then
+#'   attribute "CFTime" of the returned value contains an instance of `CFTime`
+#'   that describes the dimension of filtering the dataset associated with `x`
+#'   with the result of this function, excluding any `NA` values.
+#' @export
+#' @references https://github.com/R-CF/CFtime/issues/20
+"[.CFTime" = function(x, i = TRUE, ...) {
+  x$indexOf(i)
+}

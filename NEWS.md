@@ -1,9 +1,12 @@
+# CFtime (development version)
+
 # CFtime 1.7.1
 
 Maintenance release
 
 * Added `length` field to class `CFTime`.
 * Added `format.CFTime()` S3 method.
+* Added `"[.CFTime"` S3 method.
 * Documentation has been moved from vignettes to a website on github.io.
 
 # CFtime 1.7.0

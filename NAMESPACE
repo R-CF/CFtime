@@ -2,6 +2,7 @@
 
 S3method("+",CFTime)
 S3method("==",CFTime)
+S3method("[",CFTime)
 S3method(as.character,CFTime)
 S3method(cut,CFTime)
 S3method(length,CFTime)

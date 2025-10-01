@@ -303,8 +303,8 @@ argument \code{x} contains index values.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A numeric vector giving indices into \code{self} for the values of
-\code{x}. If there is at least 1 valid index, then attribute "CFTime"
+A numeric vector giving indices into \code{self} for the valid values
+of \code{x}. If there is at least 1 valid index, then attribute "CFTime"
 contains an instance of \code{CFTime} that describes the dimension of
 filtering the dataset associated with \code{self} with the result of this
 method, excluding any \code{NA} values.
