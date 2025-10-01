@@ -9,7 +9,7 @@ represent the date and time in a selectable combination for each offset."></head
 
     <a class="navbar-brand me-2" href="../index.html">CFtime</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -133,8 +133,8 @@ the use of <code>strptime</code>-like format specifiers.</p></div>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">t2</span> <span class="op">&lt;-</span> <span class="fu"><a href="CFtime-function.html">CFtime</a></span><span class="op">(</span><span class="st">"days since 2002-01-21"</span>, <span class="st">"standard"</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="fu">as_timestamp</span><span class="op">(</span><span class="va">t2</span>, asPOSIX <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2002-02-05 GMT" "2002-02-06 GMT" "2002-02-07 GMT" "2002-02-08 GMT"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5] "2002-02-09 GMT" "2002-02-10 GMT"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2002-02-05 UTC" "2002-02-06 UTC" "2002-02-07 UTC" "2002-02-08 UTC"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5] "2002-02-09 UTC" "2002-02-10 UTC"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="fu">as_timestamp</span><span class="op">(</span><span class="va">t2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2002-02-05" "2002-02-06" "2002-02-07" "2002-02-08" "2002-02-09"</span>
