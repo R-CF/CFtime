@@ -20,7 +20,7 @@ The following calendars are supported:
 when the Gregorian calendar was adopted.
 \item \code{\link[=CFCalendarTAI]{tai}}, International Atomic Time clock with dates expressed using the Gregorian calendar.
 \item \code{\link[=CFCalendarUTC]{utc}}, Coordinated Universal Time clock with dates expressed using the Gregorian calendar.
-\item \code{\link[=CFCalendarJulian]{julian}}, every fourth year is a leap year (so including the years 1700, 1800, 1900, 2100, etc).
+\item \code{\link[=CFCalendarJulian]{julian}}, every fourth year is a leap year.
 \item \code{\link[=CFCalendar365]{noleap\\365_day}}, all years have 365 days.
 \item \code{\link[=CFCalendar366]{all_leap\\366_day}}, all years have 366 days.
 \item \code{\link[=CFCalendar360]{360_day}}, all years have 360 days, divided over 12 months of 30 days.
@@ -29,24 +29,23 @@ when the Gregorian calendar was adopted.
 \references{
 https://cfconventions.org/Data/cf-conventions/cf-conventions-1.12/cf-conventions.html#calendar
 }
-\section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{name}}{Descriptive name of the calendar, as per the CF Metadata
-Conventions.}
-
-\item{\code{definition}}{The string that defines the units and the origin, as
-per the CF Metadata Conventions.}
-
-\item{\code{unit}}{The numeric id of the unit of the calendar.}
-
-\item{\code{origin}}{\code{data.frame} with fields for the origin of the calendar.}
-}
-\if{html}{\out{</div>}}
-}
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
+\item{\code{name}}{(read-only) Name of the calendar, as per the CF Metadata
+Conventions.}
+
+\item{\code{definition}}{(read-only) The string that defines the units and the
+origin, as per the CF Metadata Conventions.}
+
+\item{\code{unit}}{(read-only) The numeric id of the unit of the calendar.}
+
+\item{\code{prefix_id}}{(read-only) The index value of the prefix of the time
+unit. If the unit does not have a prefix, returns the value 0L.}
+
+\item{\code{origin}}{(read-only) \code{data.frame} with fields for the origin of the
+calendar.}
+
 \item{\code{origin_date}}{(read-only) Character string with the date of the
 calendar.}
 
@@ -191,9 +190,9 @@ default to cover the majority of cases.
 \subsection{Method \code{is_compatible()}}{
 This method tests if the \code{CFCalendar} instance in argument
 \code{cal} is compatible with \code{self}, meaning that they are of the same
-class and have the same unit. Calendars "standard", and "gregorian" are
-compatible, as are the pairs of "365_day" and "no_leap", and "366_day"
-and "all_leap".
+class and have the same unit and prefix. Calendars "standard", and
+"gregorian" are compatible, as are the pairs of "365_day" and
+"no_leap", and "366_day" and "all_leap".
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{CFCalendar$is_compatible(cal)}\if{html}{\out{</div>}}
 }
@@ -216,9 +215,9 @@ and "all_leap".
 \subsection{Method \code{is_equivalent()}}{
 This method tests if the \code{CFCalendar} instance in argument
 \code{cal} is equivalent to \code{self}, meaning that they are of the same class,
-have the same unit, and equivalent origins. Calendars "standard", and
-"gregorian" are equivalent, as are the pairs of "365_day" and
-"no_leap", and "366_day" and "all_leap".
+have the same unit and prefix, and equivalent origins. Calendars
+"standard", and "gregorian" are equivalent, as are the pairs of
+"365_day" and "no_leap", and "366_day" and "all_leap".
 
 Note that the origins need not be identical, but their parsed values
 have to be. "2000-01" is parsed the same as "2000-01-01 00:00:00", for
@@ -235,8 +234,8 @@ instance.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-\code{TRUE} if the instance in argument \code{cal} is equivalent to
-\code{self}, \code{FALSE} otherwise.
+\code{TRUE} if the instance in argument \code{cal} is equivalent to \code{self},
+\code{FALSE} otherwise.
 }
 }
 \if{html}{\out{<hr>}}

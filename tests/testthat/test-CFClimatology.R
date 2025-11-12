@@ -3,8 +3,8 @@ test_that("CFClimatology works", {
   expect_error(CFClimatology$new("days since 2025-01-01", "360_day", 15 + 30 * 0:11))
 
   # Bad bounds
-  expect_error(CFClimatology$new("days since 2025-01-01", "360_day", 15 + 30 * 0:11,
-                                 matrix(c(80 * 0:11, 80 * 1:12), nrow = 2, byrow = T)))
+  expect_warning(CFClimatology$new("days since 2025-01-01", "360_day", 15 + 30 * 0:11,
+                                   matrix(c(80 * 0:11, 80 * 1:12), nrow = 2, byrow = T)))
 
   clim <- CFClimatology$new("days since 2025-01-01", "360_day", 15 + 30 * 0:11,
                             matrix(c(30 * 0:11, 30 * 1:12), nrow = 2, byrow = T))

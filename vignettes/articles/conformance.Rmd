@@ -27,7 +27,7 @@ This package is agnostic to the orientation of the axes in any data variable tha
 
 ## 4.4.1. Time Coordinate Units
 
-The `CFtime` package fully supports the units `"second"`, `"minute"`, `"hour"` and `"day"`, including abbreviated and/or plural forms. Unit `"second"` is (nominally) the SI second, a `"minute"` equals 60 seconds, an `"hour"` equals 3,600 seconds, and a `"day"` equals 86,400 seconds. This is exactly as expected, but refer to the `utc` calendar, below, for peculiarities of that calendar.
+The `CFtime` package fully supports the units `"second"`, `"minute"`, `"hour"` and `"day"`, including abbreviated and/or plural forms. Prefixes for decimal multiples and submultiples (section 3.1.3 of the conventions) may be used. Unit `"second"` is (nominally) the SI second, a `"minute"` equals 60 seconds, an `"hour"` equals 3,600 seconds, and a `"day"` equals 86,400 seconds. This is exactly as expected, but refer to the `utc` calendar, below, for peculiarities of that calendar.
 
 The `units` `"month"` and `"year"` are accepted on input but not using their definition in UDUNITS. Instead, `"year"` is a calendar year, so either 360, 365 or 366 days depending on its value and the calendar. A `"month"` is similarly a calendar month. Use of either of these time units is discouraged by the CF Metadata Conventions.
 

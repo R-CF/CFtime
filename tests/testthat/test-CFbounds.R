@@ -4,7 +4,7 @@ test_that("bounds works", {
   bnds <- rbind(0:9, 1:10)
 
   expect_null(t$get_bounds())          # no offsets
-  expect_error(t$set_bounds(bnds))   #
+  expect_warning(t$set_bounds(bnds))   #
 
   t <- t + off
   expect_null(t$bounds) # bounds not set
@@ -14,9 +14,9 @@ test_that("bounds works", {
   t$set_bounds(NULL)
   expect_null(t$bounds)
 
-  expect_error(bounds(t) <- matrix(1:12, nrow = 4))
-  expect_error(bounds(t) <- "plain wrong")
-  expect_error(bounds(t) <- bnds * 10)
+  expect_warning(bounds(t) <- matrix(1:12, nrow = 4))
+  expect_warning(bounds(t) <- "plain wrong")
+  expect_warning(bounds(t) <- bnds * 10)
 
   bounds(t) <- bnds
   expect_match(capture_output(t$print()), "Bounds  : set$")

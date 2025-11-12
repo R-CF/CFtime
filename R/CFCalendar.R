@@ -18,7 +18,7 @@ NULL
 #'   when the Gregorian calendar was adopted.
 #'   \item [`tai`][CFCalendarTAI], International Atomic Time clock with dates expressed using the Gregorian calendar.
 #'   \item [`utc`][CFCalendarUTC], Coordinated Universal Time clock with dates expressed using the Gregorian calendar.
-#'   \item [`julian`][CFCalendarJulian], every fourth year is a leap year (so including the years 1700, 1800, 1900, 2100, etc).
+#'   \item [`julian`][CFCalendarJulian], every fourth year is a leap year.
 #'   \item [`noleap\365_day`][CFCalendar365], all years have 365 days.
 #'   \item [`all_leap\366_day`][CFCalendar366], all years have 366 days.
 #'   \item [`360_day`][CFCalendar360], all years have 360 days, divided over 12 months of 30 days.
@@ -27,21 +27,45 @@ NULL
 #'   https://cfconventions.org/Data/cf-conventions/cf-conventions-1.12/cf-conventions.html#calendar
 #' @docType class
 CFCalendar <- R6::R6Class("CFCalendar",
+  private = list(
+    .name = "",
+    .definition = "",
+    .unit = -1L,
+
+    # The index into the CFt$prefixes data.frame, if a prefix is being used.
+    # Default value of 0L indicates no prefix.
+    .prefix = 0L,
+
+    .origin = data.frame(),
+
+    # This method parses the unit to see if it is known, including any prefix
+    # for multiples or sub-multiples (section 3.1.3 of the conventions)
+    parse_unit = function(x) {
+      units <- CFt$CFunits$unit
+
+      # Try exact match - case-insensitive
+      u <- which(units == tolower(x))
+      if (length(u))
+        return(list(prefix = 0L, unit = CFt$CFunits$id[u]))
+
+      # Try prefix + unit combinations - check longest unit names first
+      usort <- units[order(nchar(units), decreasing = TRUE)]
+      umatch <- which(endsWith(x, usort))
+      if (length(umatch)) {
+        for (m in 1:length(umatch)) {
+          u <- usort[umatch[m]]
+          pref <- sub(paste0(u, "$"), "", x)
+          pmatch <- match(pref, CFt$prefixes$name)
+          if (is.na(pmatch))
+            pmatch <- match(pref, CFt$prefixes$abbrev)
+          if (!is.na(pmatch))
+            return(list(prefix = pmatch, unit = CFt$CFunits$id[match(u, units)]))
+        }
+      }
+      return(list(prefix = 0L, unit = NA))
+    }
+  ),
   public = list(
-    #' @field name Descriptive name of the calendar, as per the CF Metadata
-    #' Conventions.
-    name = "",
-
-    #' @field definition The string that defines the units and the origin, as
-    #' per the CF Metadata Conventions.
-    definition = "",
-
-    #' @field unit The numeric id of the unit of the calendar.
-    unit = -1L,
-
-    #' @field origin `data.frame` with fields for the origin of the calendar.
-    origin = data.frame(),
-
     #' @description Create a new CF calendar.
     #' @param nm The name of the calendar. This must follow the CF Metadata
     #' Conventions.
@@ -49,20 +73,21 @@ CFCalendar <- R6::R6Class("CFCalendar",
     #' per the CF Metadata Conventions.
     initialize = function(nm, definition) {
       stopifnot(length(definition) ==  1L, length(nm) == 1L)
-      self$name <- tolower(nm)
-      self$definition <- definition
+      private$.name <- tolower(nm)
+      private$.definition <- definition
 
       parts <- strsplit(definition, " ")[[1L]]
       if ((length(parts) < 3L) || !(tolower(parts[2L]) %in% c("since", "after", "from", "ref", "per")))
         stop("Definition string does not appear to be a CF-compliant time coordinate description", call. = FALSE)
-      u <- which(CFt$CFunits$unit == tolower(parts[1L]))
-      if (length(u) == 0L) stop("Unsupported unit: ", parts[1L], call. = FALSE)
-      self$unit <- CFt$CFunits$id[u]
+      u <- private$parse_unit(parts[1L])
+      if (is.na(u$unit)) stop("Unsupported unit: ", parts[1L], call. = FALSE)
+      private$.unit <- u$unit
+      private$.prefix <- u$prefix
 
       dt <- self$parse(paste(parts[3L:length(parts)], collapse = " "))
       if (is.na(dt$year[1L]))
         stop("Definition string does not appear to be a CF-compliant time coordinate description: invalid base date specification", call. = FALSE)
-      self$origin <- dt
+      private$.origin <- dt
     },
 
     #' @description Print information about the calendar to the console.
@@ -73,8 +98,8 @@ CFCalendar <- R6::R6Class("CFCalendar",
       if (tz == "+0000") tz <- ""
       cat("CF calendar:",
           "\n  Origin  : ", self$origin_date, "T", self$origin_time, tz,
-          "\n  Units   : ", CFt$units$name[self$unit],
-          "\n  Type    : ", self$name, "\n",
+          "\n  Units   : ", paste0(if (private$.prefix) CFt$prefixes$name[private$.prefix], CFt$units$name[private$.unit]),
+          "\n  Type    : ", private$.name, "\n",
           sep = "")
       invisible(self)
     },
@@ -128,30 +153,31 @@ CFCalendar <- R6::R6Class("CFCalendar",
 
     #' @description This method tests if the `CFCalendar` instance in argument
     #'   `cal` is compatible with `self`, meaning that they are of the same
-    #'   class and have the same unit. Calendars "standard", and "gregorian" are
-    #'   compatible, as are the pairs of "365_day" and "no_leap", and "366_day"
-    #'   and "all_leap".
+    #'   class and have the same unit and prefix. Calendars "standard", and
+    #'   "gregorian" are compatible, as are the pairs of "365_day" and
+    #'   "no_leap", and "366_day" and "all_leap".
     #' @param cal Instance of a descendant of the `CFCalendar` class.
     #' @return `TRUE` if the instance in argument `cal` is compatible with
     #'   `self`, `FALSE` otherwise.
     is_compatible = function(cal) {
-      self$unit == cal$unit && class(self)[1L] == class(cal)[1L]
+      private$.unit == cal$unit && private$.prefix == cal$prefix_id &&
+      class(self)[1L] == class(cal)[1L]
     },
 
     #' @description This method tests if the `CFCalendar` instance in argument
     #'   `cal` is equivalent to `self`, meaning that they are of the same class,
-    #'   have the same unit, and equivalent origins. Calendars "standard", and
-    #'   "gregorian" are equivalent, as are the pairs of "365_day" and
-    #'   "no_leap", and "366_day" and "all_leap".
+    #'   have the same unit and prefix, and equivalent origins. Calendars
+    #'   "standard", and "gregorian" are equivalent, as are the pairs of
+    #'   "365_day" and "no_leap", and "366_day" and "all_leap".
     #'
     #'   Note that the origins need not be identical, but their parsed values
     #'   have to be. "2000-01" is parsed the same as "2000-01-01 00:00:00", for
     #'   instance.
     #' @param cal Instance of a descendant of the `CFCalendar` class.
-    #' @return `TRUE` if the instance in argument `cal` is equivalent to
-    #'   `self`, `FALSE` otherwise.
+    #' @return `TRUE` if the instance in argument `cal` is equivalent to `self`,
+    #'   `FALSE` otherwise.
     is_equivalent = function(cal) {
-      all(self$origin[1L,1L:6L] == cal$origin[1L,1L:6L]) &&  # Offset column is NA
+      all(private$.origin[1L,1L:6L] == cal$origin[1L,1L:6L]) &&  # Offset column is NA
       self$is_compatible(cal)
     },
 
@@ -290,9 +316,11 @@ CFCalendar <- R6::R6Class("CFCalendar",
         cap$offset <- rep(0, nrow(cap))     # this happens, f.i., when a CFCalendar is created
       } else {
         days <- self$date2offset(cap)
-        cap$offset <- round((days * 86400 + (cap$hour - self$origin$hour[1]) * 3600 +
-                             (cap$minute - self$origin$minute[1]) * 60 +
-                             cap$second - self$origin$second) / CFt$units$seconds[self$unit], 6)
+        pref <- if (private$.prefix) CFt$prefixes$multiplier[private$.prefix] else 1
+        cap$offset <- round((days * 86400 + (cap$hour - private$.origin$hour[1]) * 3600 +
+                             (cap$minute - private$.origin$minute[1]) * 60 +
+                             cap$second - private$.origin$second) /
+                             (CFt$units$seconds[private$.unit] * pref), 6)
       }
       cap
     },
@@ -313,10 +341,12 @@ CFCalendar <- R6::R6Class("CFCalendar",
                           hour = integer(), minute = integer(), second = numeric(),
                           tz = character(), offset = numeric()))
 
-      if (self$unit <= 4L) { # Days, hours, minutes, seconds
+      prefix <- if (private$.prefix) CFt$prefixes$multiplier[private$.prefix] else 1
+
+      if (private$.unit <= 4L) { # Days, hours, minutes, seconds
         # First add time: convert to seconds first, then recompute time parts
-        secs <- offsets * CFt$units$seconds[self$unit] +
-                self$origin$hour * 3600 + self$origin$minute * 60 + self$origin$second
+        secs <- offsets * CFt$units$seconds[private$.unit] * prefix +
+                private$.origin$hour * 3600 + private$.origin$minute * 60 + private$.origin$second
         days <- secs %/% 86400L            # overflow days
         secs <- round(secs %% 86400L, 3L)  # drop overflow days from time, round down to milli-seconds to avoid errors
 
@@ -329,9 +359,9 @@ CFCalendar <- R6::R6Class("CFCalendar",
         out <- if (any(days != 0L))
           self$offset2date(days)
         else
-          data.frame(year = rep(self$origin$year, len),
-                     month = rep(self$origin$month, len),
-                     day = rep(self$origin$day, len))
+          data.frame(year = rep(private$.origin$year, len),
+                     month = rep(private$.origin$month, len),
+                     day = rep(private$.origin$day, len))
 
         # Put it all back together again
         out$hour <- hrs
@@ -339,13 +369,13 @@ CFCalendar <- R6::R6Class("CFCalendar",
         out$second <- secs
         out$tz <- rep(self$timezone, len)
       } else { # Months, years
-        out <- self$origin[rep(1L, len), ]
-        if (self$unit == 5L) { # Offsets are months
-          months <- out$month + offsets - 1L
+        out <- private$.origin[rep(1L, len), ]
+        if (private$.unit == 5L) { # Offsets are months
+          months <- out$month + offsets * prefix - 1L
           out$month <- months %% 12L + 1L
           out$year <- out$year + months %/% 12L
         } else {               # Offsets are years
-          out$year <- out$year + offsets
+          out$year <- out$year + offsets * prefix
         }
       }
       out$offset <- offsets
@@ -354,6 +384,40 @@ CFCalendar <- R6::R6Class("CFCalendar",
 
   ),
   active = list(
+    #' @field name (read-only) Name of the calendar, as per the CF Metadata
+    #'   Conventions.
+    name = function(value) {
+      if (missing(value))
+        private$.name
+    },
+
+    #' @field definition (read-only) The string that defines the units and the
+    #'   origin, as per the CF Metadata Conventions.
+    definition = function(value) {
+      if (missing(value))
+        private$.definition
+    },
+
+    #' @field unit (read-only) The numeric id of the unit of the calendar.
+    unit = function(value) {
+      if (missing(value))
+        private$.unit
+    },
+
+    #' @field prefix_id (read-only) The index value of the prefix of the time
+    #' unit. If the unit does not have a prefix, returns the value 0L.
+    prefix_id = function(value) {
+      if (missing(value))
+        private$.prefix
+    },
+
+    #' @field origin (read-only) `data.frame` with fields for the origin of the
+    #'   calendar.
+    origin = function(value) {
+      if (missing(value))
+        private$.origin
+    },
+
     #' @field origin_date (read-only) Character string with the date of the
     #'   calendar.
     origin_date = function(value) {

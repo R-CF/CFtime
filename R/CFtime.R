@@ -109,7 +109,8 @@ CFTime <- R6::R6Class("CFTime",
         } else {
           el <- if (noff > 1L) {
             sprintf("  Elements: [%s .. %s] (average of %f %s between %d elements)\n",
-                   d[1L], d[2L], self$resolution, CFt$units$name[self$cal$unit], noff)
+                   d[1L], d[2L], self$resolution,
+                   paste0(if (self$cal$prefix_id) CFt$prefixes$name[self$cal$prefix_id], CFt$units$name[self$cal$unit]), noff)
           } else
             paste("  Element :", d[1L], "\n")
         }
@@ -117,8 +118,8 @@ CFTime <- R6::R6Class("CFTime",
         b <- if (is.null(private$.bounds)) "  Bounds  : not set\n"
              else "  Bounds  : set\n"
       }
-      cal <- capture.output(self$cal$print())
-      cat(paste(cal, collapse = "\n"), "\nTime series:\n",  el, b, sep = "")
+      self$cal$print()
+      cat("\nTime series:\n",  el, b, sep = "")
       invisible(self)
     },
 
@@ -358,18 +359,19 @@ CFTime <- R6::R6Class("CFTime",
         off <- self$offsets
         len <- length(off)
 
+        warn <- NULL
         if (len == 0L)
-          stop("Cannot set bounds when there are no offsets", call. = FALSE)
-
-        if (is.matrix(value) && is.numeric(value)) {
+          warn <- "Cannot set boundary values when there are no offsets"
+        else if (is.matrix(value) && is.numeric(value)) {
           if (!all(dim(value) == c(2L, len)))
-            stop("Replacement value has incorrect dimensions", call. = FALSE)
-        } else stop("Replacement value must be a numeric matrix or a single logical value", call. = FALSE)
+            warn <- "Replacement boundary values array has incorrect dimensions"
+        } else warn <- "Replacement boundary values must be a numeric matrix or a single logical value"
+        if (is.null(warn) && !(all(value[2L,] >= off) && all(off >= value[1L,])))
+          warn <- "Values of the replacement boundary values must surround the offset values"
 
-        if (!(all(value[2L,] >= off) && all(off >= value[1L,])))
-          stop("Values of the replacement value must surround the offset values", call. = FALSE)
-
-        private$.bounds <- value
+        if (is.null(warn))
+          private$.bounds <- value
+        else warning(warn, call. = FALSE)
       }
       invisible(self)
     },

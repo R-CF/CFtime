@@ -1,5 +1,12 @@
 # CFtime (development version)
 
+Maintenance release
+
+* Time units can use SI decimal multiples or sub-multiples, such as "µs" or "kiloyear".
+* Setting bad boundary values generates a warning instead of an error.
+* `CFCalendar` and subclasses use active fields for all properties.
+* CRAN landing page links to github.io documentation.
+
 # CFtime 1.7.1
 
 Maintenance release

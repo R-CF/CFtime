@@ -5,7 +5,7 @@
 * Additional checks have been performed with GHA and devtools::check(remote = TRUE, manual = TRUE)
 and devtools::check_win_devel().
 
-* This patch release 1.7.1 has some new functions and updates the documentation to the latest version of imported package ncdfCF to clear a breaking change.
+* This patch release 1.7.2 has some new functions and updates the documentation.
 
 ## revdepcheck results
 
