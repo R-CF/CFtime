@@ -63,7 +63,7 @@
 <p>CFtime is an R package that supports working with <a href="http://cfconventions.org" class="external-link">CF Metadata Conventions</a> time coordinates, specifically geared to time-referencing data sets of climate projections such as those produced under the <a href="https://www.wcrp-climate.org" class="external-link">World Climate Research Programme</a> and re-analysis data such as ERA5 from the European Centre for Medium-range Weather Forecasts (ECMWF).</p>
 <p>The data sets include in their metadata an epoch, or origin, a point in time from which other points in time are calculated. This epoch takes the form of <code>days since 1949-12-01</code>, with each data collection (Coupled Model Intercomparison Project (CMIP) generation, model, etc) having its own epoch. The data itself has a temporal dimension if a coordinate variable in the netCDF file has an attribute <code>units</code> with a string value describing an epoch. The coordinate variable, say “time”, has data values such as 43289, which are offsets from the epoch in units of the epoch string (“days” in this case). To convert this offset to a date, using a specific calendar, is what this package does. Given that the calendars supported by the CF Metadata Conventions are not compatible with <code>POSIXt</code>, this conversion is not trivial because the standard R date-time operations do not give correct results. That it is important to account for these differences is easily demonstrated:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/R-CF/CFtime" class="external-link">CFtime</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-cf.github.io/CFtime/">CFtime</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># POSIXt calculations on a standard calendar</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"1949-12-01"</span><span class="op">)</span> <span class="op">+</span> <span class="fl">43289</span></span>
@@ -183,7 +183,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

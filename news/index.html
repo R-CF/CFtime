@@ -40,9 +40,15 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="cftime-development-version">CFtime (development version)<a class="anchor" aria-label="anchor" href="#cftime-development-version"></a></h2>
-</div>
+<p>Maintenance release</p>
+<ul><li>Time units can use SI decimal multiples or sub-multiples, such as “µs” or “kiloyear”.</li>
+<li>Setting bad boundary values generates a warning instead of an error.</li>
+<li>
+<code>CFCalendar</code> and subclasses use active fields for all properties.</li>
+<li>CRAN landing page links to github.io documentation.</li>
+</ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.7.1" id="cftime-171">CFtime 1.7.1<a class="anchor" aria-label="anchor" href="#cftime-171"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.7.1" id="cftime-171">CFtime 1.7.1<a class="anchor" aria-label="anchor" href="#cftime-171"></a></h2><p class="text-muted">CRAN release: 2025-10-01</p>
 <p>Maintenance release</p>
 <ul><li>Added <code>length</code> field to class <code>CFTime</code>.</li>
 <li>Added <code><a href="../reference/format.CFTime.html">format.CFTime()</a></code> S3 method.</li>
@@ -103,14 +109,14 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.4.1" id="cftime-141">CFtime 1.4.1<a class="anchor" aria-label="anchor" href="#cftime-141"></a></h2><p class="text-muted">CRAN release: 2024-09-15</p>
-<ul><li>Method <code><a href="../reference/deprecated_functions.html">slab()</a></code> has an additional argument <code>rightmost.closed</code> to indicate if the upper extreme value should be included in the result.</li>
-<li>Fixed bounds information on CFtime instances returned from methods <code><a href="../reference/indexOf.html">indexOf()</a></code> and <code><a href="../reference/deprecated_functions.html">slab()</a></code>.</li>
+<ul><li>Method <code>slab()</code> has an additional argument <code>rightmost.closed</code> to indicate if the upper extreme value should be included in the result.</li>
+<li>Fixed bounds information on CFtime instances returned from methods <code><a href="../reference/indexOf.html">indexOf()</a></code> and <code>slab()</code>.</li>
 <li>Several minor code improvements.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.4.0" id="cftime-140">CFtime 1.4.0<a class="anchor" aria-label="anchor" href="#cftime-140"></a></h2><p class="text-muted">CRAN release: 2024-06-05</p>
 <ul><li>Bounds that define intervals around offsets can be associated with a CFtime instance and retrieved as raw offset values or as formatted timestamps.</li>
-<li>Methods that subset a CF time series (e.g. <code><a href="../reference/CFfactor.html">CFfactor()</a></code>, <code><a href="../reference/cut.CFTime.html">cut()</a></code>, <code><a href="../reference/deprecated_functions.html">slab()</a></code>) now have an attribute “CFtime” (among possible others) that describes the “time” dimension of the analysis result applying the subset. In other words, if CFtime instance ‘Acf’ describes the temporal dimension of data set ‘A’ and a factor ‘Af’ is generated from ‘Acf’, then <code>Bcf &lt;- attr(Af, "CFtime")</code> describes the temporal dimension of the result of, say, <code>B &lt;- apply(A, 1:2, tapply, Af, FUN)</code>.</li>
+<li>Methods that subset a CF time series (e.g. <code><a href="../reference/CFfactor.html">CFfactor()</a></code>, <code><a href="../reference/cut.CFTime.html">cut()</a></code>, <code>slab()</code>) now have an attribute “CFtime” (among possible others) that describes the “time” dimension of the analysis result applying the subset. In other words, if CFtime instance ‘Acf’ describes the temporal dimension of data set ‘A’ and a factor ‘Af’ is generated from ‘Acf’, then <code>Bcf &lt;- attr(Af, "CFtime")</code> describes the temporal dimension of the result of, say, <code>B &lt;- apply(A, 1:2, tapply, Af, FUN)</code>.</li>
 <li>New <code><a href="../reference/indexOf.html">indexOf()</a></code> method added that returns the indices of supplied timestamps in a CFtime instance, optionally with a fractional part. This can be used to extract specific time steps, or to interpolate between time steps using the fractional part, from the time dimension of the data set associated with the CFtime instance. A vector of indices (e.g. referring to slices of the data set) can also be supplied, in which case valid indices are returned, with the new CFtime instance.</li>
 <li>New <code><a href="../reference/cut.CFTime.html">cut()</a></code> method added to generate a factor, similar to <code><a href="https://rdrr.io/r/base/cut.POSIXt.html" class="external-link">cut.POSIXt()</a></code> but with some differences in the arguments.</li>
 <li>
@@ -119,7 +125,7 @@
 <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code> method added that generates a character vector of timestamps for the offsets in a CFtime instance. The format is specified using the flags used in <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strptime()</a></code>, with some limitations. In particular, locale-specific formatting is limited to month names and no weekday information can be generated. The <code><a href="https://rdrr.io/r/base/range.html" class="external-link">range()</a></code> method has a new “format” parameter to support the same functionality and timestamps can also be generated for the extremes of the bounds, if set.</li>
 <li>
 <code>as_character()</code> and <code><a href="https://rdrr.io/r/base/length.html" class="external-link">length()</a></code> methods added that return a vector of timestamps or the number of offsets in a CFtime instance, respectively.</li>
-<li>Several functions have been renamed (most notably <code>CFtimestamp()</code> to <code><a href="../reference/as_timestamp.html">as_timestamp()</a></code>, <code>CFcomplete()</code> to <code><a href="../reference/is_complete.html">is_complete()</a></code>, <code>CFrange()</code> to the standard generic method <code><a href="https://rdrr.io/r/base/range.html" class="external-link">range()</a></code>, and <code>CFsubset()</code> to <code><a href="../reference/deprecated_functions.html">slab()</a></code>) to be more consistent with the R universe. The original functions are now flagged as being deprecated. Some datum functions (deep down where regular mortals do not dwell) have been deleted.</li>
+<li>Several functions have been renamed (most notably <code>CFtimestamp()</code> to <code><a href="../reference/as_timestamp.html">as_timestamp()</a></code>, <code>CFcomplete()</code> to <code><a href="../reference/is_complete.html">is_complete()</a></code>, <code>CFrange()</code> to the standard generic method <code><a href="https://rdrr.io/r/base/range.html" class="external-link">range()</a></code>, and <code>CFsubset()</code> to <code>slab()</code>) to be more consistent with the R universe. The original functions are now flagged as being deprecated. Some datum functions (deep down where regular mortals do not dwell) have been deleted.</li>
 <li>Time zone designator “UTC” accepted when parsing timestamps to offsets.</li>
 <li>Minor code fixes, see GitHub commits.</li>
 <li>Documentation updated, with description of new functions.</li>
@@ -166,7 +172,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

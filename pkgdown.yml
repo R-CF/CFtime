@@ -1,11 +1,11 @@
 pandoc: 3.1.11
-pkgdown: 2.1.3
+pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   articles/cftime: cftime.html
   articles/conformance: conformance.html
   articles/processing: processing.html
-last_built: 2025-10-01T10:25Z
+last_built: 2025-11-12T11:41Z
 urls:
   reference: https://r-cf.github.io/CFtime/reference
   article: https://r-cf.github.io/CFtime/articles
