@@ -1,4 +1,4 @@
-# CFtime (development version)
+# CFtime 1.7.2
 
 Maintenance release
 
