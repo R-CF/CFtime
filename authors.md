@@ -7,7 +7,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/R-CF/CFtime/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/R-CF/CFtime/blob/v1.7.2/DESCRIPTION)
 
 Van Laake P (2025). *CFtime: Using CF-Compliant Calendars with Climate
 Projection Data*. R package version 1.7.2,
