@@ -1,6 +1,8 @@
 # Changelog
 
-## CFtime (development version)
+## CFtime 1.7.2
+
+CRAN release: 2025-11-12
 
 Maintenance release
 

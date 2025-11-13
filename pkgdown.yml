@@ -5,7 +5,7 @@ articles:
   articles/cftime: cftime.html
   articles/conformance: conformance.html
   articles/processing: processing.html
-last_built: 2025-11-12T11:41Z
+last_built: 2025-11-13T19:26Z
 urls:
   reference: https://r-cf.github.io/CFtime/reference
   article: https://r-cf.github.io/CFtime/articles
