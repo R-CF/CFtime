@@ -16,7 +16,7 @@
 #'
 #' @export
 #' @references
-#'   https://cfconventions.org/Data/cf-conventions/cf-conventions-1.12/cf-conventions.html#time-coordinate
+#'   https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate
 #' @docType class
 CFTime <- R6::R6Class("CFTime",
   private = list(

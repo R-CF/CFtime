@@ -20,7 +20,7 @@ information when processing data from netCDF files. Filtering and indexing of
 time values is supported, as is the generation of factors.
 }
 \references{
-https://cfconventions.org/Data/cf-conventions/cf-conventions-1.12/cf-conventions.html#time-coordinate
+https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}

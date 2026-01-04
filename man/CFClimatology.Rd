@@ -14,7 +14,7 @@ climatological bounds values and includes methods to query the structure of
 the climatological data.
 }
 \references{
-https://cfconventions.org/Data/cf-conventions/cf-conventions-1.12/cf-conventions.html#climatological-statistics
+https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#climatological-statistics
 }
 \section{Super class}{
 \code{\link[CFtime:CFTime]{CFtime::CFTime}} -> \code{CFClimatology}

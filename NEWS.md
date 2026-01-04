@@ -1,3 +1,10 @@
+# CFtime (development version)
+
+Maintenance release
+
+* Support for CF-1.13.
+* Documentation updated.
+
 # CFtime 1.7.2
 
 Maintenance release

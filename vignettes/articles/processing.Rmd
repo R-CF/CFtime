@@ -55,7 +55,7 @@ Building on the examples above of opening a file, creating a `CFTime` instance a
 ```{r}
 # Get the data for the "pr" data variable from the netCDF data set.
 # The `CFVariable$array()` method ensures that data are in standard R orientation.
-# Converts units of kg m-2 s-1 to mm/day.
+# Converts units of kg m-2 s-1 to mm.
 pr <- ds[["pr"]]$array() * 86400
 
 # Get a global attribute from the file
@@ -128,7 +128,7 @@ One significant advantage of this processing workflow is that it is easily paral
 
 ## Working with multiple files in a single data suite
 
-Due to the large size of typical climate projection data files, it is common to have a data suite that is contained in multiple files. A case in point is the CORDEX data set which breaks up the experiment period of 2006 - 2100 into 19 files of 5 years each, with each file covering a single parameter (temperature, precipitation, etc) over an entire domain (such as Europe, South Asia, Central America and the Caribbean, etc). The CFtime package can streamline processing of such multi-file data suites as well.
+Due to the large size of typical climate projection data files, it is common to have a data suite that is contained in multiple files. A case in point is the CORDEX data set which breaks up the experiment period of 2006-2100 into 19 files of 5 years each, with each file covering a single parameter (temperature, precipitation, etc) over an entire domain (such as Europe, South Asia, Central America and the Caribbean, etc). The CFtime package can streamline processing of such multi-file data suites as well.
 
 Assuming that you have your CORDEX files in a directory on disk, organized by domain and other properties such as the variable, GCM/RCM combination, experiment, etc, the process of preparing the files for processing could be encoded in a function as below. The argument `fn` is a list of file names to process, and `var` is the variable contained in the files. (There are no checks on argument sanity here, which should really be included. This function only makes sense for a single [domain, GCM/RCM, experiment, variable] combination. Also be aware of data size, CORDEX files are huge and stitching all domain data together will easily exhaust available memory and it may thus lead to very large swap files and very poor performance - use the `ncdfCF::CFVariable$subset()` method to read spatial or temporal chunks of data to avoid such problems.)
 

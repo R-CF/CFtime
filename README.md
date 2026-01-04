@@ -23,7 +23,7 @@ commit](https://img.shields.io/github/last-commit/R-CF/CFtime)](https://github.c
 <!-- badges: end -->
 
 CFtime is an R package that supports working with [CF Metadata
-Conventions](http://cfconventions.org) time coordinates, specifically
+Conventions](https://cfconventions.org) time coordinates, specifically
 geared to time-referencing data sets of climate projections such as
 those produced under the [World Climate Research
 Programme](https://www.wcrp-climate.org) and re-analysis data such as
@@ -62,29 +62,31 @@ valid date on a `360_day` calendar.)
 
 All defined calendars of the CF Metadata Conventions are supported:
 
-- `standard` or `gregorian`: This calendar is valid for the Common Era
-  only; it starts at 0001-01-01 00:00:00, i.e. 1 January of year 1. Time
-  periods prior to the introduction of the Gregorian calendar
-  (1582-10-15) use the `julian` calendar that was in common use then.
-  The 10-day gap between the Julian and Gregorian calendars is observed,
-  so dates in the range 5 to 14 October 1582 are invalid.
+- `standard` (or the deprecated `gregorian`): This calendar is valid for
+  the Common Era only; it starts at `0001-01-01T00:00:00`, i.e. 1
+  January of year 1. Time periods prior to the introduction of the
+  Gregorian calendar (`1582-10-15`) use the `julian` calendar that was
+  in common use then. The 10-day gap between the Julian and Gregorian
+  calendars is observed, so dates in the range 5 to 14 October 1582 are
+  invalid.
 - `proleptic_gregorian`: This calendar uses the Gregorian calendar for
   periods prior to the introduction of that calendar as well, and it
   extends to periods before the Common Era, e.g. year 0 and negative
   years.
 - `tai`: International Atomic Time, a global standard for linear time
   based on multiple atomic clocks: it counts seconds since its start at
-  1958-01-01 00:00:00. For presentation it uses the Gregorian calendar.
-  Timestamps prior to its start are not allowed.
+  `1958-01-01T00:00:00`. For presentation it uses the Gregorian
+  calendar. Timestamps prior to its start are not allowed.
 - `utc`: Coordinated Universal Time, the standard for civil timekeeping
   all over the world. It is based on International Atomic Time but it
   uses occasional leap seconds to remain synchronous with Earth’s
-  rotation around the Sun; at the end of 2024 it is 37 seconds behind
-  `tai`. It uses the Gregorian calendar with a start at 1972-01-01
-  00:00:00; earlier timestamps are not allowed. Future timestamps are
-  also not allowed because the insertion of leap seconds is
-  unpredictable. Most computer clocks synchronize against UTC but
-  calculations of periods do not consider leap seconds.
+  rotation around the Sun; at the end of 2025 it is 37 seconds behind
+  `tai`. It uses the Gregorian calendar with a start at
+  `1972-01-01T00:00:00`; earlier timestamps are not allowed. Future
+  timestamps are also not allowed because the insertion of leap seconds
+  is unpredictable. Most computer clocks synchronize against UTC but
+  calculations of periods do not consider leap seconds (but `CFtime`
+  does).
 - `julian`: The `julian` calendar has a leap year every four years,
   including centennial years. Otherwise it is the same as the `standard`
   calendar.

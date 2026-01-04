@@ -24,7 +24,7 @@ NULL
 #'   \item [`360_day`][CFCalendar360], all years have 360 days, divided over 12 months of 30 days.
 #' }
 #' @references
-#'   https://cfconventions.org/Data/cf-conventions/cf-conventions-1.12/cf-conventions.html#calendar
+#'   https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#calendar
 #' @docType class
 CFCalendar <- R6::R6Class("CFCalendar",
   private = list(
