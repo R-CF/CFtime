@@ -24,13 +24,14 @@ Conventions supports no less than 12 different calendar definitions,
 that, upon analysis, fall into 9 distinct calendars (from the
 perspective of computation of climate projections):
 
-- `standard` (or `gregorian`): The Gregorian calendar that is in common
-  use in many countries around the world, adopted by edict of Pope
-  Gregory XIII in 1582 and in effect from 15 October of that year. The
-  earliest valid time in this calendar is 0001-01-01 00:00:00 (1 January
-  of year 1) as year 0 does not exist and the CF Metadata Conventions
-  require the year to be positive, but noting that a Julian calendar is
-  used in periods before the Gregorian calendar was introduced.
+- `standard` (or `gregorian`, deprecated): The Gregorian calendar that
+  is in common use in many countries around the world, adopted by edict
+  of Pope Gregory XIII in 1582 and in effect from 15 October of that
+  year. The earliest valid time in this calendar is
+  `0001-01-01T00:00:00` (1 January of year 1) as year 0 does not exist
+  and the CF Metadata Conventions require the year to be positive, but
+  noting that a Julian calendar is used in periods before the Gregorian
+  calendar was introduced.
 - `proleptic_gregorian`: This is the Gregorian calendar with validity
   extended to periods prior to `1582-10-15`, including a year 0 and
   negative years. This calendar is the closest to what is being used in
@@ -39,18 +40,19 @@ perspective of computation of climate projections):
   does POSIXt), most computers are periodically synchronized against a
   time server running on UTC, which does include leap seconds.
 - `tai`: International Atomic Time, a global standard for linear time:
-  it counts seconds since its start at 1958-01-01 00:00:00. For
+  it counts seconds since its start at `1958-01-01T00:00:00`. For
   presentation it uses the Gregorian calendar. Timestamps prior to its
   start are not allowed.
 - `utc`: Coordinated Universal Time, the standard for civil timekeeping
   all over the world. It is based on International Atomic Time but it
   uses occasional leap seconds to remain synchronous with Earth’s
-  rotation around the Sun; at the end of 2024 it is 37 seconds behind
-  `tai`. It uses the Gregorian calendar with a start at 1972-01-01
-  00:00:00; earlier timestamps are not allowed. Future timestamps are
-  also not allowed because the insertion of leap seconds is
-  unpredictable. Most computer clocks synchronize with UTC but calculate
-  time intervals without accounting for leap seconds.
+  rotation around the Sun; at the end of 2025 it is 37 seconds behind
+  `tai`. It uses the Gregorian calendar with a start at
+  `1972-01-01T00:00:00`; earlier timestamps are not allowed. Future
+  timestamps are also not allowed because the insertion of leap seconds
+  is unpredictable. Most computer clocks synchronize with UTC but
+  calculate time intervals without accounting for leap seconds (but
+  `CFtime` does).
 - `julian`: Adopted in the year 45 BCE, every fourth year is a leap
   year. Originally, the Julian calendar did not have a monotonically
   increasing year assigned to it and there are indeed several Julian
@@ -58,7 +60,7 @@ perspective of computation of climate projections):
   to them. Common interpretation is currently that the year is the same
   as that of the Gregorian calendar. The Julian calendar is currently 13
   days behind the Gregorian calendar. As with the standard calendar, the
-  earliest valid time in this calendar is 0001-01-01 00:00:00.
+  earliest valid time in this calendar is `0001-01-01T00:00:00`.
 - `365_day` or `noleap`: “Model time” in which no years have a leap day.
   Negative years are allowed and year 0 exists.
 - `366_day` or `all_leap`: “Model time” in which all years have a leap
@@ -96,8 +98,8 @@ as_timestamp(CFtime("days since 1949-12-01", "360_day", 43289))
 Using standard `POSIXt` calculations gives a result that is about 21
 months off from the correct date - obviously an undesirable situation.
 This example is far from artificial: `1949-12-01` is the origin for all
-CORDEX data, covering the period 1950 - 2005 for historical experiments
-and the period 2006 - 2100 for RCP experiments (with some deviation
+CORDEX data, covering the period 1950-2005 for historical experiments
+and the period 2006-2100 for RCP experiments (with some deviation
 between data sets), and several models used in the CORDEX set use the
 `360_day` calendar. The `365_day` or `noleap` calendar deviates by about
 1 day every 4 years (disregarding centurial years), or about 24 days in
@@ -161,7 +163,7 @@ the `CFtime` package by the R6 class `CFTime`.
 The
 [`CFtime()`](https://r-cf.github.io/CFtime/reference/CFtime-function.md)
 function takes a description (which is actually a unit - “days” - in
-reference to an origin - “1949-12-01”), a calendar description, and a
+reference to an origin - `1949-12-01`), a calendar description, and a
 vector of *offsets* from that origin. Once a `CFTime` instance is
 created its origin and calendar cannot be changed anymore. Offsets may
 be added.
@@ -452,7 +454,7 @@ There are six periods defined for factoring:
 - `year`, to summarize data to yearly timescales
 - `season`, the meteorological seasons. Note that the month of December
   will be added to the months of January and February of the following
-  year, so the date “2020-12-01” yields the factor value “2021S1”.
+  year, so the date `2020-12-01` yields the factor value “2021S1”.
 - `quarter`, the standard quarters of the year.
 - `month`, monthly summaries, the default period.
 - `dekad`, 10-day period. Each month is subdivided in dekads as
@@ -607,7 +609,7 @@ number of seconds.
 If 27 seconds is of no concern to you or your application - perhaps your
 data has a daily resolution - then you can safely forget about the leap
 seconds in several of the calendars, in particular `standard` (for
-periods after 1582-10-15), `proleptic_gregorian` and `tai`. The `utc`
+periods after `1582-10-15`), `proleptic_gregorian` and `tai`. The `utc`
 calendar does account for leap seconds so consider if you should use
 that - this is the only calendar that considers leap seconds in
 calculation. These calendars support the generation of timestamps in

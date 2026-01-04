@@ -16,7 +16,7 @@ indexing of time values is supported, as is the generation of factors.
 
 ## References
 
-https://cfconventions.org/Data/cf-conventions/cf-conventions-1.12/cf-conventions.html#time-coordinate
+https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate
 
 ## Public fields
 

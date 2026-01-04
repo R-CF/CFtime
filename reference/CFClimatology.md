@@ -11,7 +11,7 @@ query the structure of the climatological data.
 
 ## References
 
-https://cfconventions.org/Data/cf-conventions/cf-conventions-1.12/cf-conventions.html#climatological-statistics
+https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#climatological-statistics
 
 ## Super class
 

@@ -215,7 +215,7 @@ periods relative to a baseline period could look like this:
 ``` r
 # Get the data for the "pr" data variable from the netCDF data set.
 # The `CFVariable$array()` method ensures that data are in standard R orientation.
-# Converts units of kg m-2 s-1 to mm/day.
+# Converts units of kg m-2 s-1 to mm.
 pr <- ds[["pr"]]$array() * 86400
 
 # Get a global attribute from the file
@@ -333,7 +333,7 @@ to easily make the code run on all available CPU cores.
 Due to the large size of typical climate projection data files, it is
 common to have a data suite that is contained in multiple files. A case
 in point is the CORDEX data set which breaks up the experiment period of
-2006 - 2100 into 19 files of 5 years each, with each file covering a
+2006-2100 into 19 files of 5 years each, with each file covering a
 single parameter (temperature, precipitation, etc) over an entire domain
 (such as Europe, South Asia, Central America and the Caribbean, etc).
 The CFtime package can streamline processing of such multi-file data

@@ -284,7 +284,7 @@ could look like this:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the data for the "pr" data variable from the netCDF data set.</span></span>
 <span><span class="co"># The `CFVariable$array()` method ensures that data are in standard R orientation.</span></span>
-<span><span class="co"># Converts units of kg m-2 s-1 to mm/day.</span></span>
+<span><span class="co"># Converts units of kg m-2 s-1 to mm.</span></span>
 <span><span class="va">pr</span> <span class="op">&lt;-</span> <span class="va">ds</span><span class="op">[[</span><span class="st">"pr"</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="fu">array</span><span class="op">(</span><span class="op">)</span> <span class="op">*</span> <span class="fl">86400</span></span>
 <span></span>
 <span><span class="co"># Get a global attribute from the file</span></span>
@@ -397,7 +397,7 @@ available CPU cores.</p>
 <p>Due to the large size of typical climate projection data files, it is
 common to have a data suite that is contained in multiple files. A case
 in point is the CORDEX data set which breaks up the experiment period of
-2006 - 2100 into 19 files of 5 years each, with each file covering a
+2006-2100 into 19 files of 5 years each, with each file covering a
 single parameter (temperature, precipitation, etc) over an entire domain
 (such as Europe, South Asia, Central America and the Caribbean, etc).
 The CFtime package can streamline processing of such multi-file data

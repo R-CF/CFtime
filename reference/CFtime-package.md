@@ -9,13 +9,13 @@ Intergovernmental Panel on Climate Change (IPCC). This package
 specifically allows the user to work with any of the CF-compliant
 calendars (many of which are not compliant with POSIXt). The CF time
 coordinate is formally defined in the [CF Metadata Conventions
-document](https://cfconventions.org/Data/cf-conventions/cf-conventions-1.12/cf-conventions.html#time-coordinate).
+document](https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate).
 
 ## Details
 
 This package also supports the creation of a "time" dimension, using
 class `CFClimatology`, for climatological statistics as defined
-[here](https://cfconventions.org/Data/cf-conventions/cf-conventions-1.12/cf-conventions.html#climatological-statistics).
+[here](https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#climatological-statistics).
 
 The package can create a
 [CFTime](https://r-cf.github.io/CFtime/reference/CFtime.md) or

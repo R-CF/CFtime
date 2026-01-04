@@ -39,7 +39,7 @@ The following calendars are supported:
 
 ## References
 
-https://cfconventions.org/Data/cf-conventions/cf-conventions-1.12/cf-conventions.html#calendar
+https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#calendar
 
 ## Active bindings
 

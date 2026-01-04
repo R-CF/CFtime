@@ -1,8 +1,8 @@
 # Conformance with the CF Metadata Conventions
 
-`CFtime` is based on version 1.12 of the CF Metadata Conventions. The
+`CFtime` is based on version 1.13 of the CF Metadata Conventions. The
 text for the *time coordinate* in the conventions may be consulted
-[here](https://cfconventions.org/Data/cf-conventions/cf-conventions-1.12/cf-conventions.html#time-coordinate).
+[here](https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate).
 
 > The *time coordinate* is one of four coordinate types that receive
 > “special treatment” in the conventions. The other three are longitude,
@@ -40,7 +40,11 @@ variable that references the time coordinate. Consequently, the
 (but the `ncdfCF` package handles both). Identification of a time
 coordinate is done by the `units` attribute, alone.
 
-## 4.4.1. Time Coordinate Units
+## 4.4.1. Time Coordinate Variables
+
+Fully conformant
+
+## 4.4.2. Time Coordinate Units
 
 The `CFtime` package fully supports the units `"second"`, `"minute"`,
 `"hour"` and `"day"`, including abbreviated and/or plural forms.
@@ -68,59 +72,39 @@ datetimes valid in specific calendars other than Gregorian (such as
 `2023-02-30` in the `360_day` calendar) are acceptable as well. The
 UDUNITS “packed” format is not supported.
 
-Timezone information can only use `00`, `15`, `30` and `45` to indicate
+Time zone offsets are supported on all calendars, with limitations. The
+`tai` and `utc` calendars may not use a time zone offset other than 0.
+Time zone offsets are ignored for all of the model calendars.
+
+Time zone offsets can only use `00`, `15`, `30` and `45` to indicate
 minutes; other minute offsets have never been used anywhere. A time zone
 value of `"UTC"` or `"GMT"` is accepted, as an extension to the
-conventions. Even though the conventions don’t indicate it, the `tai`
-and `utc` calendars can carry no time zone indication as that does not
-exist for either of these calendars.
+conventions.
 
-## 4.4.2. Calendar
+## 4.4.3. Calendar
 
 If a `calendar` attribute is not given, `"standard"` is assumed, being
 the default calendar as per the conventions.
 
-- `standard` (or the deprecated `gregorian`): Fully conformant, but leap
-  seconds are never considered (see below). The combination of a
-  *reference datetime* and other *datetimes* spanning the gap between
-  1582-10-05 and 1582-10-15, in either direction, is supported.
-- `proleptic_gregorian`: Fully conformant, but leap seconds are never
-  considered (see below).
-- `julian`: Fully conformant, but, despite the suggestion in the
-  conventions, leap seconds do not exist in this calendar and are thus
-  never considered.
-- `utc`: Fully conformant but with an origin of 1972-01-01T00:00:00
-  (earlier datetimes not allowed). Leap seconds are always accounted so
-  when a leap second is included, UTC time progresses like
+- `standard` (or the deprecated `gregorian`): Fully conformant. The
+  combination of a *reference datetime* and other *datetimes* spanning
+  the gap between 1582-10-05 and 1582-10-15, in either direction, is
+  supported.
+- `proleptic_gregorian`: Fully conformant.
+- `julian`: Fully conformant.
+- `utc`: Fully conformant. Leap seconds are always accounted so when a
+  leap second is included, UTC time progresses like
   `23:59:58 ... 23:59:59 ... 23:59:60 ... 00:00:00 ... 00:00:01`. This
   also extends to minutes
   `23:59:00 ... 23:59:60 ... 00:00:59 ... 00:01:59`, always adding 60
   seconds. Likewise for `hours` and `days`. Units `"year"` and `"month"`
-  are not allowed, and neither is any time zone indication.
+  are not allowed, and neither is any time zone indication other than 0.
 - `tai`: Fully conformant. Units `"year"` and `"month"` are not allowed,
-  and neither is any time zone indication.
+  and neither is any time zone indication other than 0.
 - `no_leap` / `365_day`: Fully conformant.
 - `all_leap` / `366_day`: Fully conformant.
 - `360_day`: Fully conformant.
 - `none`: Fully conformant.
-
-## 4.4.3. Leap seconds
-
-The `utc` calendar fully supports leap seconds.
-
-The `julian` calendar has no concept of leap seconds so these are never
-possible or considered. Using a leap second in a `julian` calendar is an
-error.
-
-In the `standard` and `proleptic_gregorian` calendars only the variant
-without leap seconds is considered. The `units_metadata` attribute is
-not considered, so assumed to be `"leap seconds: unknown"`. The
-assumption here is that if second accuracy for a data producer is
-essential, then the entire tool chain from observation equipment, to
-processing, to file recording will have to be of known characteristics
-with regards to UTC time and leap seconds and thus the `utc` calendar
-would be used, rather than `standard` or `proleptic_gregorian` with a
-caveat communicated through the `units_metdata` attribute.
 
 ## 4.4.4. Time Coordinates with no Annual Cycle
 
