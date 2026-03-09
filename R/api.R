@@ -476,58 +476,57 @@ slice <- function(x, extremes, rightmost.closed = FALSE) {
   length(e1$offsets) == length(e2$offsets) &&
   all(e1$offsets == e2$offsets)
 
-#' Extend a CFTime object
+#' Extend a CFTime or CFClimatology object
 #'
-#' A [CFTime] instance can be extended with this operator, using values from
-#' another `CFTime` instance, or a vector of numeric offsets or character
-#' timestamps. If the values come from another `CFTime` instance, the calendars
-#' of the two instances must be compatible If the calendars of the `CFTime`
-#' instances are not compatible, an error is thrown.
+#' A [CFTime] or [CFClimatology] instance can be extended with this operator,
+#' using values from another `CFTime` or `CFClimatology` instance, respectively,
+#' or a vector of numeric offsets or character timestamps. If the values come
+#' from another `CFTime` or `CFClimatology` instance, the calendars of the two
+#' instances must be compatible. If the calendars of the instances are not
+#' compatible, an error is thrown.
 #'
-#' The resulting `CFTime` instance will have the offsets of the original
-#' `CFTime` instance, appended with offsets from argument `e2` in the order that
-#' they are specified. If the new sequence of offsets is not monotonically
+#' The resulting `CFTime` or `CFClimatology` instance will have the offsets of
+#' the original instance, appended with offsets from argument `e2` in the order
+#' that they are specified. If the new sequence of offsets is not monotonically
 #' increasing a warning is generated (the COARDS metadata convention requires
 #' offsets to be monotonically increasing).
 #'
 #' There is no reordering or removal of duplicates. This is because the time
 #' series are usually associated with a data set and the correspondence between
-#' the data in the files and the `CFTime` instance is thus preserved. When
-#' merging the data sets described by this time series, the order must be
-#' identical to the merging here.
+#' the data in the files and the instance is thus preserved. When merging the
+#' data sets described by this time series, the order must be identical to the
+#' merging here.
 #'
 #' Note that when adding multiple vectors of offsets to a `CFTime` instance, it
 #' is more efficient to first concatenate the vectors and then do a final
-#' addition to the `CFTime` instance. So avoid
-#' `CFtime(definition, calendar, e1) + CFtime(definition, calendar, e2) + CFtime(definition, calendar, e3) + ...`
+#' addition to the `CFTime` instance. So avoid `CFtime(definition, calendar, e1) + CFtime(definition, calendar, e2) + CFtime(definition, calendar, e3) + ...`
 #' but rather do `CFtime(definition, calendar) + c(e1, e2, e3, ...)`. It is the
 #' responsibility of the operator to ensure that the offsets of the different
 #' data sets are in reference to the same calendar.
 #'
 #' Note also that `RNetCDF` and `ncdf4` packages both return the values of the
-#' "time" dimension as a 1-dimensional array. You have to `dim(time_values) <-
-#' NULL` to de-class the array to a vector before adding offsets to an existing
-#' `CFtime` instance.
+#' "time" dimension as a 1-dimensional array. You have to de-class the array to
+#' a vector before adding offsets to an existing `CFtime` instance.
 #'
-#' Any bounds that were set will be removed. Use [bounds()] to retrieve the
-#' bounds of the individual `CFTime` instances and then set them again after
-#' merging the two instances.
+#' If both operands to this operator are `CFTime` or `CFClimatology` instances
+#' and both have bounds set, then their bounds will be preserved in the result.
 #'
 #' @param e1 Instance of the `CFTime` class.
 #' @param e2 Instance of the `CFTime` class with a calendar compatible with that
-#'   of argument `e1`, or a numeric vector with offsets from the origin of
-#'   argument `e1`, or a vector of `character` timestamps in ISO8601 or UDUNITS
-#'   format.
+#'   of argument `e1`. This argument may also be a numeric vector with offsets
+#'   from the origin of argument `e1`, or a vector of `character` timestamps in
+#'   ISO8601 or UDUNITS format.
 #' @returns A `CFTime` object with the offsets of argument `e1` extended by the
 #'   values from argument `e2`.
 #' @export
 #' @aliases CFtime-merge
 #' @examples
-#' e1 <- CFtime("days since 1850-01-01", "gregorian", 0:364)
-#' e2 <- CFtime("days since 1850-01-01 00:00:00", "standard", 365:729)
+#' e1 <- CFTime$new("days since 1850-01-01", "gregorian", 0:364)
+#' e2 <- CFTime$new("days since 1850-01-01 00:00:00", "standard", 365:729)
 #' e1 + e2
 "+.CFTime" <- function(e1, e2) {
-  if (inherits(e2, "CFTime")) {
+  diff <- NULL
+  new_time <- if (inherits(e2, "CFTime")) {
     if (!e1$cal$is_compatible(e2$cal)) stop("Calendars not compatible", call. = FALSE) # nocov
     if (all(e1$cal$origin[1:6] == e2$cal$origin[1:6]))
       CFTime$new(e1$cal$definition, e1$cal$name, c(e1$offsets, e2$offsets))
@@ -541,6 +540,34 @@ slice <- function(x, extremes, rightmost.closed = FALSE) {
     time <- e1$cal$parse(e2)
     if (anyNA(time$year)) stop("Argument `e2` contains invalid timestamps", call. = FALSE) # nocov
     CFTime$new(e1$cal$definition, e1$cal$name, c(e1$offsets, time$offset))
+  }
+
+  if (!is.null(be1 <- e1$bounds) && !is.null(be2 <- e2$bounds)) {
+    if (!is.null(diff))
+      be2 <- be2 + diff
+    new_time$bounds <- cbind(be1, be2)
+  }
+
+  new_time
+}
+
+#' @title Extending a CFClimatology object
+#' @rdname plus-.CFTime
+#' @param c1,c2 Instances of the `CFClimatology` class, having compatible
+#'   calendars.
+#' @returns A `CFClimatology` object with the offsets of argument `c1` extended
+#'   by the values from argument `c2`.
+#' @export
+"+.CFClimatology" <- function(c1, c2) {
+  if (!inherits(c2, "CFClimatology"))
+    stop("Can only merge a `CFClimatology` instance to another `CFClimatology`")
+  if (!c1$cal$is_compatible(c2$cal)) stop("Calendars not compatible", call. = FALSE) # nocov
+
+  if (all(c1$cal$origin[1:6] == c2$cal$origin[1:6]))
+    CFClimatology$new(c1$cal$definition, c1$cal$name, c(c1$offsets, c2$offsets), cbind(c1$bounds, c2$bounds))
+  else {
+    diff <- c1$cal$parse(paste(c2$cal$origin_date, c2$cal$origin_time))$offset
+    CFClimatology$new(c1$cal$definition, c1$cal$name, c(c1$offsets, c2$offsets + diff), cbind(c1$bounds, c2$bounds + diff))
   }
 }
 

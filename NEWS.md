@@ -3,6 +3,8 @@
 Maintenance release
 
 * Support for CF-1.13.
+* `CFClimatology` instances can now be extended with the `+` operator.
+* When extending a `CFTime` or `CFClimatology` instance with another such instance using the `+` operator, bounds are preserved if both instances have bounds set.
 * Documentation updated.
 
 # CFtime 1.7.2

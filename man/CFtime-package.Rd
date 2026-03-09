@@ -38,7 +38,7 @@ are \href{https://cran.r-project.org/package=RNetCDF}{RNetCDF} and
 \item \code{\link[=properties]{Properties}} of the \code{CFTime} instance
 \item \code{\link[=parse_timestamps]{parse_timestamps()}}: Parse a vector of character timestamps into \code{CFTime} elements
 \item \code{\link[=CFtime-equivalent]{Compare}} two \code{CFTime} instances
-\item \code{\link[=CFtime-merge]{Merge}} two \code{CFTime} instances or append additional time steps to a \code{CFTime} instance
+\item \code{\link[=CFtime-merge]{Merge}} two \code{CFTime} or \code{CFClimatology} instances, or append additional time steps to a \code{CFTime} instance
 \item \code{\link[=as_timestamp]{as_timestamp()}} and \code{\link[=format]{format()}}: Generate a vector of character or \code{POSIXct} timestamps from a \code{CFTime} instance
 \item \code{\link[=range]{range()}}: Timestamps of the two endpoints in the time series
 \item \code{copy()}: Create a copy of a CFTime instance

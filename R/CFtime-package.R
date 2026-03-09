@@ -31,7 +31,7 @@
 #' * [`Properties`][properties] of the `CFTime` instance
 #' * [parse_timestamps()]: Parse a vector of character timestamps into `CFTime` elements
 #' * [`Compare`][CFtime-equivalent] two `CFTime` instances
-#' * [`Merge`][CFtime-merge] two `CFTime` instances or append additional time steps to a `CFTime` instance
+#' * [`Merge`][CFtime-merge] two `CFTime` or `CFClimatology` instances, or append additional time steps to a `CFTime` instance
 #' * [as_timestamp()] and [format()]: Generate a vector of character or `POSIXct` timestamps from a `CFTime` instance
 #' * [range()]: Timestamps of the two endpoints in the time series
 #' * `copy()`: Create a copy of a CFTime instance

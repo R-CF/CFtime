@@ -3,60 +3,68 @@
 \name{+.CFTime}
 \alias{+.CFTime}
 \alias{CFtime-merge}
-\title{Extend a CFTime object}
+\alias{+.CFClimatology}
+\title{Extend a CFTime or CFClimatology object}
 \usage{
 \method{+}{CFTime}(e1, e2)
+
+\method{+}{CFClimatology}(c1, c2)
 }
 \arguments{
 \item{e1}{Instance of the \code{CFTime} class.}
 
 \item{e2}{Instance of the \code{CFTime} class with a calendar compatible with that
-of argument \code{e1}, or a numeric vector with offsets from the origin of
-argument \code{e1}, or a vector of \code{character} timestamps in ISO8601 or UDUNITS
-format.}
+of argument \code{e1}. This argument may also be a numeric vector with offsets
+from the origin of argument \code{e1}, or a vector of \code{character} timestamps in
+ISO8601 or UDUNITS format.}
+
+\item{c1, c2}{Instances of the \code{CFClimatology} class, having compatible
+calendars.}
 }
 \value{
 A \code{CFTime} object with the offsets of argument \code{e1} extended by the
 values from argument \code{e2}.
+
+A \code{CFClimatology} object with the offsets of argument \code{c1} extended
+by the values from argument \code{c2}.
 }
 \description{
-A \link{CFTime} instance can be extended with this operator, using values from
-another \code{CFTime} instance, or a vector of numeric offsets or character
-timestamps. If the values come from another \code{CFTime} instance, the calendars
-of the two instances must be compatible If the calendars of the \code{CFTime}
-instances are not compatible, an error is thrown.
+A \link{CFTime} or \link{CFClimatology} instance can be extended with this operator,
+using values from another \code{CFTime} or \code{CFClimatology} instance, respectively,
+or a vector of numeric offsets or character timestamps. If the values come
+from another \code{CFTime} or \code{CFClimatology} instance, the calendars of the two
+instances must be compatible. If the calendars of the instances are not
+compatible, an error is thrown.
 }
 \details{
-The resulting \code{CFTime} instance will have the offsets of the original
-\code{CFTime} instance, appended with offsets from argument \code{e2} in the order that
-they are specified. If the new sequence of offsets is not monotonically
+The resulting \code{CFTime} or \code{CFClimatology} instance will have the offsets of
+the original instance, appended with offsets from argument \code{e2} in the order
+that they are specified. If the new sequence of offsets is not monotonically
 increasing a warning is generated (the COARDS metadata convention requires
 offsets to be monotonically increasing).
 
 There is no reordering or removal of duplicates. This is because the time
 series are usually associated with a data set and the correspondence between
-the data in the files and the \code{CFTime} instance is thus preserved. When
-merging the data sets described by this time series, the order must be
-identical to the merging here.
+the data in the files and the instance is thus preserved. When merging the
+data sets described by this time series, the order must be identical to the
+merging here.
 
 Note that when adding multiple vectors of offsets to a \code{CFTime} instance, it
 is more efficient to first concatenate the vectors and then do a final
-addition to the \code{CFTime} instance. So avoid
-\code{CFtime(definition, calendar, e1) + CFtime(definition, calendar, e2) + CFtime(definition, calendar, e3) + ...}
+addition to the \code{CFTime} instance. So avoid \code{CFtime(definition, calendar, e1) + CFtime(definition, calendar, e2) + CFtime(definition, calendar, e3) + ...}
 but rather do \code{CFtime(definition, calendar) + c(e1, e2, e3, ...)}. It is the
 responsibility of the operator to ensure that the offsets of the different
 data sets are in reference to the same calendar.
 
 Note also that \code{RNetCDF} and \code{ncdf4} packages both return the values of the
-"time" dimension as a 1-dimensional array. You have to \code{dim(time_values) <- NULL} to de-class the array to a vector before adding offsets to an existing
-\code{CFtime} instance.
+"time" dimension as a 1-dimensional array. You have to de-class the array to
+a vector before adding offsets to an existing \code{CFtime} instance.
 
-Any bounds that were set will be removed. Use \code{\link[=bounds]{bounds()}} to retrieve the
-bounds of the individual \code{CFTime} instances and then set them again after
-merging the two instances.
+If both operands to this operator are \code{CFTime} or \code{CFClimatology} instances
+and both have bounds set, then their bounds will be preserved in the result.
 }
 \examples{
-e1 <- CFtime("days since 1850-01-01", "gregorian", 0:364)
-e2 <- CFtime("days since 1850-01-01 00:00:00", "standard", 365:729)
+e1 <- CFTime$new("days since 1850-01-01", "gregorian", 0:364)
+e2 <- CFTime$new("days since 1850-01-01 00:00:00", "standard", 365:729)
 e1 + e2
 }
