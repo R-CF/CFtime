@@ -51,8 +51,8 @@ the two main options are
   two `CFTime` instances
 
 - [`Merge`](https://r-cf.github.io/CFtime/reference/plus-.CFTime.md) two
-  `CFTime` instances or append additional time steps to a `CFTime`
-  instance
+  `CFTime` or `CFClimatology` instances, or append additional time steps
+  to a `CFTime` instance
 
 - [`as_timestamp()`](https://r-cf.github.io/CFtime/reference/as_timestamp.md)
   and [`format()`](https://rdrr.io/r/base/format.html): Generate a

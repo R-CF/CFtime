@@ -94,7 +94,8 @@
   : Parse series of timestamps in CF format to date-time elements
 
 - [`` `+`( ``*`<CFTime>`*`)`](https://r-cf.github.io/CFtime/reference/plus-.CFTime.md)
-  : Extend a CFTime object
+  [`` `+`( ``*`<CFClimatology>`*`)`](https://r-cf.github.io/CFtime/reference/plus-.CFTime.md)
+  : Extend a CFTime or CFClimatology object
 
 - [`definition()`](https://r-cf.github.io/CFtime/reference/properties.md)
   [`calendar()`](https://r-cf.github.io/CFtime/reference/properties.md)
