@@ -18,22 +18,6 @@ indexing of time values is supported, as is the generation of factors.
 
 https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate
 
-## Public fields
-
-- `cal`:
-
-  The calendar of this `CFTime` instance, a descendant of the
-  [CFCalendar](https://r-cf.github.io/CFtime/reference/CFCalendar.md)
-  class.
-
-- `offsets`:
-
-  A numeric vector of offsets from the origin of the calendar.
-
-- `resolution`:
-
-  The average number of time units between offsets.
-
 ## Active bindings
 
 - `calendar`:
@@ -43,9 +27,22 @@ https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions
   [CFCalendar](https://r-cf.github.io/CFtime/reference/CFCalendar.md)
   class.
 
+- `cal`:
+
+  (read-only) DEPRECATED. Use the `calendar` field instead.
+
 - `unit`:
 
   (read-only) The unit string of the calendar and time series.
+
+- `offsets`:
+
+  (read-only) A numeric vector of offsets from the origin of the
+  calendar.
+
+- `resolution`:
+
+  (read-only) The average number of time units between offsets.
 
 - `length`:
 
@@ -381,8 +378,8 @@ Set or delete the boundary values of the `CFTime` instance.
 - `value`:
 
   The boundary values to set, in units of the offsets. A matrix
-  `(2, length(self$offsets))`. If `NULL`, the boundaries are deleted. If
-  `TRUE`, make regular, consecutive boundaries.
+  `(2, length(private$.offsets))`. If `NULL`, the boundaries are
+  deleted. If `TRUE`, make regular, consecutive boundaries.
 
 #### Returns
 

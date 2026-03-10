@@ -79,32 +79,28 @@ time values is supported, as is the generation of factors.</p>
     <p>https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate</p>
     </div>
     <div class="section level2">
-    <h2 id="public-fields">Public fields<a class="anchor" aria-label="anchor" href="#public-fields"></a></h2>
-    <p></p><div class="r6-fields"><dl><dt><code>cal</code></dt>
-<dd><p>The calendar of this <code>CFTime</code> instance, a descendant of the
-<a href="CFCalendar.html">CFCalendar</a> class.</p></dd>
-
-
-<dt><code>offsets</code></dt>
-<dd><p>A numeric vector of offsets from the origin of the
-calendar.</p></dd>
-
-
-<dt><code>resolution</code></dt>
-<dd><p>The average number of time units between offsets.</p></dd>
-
-
-</dl><p></p></div>
-    </div>
-    <div class="section level2">
     <h2 id="active-bindings">Active bindings<a class="anchor" aria-label="anchor" href="#active-bindings"></a></h2>
     <p></p><div class="r6-active-bindings"><dl><dt><code>calendar</code></dt>
 <dd><p>(read-only) The calendar of this <code>CFTime</code> instance, a
 descendant of the <a href="CFCalendar.html">CFCalendar</a> class.</p></dd>
 
 
+<dt><code>cal</code></dt>
+<dd><p>(read-only) DEPRECATED. Use the <code>calendar</code> field instead.</p></dd>
+
+
 <dt><code>unit</code></dt>
 <dd><p>(read-only) The unit string of the calendar and time series.</p></dd>
+
+
+<dt><code>offsets</code></dt>
+<dd><p>(read-only) A numeric vector of offsets from the origin of
+the calendar.</p></dd>
+
+
+<dt><code>resolution</code></dt>
+<dd><p>(read-only) The average number of time units between
+offsets.</p></dd>
 
 
 <dt><code>length</code></dt>
@@ -418,7 +414,7 @@ boundaries. <code>NULL</code> if the boundaries have not been set.</p>
 <h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>value</code></dt>
 <dd><p>The boundary values to set, in units of the offsets. A
-matrix <code>(2, length(self$offsets))</code>. If <code>NULL</code>, the boundaries are
+matrix <code>(2, length(private$.offsets))</code>. If <code>NULL</code>, the boundaries are
 deleted. If <code>TRUE</code>, make regular, consecutive boundaries.</p></dd>
 
 
