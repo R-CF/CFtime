@@ -44,7 +44,7 @@ CFClimatology <- R6::R6Class("CFClimatology",
       self$set_bounds(bounds)
 
       # Determine period and years from the bounds of the first offset
-      time <- self$cal$offsets2time(bounds[1L:2L, 1L])
+      time <- private$.cal$offsets2time(bounds[1L:2L, 1L])
       private$.years <- time$year
       if (all(time$day == 1L)) {
         if (all(time$month == 1L)) {
@@ -67,11 +67,11 @@ CFClimatology <- R6::R6Class("CFClimatology",
     #' @param ... Ignored.
     #' @return `self` invisibly.
     print = function(...) {
-      noff <- length(self$offsets)
+      noff <- length(private$.offsets)
       d <- self$range()
       el <- if (noff > 1L) {
         sprintf("  Elements: [%s .. %s] (average of %f %s between %d elements)\n",
-                d[1L], d[2L], self$resolution, CFt$units$name[self$cal$unit], noff)
+                d[1L], d[2L], private$.resolution, CFt$units$name[private$.cal$unit], noff)
       } else
         paste0("  Elements: ", d[1L], "\n")
 
@@ -79,7 +79,7 @@ CFClimatology <- R6::R6Class("CFClimatology",
       if (private$.years[1L] == private$.years[2L]) y <- paste0("  Year    : ", private$.years[1L], "\n")
       else y <- paste0("  Years   : ", private$.years[1L], " - ", private$.years[2L], " (inclusive)\n")
 
-      cal <- capture.output(self$cal$print())
+      cal <- capture.output(private$.cal$print())
       cat(paste(cal, collapse = "\n"), "\nClimatological time series:\n",  el, p, y, sep = "")
       invisible(self)
     }

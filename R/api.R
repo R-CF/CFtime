@@ -72,7 +72,7 @@ CFtime <- function(definition, calendar = "standard", offsets, from, to, by, len
       if (is.na(intv) || !length(intv_unit))
         stop("Argument `by` is an invalid time interval.", call. = FALSE)
 
-      doff <- intv * CFt$units$seconds[intv_unit] / CFt$units$seconds[t$cal$unit]
+      doff <- intv * CFt$units$seconds[intv_unit] / CFt$units$seconds[t$calendar$unit]
 
       # End point of the time series
       from_off <- t$offsets # There is only a single offset at this point
@@ -84,7 +84,7 @@ CFtime <- function(definition, calendar = "standard", offsets, from, to, by, len
         t + seq(from = from_off + doff, by = doff, length.out = length.out[1L] - 1L)
       } else {
         # Time series up to a finishing point
-        to_off <- t$cal$parse(to[1L])$offset
+        to_off <- t$calendar$parse(to[1L])$offset
         if (is.na(to_off))
           stop("Argument `to` must be a single character timestamp value.")
         t + seq(from = from_off + doff, to = to_off, by = doff)
@@ -124,11 +124,11 @@ CFtime <- function(definition, calendar = "standard", offsets, from, to, by, len
 
 #' @describeIn properties The definition string of the `CFTime` instance.
 #' @export
-definition <- function(t) t$cal$definition
+definition <- function(t) t$calendar$definition
 
 #' @describeIn properties The calendar of the `CFTime` instance.
 #' @export
-calendar <- function(t) t$cal$name
+calendar <- function(t) t$calendar$name
 
 #' @describeIn properties The unit of the `CFTime` instance.
 #' @export
@@ -136,11 +136,11 @@ unit <- function(t) t$unit
 
 #' @describeIn properties The origin of the `CFTime` instance in timestamp elements.
 #' @export
-origin <- function(t) t$cal$origin
+origin <- function(t) t$calendar$origin
 
 #' @describeIn properties The time zone of the calendar of the `CFTime` instance as a character string.
 #' @export
-timezone <- function(t) t$cal$timezone
+timezone <- function(t) t$calendar$timezone
 
 #' @describeIn properties The offsets of the `CFTime` instance as a numeric vector.
 #' @export
@@ -472,7 +472,7 @@ slice <- function(x, extremes, rightmost.closed = FALSE) {
 #' e2 <- CFtime("days since 1850-01-01 00:00:00", "standard", 0:364)
 #' e1 == e2
 "==.CFTime" <- function(e1, e2)
-  e1$cal$is_equivalent(e2$cal) &&
+  e1$calendar$is_equivalent(e2$calendar) &&
   length(e1$offsets) == length(e2$offsets) &&
   all(e1$offsets == e2$offsets)
 
@@ -527,19 +527,19 @@ slice <- function(x, extremes, rightmost.closed = FALSE) {
 "+.CFTime" <- function(e1, e2) {
   diff <- NULL
   new_time <- if (inherits(e2, "CFTime")) {
-    if (!e1$cal$is_compatible(e2$cal)) stop("Calendars not compatible", call. = FALSE) # nocov
-    if (all(e1$cal$origin[1:6] == e2$cal$origin[1:6]))
-      CFTime$new(e1$cal$definition, e1$cal$name, c(e1$offsets, e2$offsets))
+    if (!e1$calendar$is_compatible(e2$calendar)) stop("Calendars not compatible", call. = FALSE) # nocov
+    if (all(e1$calendar$origin[1:6] == e2$calendar$origin[1:6]))
+      CFTime$new(e1$calendar$definition, e1$calendar$name, c(e1$offsets, e2$offsets))
     else {
-      diff <- e1$cal$parse(paste(e2$cal$origin_date, e2$cal$origin_time))$offset
-      CFTime$new(e1$cal$definition, e1$cal$name, c(e1$offsets, e2$offsets + diff))
+      diff <- e1$calendar$parse(paste(e2$calendar$origin_date, e2$calendar$origin_time))$offset
+      CFTime$new(e1$calendar$definition, e1$calendar$name, c(e1$offsets, e2$offsets + diff))
     }
   } else if (is.numeric(e2) && .validOffsets(e2)) {
-    CFTime$new(e1$cal$definition, e1$cal$name, c(e1$offsets, e2))
+    CFTime$new(e1$calendar$definition, e1$calendar$name, c(e1$offsets, e2))
   } else {
-    time <- e1$cal$parse(e2)
+    time <- e1$calendar$parse(e2)
     if (anyNA(time$year)) stop("Argument `e2` contains invalid timestamps", call. = FALSE) # nocov
-    CFTime$new(e1$cal$definition, e1$cal$name, c(e1$offsets, time$offset))
+    CFTime$new(e1$calendar$definition, e1$calendar$name, c(e1$offsets, time$offset))
   }
 
   if (!is.null(be1 <- e1$bounds) && !is.null(be2 <- e2$bounds)) {
@@ -561,13 +561,13 @@ slice <- function(x, extremes, rightmost.closed = FALSE) {
 "+.CFClimatology" <- function(c1, c2) {
   if (!inherits(c2, "CFClimatology"))
     stop("Can only merge a `CFClimatology` instance to another `CFClimatology`")
-  if (!c1$cal$is_compatible(c2$cal)) stop("Calendars not compatible", call. = FALSE) # nocov
+  if (!c1$calendar$is_compatible(c2$calendar)) stop("Calendars not compatible", call. = FALSE) # nocov
 
-  if (all(c1$cal$origin[1:6] == c2$cal$origin[1:6]))
-    CFClimatology$new(c1$cal$definition, c1$cal$name, c(c1$offsets, c2$offsets), cbind(c1$bounds, c2$bounds))
+  if (all(c1$calendar$origin[1:6] == c2$calendar$origin[1:6]))
+    CFClimatology$new(c1$calendar$definition, c1$calendar$name, c(c1$offsets, c2$offsets), cbind(c1$bounds, c2$bounds))
   else {
-    diff <- c1$cal$parse(paste(c2$cal$origin_date, c2$cal$origin_time))$offset
-    CFClimatology$new(c1$cal$definition, c1$cal$name, c(c1$offsets, c2$offsets + diff), cbind(c1$bounds, c2$bounds + diff))
+    diff <- c1$calendar$parse(paste(c2$calendar$origin_date, c2$calendar$origin_time))$offset
+    CFClimatology$new(c1$calendar$definition, c1$calendar$name, c(c1$offsets, c2$offsets + diff), cbind(c1$bounds, c2$bounds + diff))
   }
 }
 
@@ -840,13 +840,13 @@ month_days <- function(t, x = NULL) {
   stopifnot(inherits(t, "CFTime"))
 
   if (is.null(x))
-    return(t$cal$month_days())
+    return(t$calendar$month_days())
   else {
     if (!(is.character(x))) stop("Argument `x` must be a character vector of dates in 'YYYY-MM-DD' format")
 
-    ymd <- t$cal$parse(x)
+    ymd <- t$calendar$parse(x)
     if (anyNA(ymd$year)) warning("Some dates could not be parsed. Result contains `NA` values.", call. = FALSE)
-    return(t$cal$month_days(ymd))
+    return(t$calendar$month_days(ymd))
   }
 }
 
@@ -908,14 +908,14 @@ month_days <- function(t, x = NULL) {
 #' parse_timestamps(t, timestamps)
 parse_timestamps <- function(t, x) {
   stopifnot(is.character(x), inherits(t, "CFTime"))
-  if (t$cal$unit > 4) stop("Parsing of timestamps on a 'month' or 'year' time unit is not supported.", call. = FALSE)
+  if (t$calendar$unit > 4) stop("Parsing of timestamps on a 'month' or 'year' time unit is not supported.", call. = FALSE)
 
-  out <- t$cal$parse(x)
+  out <- t$calendar$parse(x)
   if (anyNA(out$year))
     warning("Some dates could not be parsed. Result contains `NA` values.") # nocov
   if (length(unique(na.omit(out$tz))) > 1)
     warning("Timestamps have multiple time zones. Some or all may be different from the calendar time zone.") # nocov
-  else if (out$tz[1] != t$cal$timezone)
+  else if (out$tz[1] != t$calendar$timezone)
     warning("Timestamps have time zone that is different from the calendar.") # nocov
   out
 }

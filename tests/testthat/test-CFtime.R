@@ -134,20 +134,20 @@ test_that("test all variants of creating a CFtime object and useful functions", 
 
 test_that("Leap years on some calendars", {
   t <- CFTime$new("days since 2025-01-01", "360_day")
-  expect_true(all(!t$cal$leap_year(c(2000:2025))))
+  expect_true(all(!t$calendar$leap_year(c(2000:2025))))
   t <- CFTime$new("days since 2025-01-01", "366_day")
-  expect_true(all(t$cal$leap_year(c(2000:2025))))
+  expect_true(all(t$calendar$leap_year(c(2000:2025))))
 })
 
 test_that("Calendar 'none'", {
   t <- CFTime$new("days since 2025-01-01", "none")
-  expect_true(inherits(t$cal, "CFCalendarNone"))
+  expect_true(inherits(t$calendar, "CFCalendarNone"))
   t <- t + 0:4
   ymd <- data.frame(year = c(rep(2025, 5), NA), month = c(rep(1, 5), NA), day = c(1, 1, 1, 2, 3, NA))
-  expect_equal(t$cal$valid_days(ymd), c(T, T, T, F, F, NA))
-  expect_equal(t$cal$month_days(), rep(NA, 12))
-  expect_equal(t$cal$month_days(ymd), rep(NA, 6))
-  expect_equal(t$cal$leap_year(ymd$year), rep(NA, 6))
-  expect_equal(t$cal$date2offset(ymd), c(0, 0, 0, 0, 0, NA))
-  expect_equal(t$cal$offset2date(1:5), data.frame(year = rep(2025, 5), month = rep(1, 5), day = rep(1, 5)))
+  expect_equal(t$calendar$valid_days(ymd), c(T, T, T, F, F, NA))
+  expect_equal(t$calendar$month_days(), rep(NA, 12))
+  expect_equal(t$calendar$month_days(ymd), rep(NA, 6))
+  expect_equal(t$calendar$leap_year(ymd$year), rep(NA, 6))
+  expect_equal(t$calendar$date2offset(ymd), c(0, 0, 0, 0, 0, NA))
+  expect_equal(t$calendar$offset2date(1:5), data.frame(year = rep(2025, 5), month = rep(1, 5), day = rep(1, 5)))
 })

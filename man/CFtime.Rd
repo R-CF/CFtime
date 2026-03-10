@@ -22,26 +22,21 @@ time values is supported, as is the generation of factors.
 \references{
 https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate
 }
-\section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{cal}}{The calendar of this \code{CFTime} instance, a descendant of the
-\link{CFCalendar} class.}
-
-\item{\code{offsets}}{A numeric vector of offsets from the origin of the
-calendar.}
-
-\item{\code{resolution}}{The average number of time units between offsets.}
-}
-\if{html}{\out{</div>}}
-}
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
 \item{\code{calendar}}{(read-only) The calendar of this \code{CFTime} instance, a
 descendant of the \link{CFCalendar} class.}
 
+\item{\code{cal}}{(read-only) DEPRECATED. Use the \code{calendar} field instead.}
+
 \item{\code{unit}}{(read-only) The unit string of the calendar and time series.}
+
+\item{\code{offsets}}{(read-only) A numeric vector of offsets from the origin of
+the calendar.}
+
+\item{\code{resolution}}{(read-only) The average number of time units between
+offsets.}
 
 \item{\code{length}}{(read-only) Retrieve the number of offsets in the time
 series.}
@@ -344,7 +339,7 @@ Set or delete the boundary values of the \code{CFTime} instance.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{value}}{The boundary values to set, in units of the offsets. A
-matrix \verb{(2, length(self$offsets))}. If \code{NULL}, the boundaries are
+matrix \verb{(2, length(private$.offsets))}. If \code{NULL}, the boundaries are
 deleted. If \code{TRUE}, make regular, consecutive boundaries.}
 }
 \if{html}{\out{</div>}}

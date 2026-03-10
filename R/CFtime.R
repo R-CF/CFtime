@@ -20,21 +20,19 @@
 #' @docType class
 CFTime <- R6::R6Class("CFTime",
   private = list(
+    # The calendar of this instance, a descendant of the [CFCalendar] class.
+    .cal = NULL,
+
+    #A numeric vector of offsets from the origin of the calendar.
+    .offsets = numeric(),
+
+    # The average number of time units between offsets.
+    .resolution = NA_real_,
+
     # The boundary values of the time instance.
     .bounds = NULL
   ),
   public = list(
-    #' @field cal The calendar of this `CFTime` instance, a descendant of the
-    #' [CFCalendar] class.
-    cal = NULL,
-
-    #' @field offsets A numeric vector of offsets from the origin of the
-    #'   calendar.
-    offsets = numeric(),
-
-    #' @field resolution The average number of time units between offsets.
-    resolution = NA_real_,
-
     #' @description Create a new instance of this class.
     #' @param definition Character string of the units and origin of the
     #'   calendar.
@@ -47,7 +45,7 @@ CFTime <- R6::R6Class("CFTime",
     initialize = function(definition, calendar = "standard", offsets = NULL) {
       if (is.null(calendar)) calendar <- "standard" # This may occur when "calendar" attribute is not defined in the NC file
       calendar <- tolower(calendar)
-      self$cal <- switch(calendar,
+      private$.cal <- switch(calendar,
         "standard" = CFCalendarStandard$new(calendar, definition),
         "gregorian" = CFCalendarStandard$new(calendar, definition),
         "proleptic_gregorian" = CFCalendarProleptic$new(calendar, definition),
@@ -70,23 +68,23 @@ CFTime <- R6::R6Class("CFTime",
         stopifnot(.validOffsets(offsets))
 
         if (length(offsets) > 1L) {
-          self$resolution <- (max(offsets) - min(offsets)) / (length(offsets) - 1L)
+          private$.resolution <- (max(offsets) - min(offsets)) / (length(offsets) - 1L)
           if (any(diff(offsets) <= 0))
             warning("Offsets not monotonically increasing.", call. = FALSE)
         } else {
-          self$resolution <- NA_real_
+          private$.resolution <- NA_real_
         }
-        self$offsets <- as.numeric(offsets)
+        private$.offsets <- as.numeric(offsets)
       } else if (is.character(offsets)) {
-        time <- self$cal$parse(offsets)
+        time <- private$.cal$parse(offsets)
         if (anyNA(time$year)) stop("Argument `offsets` contains invalid timestamps", call. = FALSE) # nocov
 
-        self$offsets <- time$offset
+        private$.offsets <- time$offset
         if (length(offsets) > 1L)
-          self$resolution <- (max(self$offsets) - min(self$offsets)) / (length(self$offsets) - 1L)
+          private$.resolution <- (max(private$.offsets) - min(private$.offsets)) / (length(private$.offsets) - 1L)
         else
-          self$resolution <- NA_real_
-        if (any(diff(self$offsets) <= 0))
+          private$.resolution <- NA_real_
+        if (any(diff(private$.offsets) <= 0))
           warning("Offsets not monotonically increasing.", call. = FALSE)
       } else if (!is.null(offsets)) stop("Invalid offsets for CFTime object", call. = FALSE)
     },
@@ -95,13 +93,13 @@ CFTime <- R6::R6Class("CFTime",
     #' @param ... Ignored.
     #' @return Self, invisibly.
     print = function(...) {
-      noff <- length(self$offsets)
+      noff <- length(private$.offsets)
       if (noff == 0L) {
         el <- "  Elements: (no elements)\n"
         b  <- "  Bounds  : (not set)\n"
       } else {
         d <- self$range()
-        if (inherits(self$cal, "CFCalendarNone")) {
+        if (inherits(private$.cal, "CFCalendarNone")) {
           el <- if (noff > 1L) {
             sprintf("  Elements: Series of %d elements at %s\n", noff, d[1L])
           } else
@@ -109,8 +107,8 @@ CFTime <- R6::R6Class("CFTime",
         } else {
           el <- if (noff > 1L) {
             sprintf("  Elements: [%s .. %s] (average of %f %s between %d elements)\n",
-                   d[1L], d[2L], self$resolution,
-                   paste0(if (self$cal$prefix_id) CFt$prefixes$name[self$cal$prefix_id], CFt$units$name[self$cal$unit]), noff)
+                   d[1L], d[2L], private$.resolution,
+                   paste0(if (private$.cal$prefix_id) CFt$prefixes$name[private$.cal$prefix_id], CFt$units$name[private$.cal$unit]), noff)
           } else
             paste("  Element :", d[1L], "\n")
         }
@@ -118,7 +116,7 @@ CFTime <- R6::R6Class("CFTime",
         b <- if (is.null(private$.bounds)) "  Bounds  : not set\n"
              else "  Bounds  : set\n"
       }
-      self$cal$print()
+      private$.cal$print()
       cat("\nTime series:\n",  el, b, sep = "")
       invisible(self)
     },
@@ -136,7 +134,7 @@ CFTime <- R6::R6Class("CFTime",
     #'   returned, otherwise the full timestamp (without any time zone
     #'   information).
     range = function(format = "", bounds = FALSE) {
-      if (length(self$offsets) == 0L) return(c(NA_character_, NA_character_))
+      if (length(private$.offsets) == 0L) return(c(NA_character_, NA_character_))
       if (!missing(format) && ((!is.character(format)) || length(format) != 1L))
         stop("`format` argument, when present, must be a character string with formatting specifiers", call. = FALSE) # nocov
       if (!is.logical(bounds) || length(bounds) != 1L)
@@ -144,11 +142,11 @@ CFTime <- R6::R6Class("CFTime",
 
       if (bounds) {
         bnds <- private$.bounds
-        if (is.null(bnds)) time <- self$cal$offsets2time(base::range(self$offsets))
-        else time <- self$cal$offsets2time(c(bnds[1L, 1L], bnds[2L, length(self$offsets)]))
-      } else time <- self$cal$offsets2time(base::range(self$offsets))
+        if (is.null(bnds)) time <- private$.cal$offsets2time(base::range(private$.offsets))
+        else time <- private$.cal$offsets2time(c(bnds[1L, 1L], bnds[2L, length(private$.offsets)]))
+      } else time <- private$.cal$offsets2time(base::range(private$.offsets))
 
-      .format_format(time, self$cal$timezone, format)
+      .format_format(time, private$.cal$timezone, format)
     },
 
     #' @description This method generates a vector of character strings or
@@ -175,21 +173,21 @@ CFTime <- R6::R6Class("CFTime",
     #' @return A character vector where each element represents a moment in
     #'   time according to the `format` specifier.
     as_timestamp = function(format = NULL, asPOSIX = FALSE) {
-      if (asPOSIX && !self$cal$POSIX_compatible(self$offsets))
+      if (asPOSIX && !private$.cal$POSIX_compatible(private$.offsets))
         stop("Cannot make a POSIX timestamp with this calendar.", call. = FALSE)
-      if (length(self$offsets) == 0L) return()
+      if (length(private$.offsets) == 0L) return()
 
-      time <- self$cal$offsets2time(self$offsets)
+      time <- private$.cal$offsets2time(private$.offsets)
 
       if (is.null(format))
-        format <- ifelse(self$cal$unit < 4L || .has_time(time), "timestamp", "date")
+        format <- ifelse(private$.cal$unit < 4L || .has_time(time), "timestamp", "date")
       else if (!(format %in% c("date", "timestamp")))
         stop("Format specifier not recognized", call. = FALSE) # nocov
 
       if (asPOSIX) {
         if (format == "date") ISOdate(time$year, time$month, time$day, 0L, tz = "UTC")
         else ISOdatetime(time$year, time$month, time$day, time$hour, time$minute, time$second, tz = "UTC")
-      } else .format_format(time, self$cal$timezone, format)
+      } else .format_format(time, private$.cal$timezone, format)
     },
 
     #' @description Format timestamps using a specific format string, using the
@@ -225,14 +223,14 @@ CFTime <- R6::R6Class("CFTime",
     #'   timestamp. Any format specifiers not recognized or supported will be
     #'   returned verbatim.
     format = function(format, usetz = FALSE) {
-      if (length(self$offsets) == 0L) return(character(0L))
+      if (length(private$.offsets) == 0L) return(character(0L))
       if (missing(format)) format <- ""
       else if (!is.character(format) || length(format) != 1L)
         stop("`format` argument must be a character string with formatting specifiers", call. = FALSE)
 
-      ts <- self$cal$offsets2time(self$offsets)
+      ts <- private$.cal$offsets2time(private$.offsets)
       if ((usetz || grepl("%z$", format)) && .has_time(ts)) {
-        tz <- self$cal$timezone
+        tz <- private$.cal$timezone
         if (!grepl("%z$", format))
           format <- paste0(format, "%z")
       } else tz <- ""
@@ -293,14 +291,14 @@ CFTime <- R6::R6Class("CFTime",
         if (!(all(x < 0, na.rm = TRUE) || all(x > 0, na.rm = TRUE)))
           stop("Cannot mix positive and negative index values", call. = FALSE)
 
-        intv <- (1:length(self$offsets))[x]
-        xoff <- self$offsets[x]
+        intv <- (1:length(private$.offsets))[x]
+        xoff <- private$.offsets[x]
       } else {
-        if (self$cal$unit > 4L)
+        if (private$.cal$unit > 4L)
           stop("Parsing of timestamps on a 'month' or 'year' time unit is not supported.", call. = FALSE)
 
-        xoff <- self$cal$parse(as.character(x))$offset
-        vals <- self$offsets
+        xoff <- private$.cal$parse(as.character(x))$offset
+        vals <- private$.offsets
         bnds <- self$get_bounds()
         if (!is.null(bnds)) {
           # Axis has bounds so get the closest coordinate first, allow for extremes
@@ -319,7 +317,7 @@ CFTime <- R6::R6Class("CFTime",
 
       valid <- which(!is.na(intv))
       if (any(valid)) {
-        t <- CFTime$new(self$cal$definition, self$cal$name, xoff[valid])
+        t <- CFTime$new(private$.cal$definition, private$.cal$name, xoff[valid])
         bnds <- private$.bounds
         if (!is.null(bnds))
           t$set_bounds(bnds[, intv[valid], drop = FALSE])
@@ -336,27 +334,27 @@ CFTime <- R6::R6Class("CFTime",
       bnds <- private$.bounds
       if (is.null(bnds) || missing(format)) return(bnds)
 
-      ts <- self$cal$offsets2time(as.vector(bnds))
-      b <- .format_format(ts, self$cal$timezone, format)
+      ts <- private$.cal$offsets2time(as.vector(bnds))
+      b <- .format_format(ts, private$.cal$timezone, format)
       dim(b) <- dim(bnds)
       b
     },
 
     #' @description Set or delete the boundary values of the `CFTime` instance.
     #' @param value The boundary values to set, in units of the offsets. A
-    #'   matrix `(2, length(self$offsets))`. If `NULL`, the boundaries are
+    #'   matrix `(2, length(private$.offsets))`. If `NULL`, the boundaries are
     #'   deleted. If `TRUE`, make regular, consecutive boundaries.
     #' @return Self, invisibly.
     set_bounds = function(value) {
       if (is.null(value) || isFALSE(value)) private$.bounds <- NULL
       else if (isTRUE(value)) {
-        len <- length(self$offsets)
-        b <- seq(from       = self$offsets[1L] - self$resolution * 0.5,
-                 by         = self$resolution,
+        len <- length(private$.offsets)
+        b <- seq(from       = private$.offsets[1L] - private$.resolution * 0.5,
+                 by         = private$.resolution,
                  length.out = len + 1L)
         private$.bounds <- rbind(b[1L:len], b[2L:(len+1L)])
       } else {
-        off <- self$offsets
+        off <- private$.offsets
         len <- length(off)
 
         warn <- NULL
@@ -389,23 +387,23 @@ CFTime <- R6::R6Class("CFTime",
     #' @return `TRUE` if all time steps are equidistant, `FALSE` otherwise, or
     #'   `NA` if no offsets have been set.
     equidistant = function() {
-      if (length(self$offsets) == 0L) return(NA)
-      out <- all(diff(self$offsets) == self$resolution)
+      if (length(private$.offsets) == 0L) return(NA)
+      out <- all(diff(private$.offsets) == private$.resolution)
       if (!out) {
-        doff <- diff(sort(self$offsets))
-        out <- all(doff == self$resolution)
+        doff <- diff(sort(private$.offsets))
+        out <- all(doff == private$.resolution)
         if (!out) {
           # Don't try to make sense of totally non-standard arrangements such as
           # calendar units "years" or "months" describing sub-daily time steps.
           # Also, 360_day calendar should be well-behaved so we don't want to get here.
-          if (self$cal$unit > 4L || inherits(self$cal, "CFCalendar360")) return(FALSE)
+          if (private$.cal$unit > 4L || inherits(private$.cal, "CFCalendar360")) return(FALSE)
 
           # Check if we have monthly or yearly data on a finer-scale calendar
           # This is all rather approximate but should be fine in most cases
           # This accommodates middle-of-the-time-period offsets as per the
           # CF Metadata Conventions
           # Please report problems at https://github.com/R-CF/CFtime/issues
-          ddays <- range(doff) * CFt$units$per_day[self$cal$unit]
+          ddays <- range(doff) * CFt$units$per_day[private$.cal$unit]
           return((ddays[1] >= 28 && ddays[2] <= 31) ||      # months
                    (ddays[1] >= 8 && ddays[2] <= 11) ||     # dekads
                    (ddays[1] >= 90 && ddays[2] <= 92) ||    # seasons, quarters
@@ -439,9 +437,9 @@ CFTime <- R6::R6Class("CFTime",
       if (!is.character(extremes) || length(extremes) < 1L)
         stop("Second argument must be a character vector of at least one timestamp.", call. = FALSE) # nocov
 
-      off <- self$offsets
+      off <- private$.offsets
       roff <- range(off)
-      ext <- range(self$cal$parse(extremes)$offset, na.rm = TRUE)
+      ext <- range(private$.cal$parse(extremes)$offset, na.rm = TRUE)
       if (all(is.na(ext)) || ext[1L] > roff[2L] || ext[2L] < roff[1L])
         out <- rep(FALSE, length(off))
       else {
@@ -449,7 +447,7 @@ CFTime <- R6::R6Class("CFTime",
         out <- if (closed) off >= ext[1L] & off <= ext[2L]
                else off >= ext[1L] & off < ext[2L]
         if (any(out)) {
-          t <- CFTime$new(self$cal$definition, self$cal$name, off[out])
+          t <- CFTime$new(private$.cal$definition, private$.cal$name, off[out])
           bnds <- private$.bounds
           if (!is.null(bnds))
             t$set_bounds(bnds[, out, drop = FALSE])
@@ -464,7 +462,7 @@ CFTime <- R6::R6Class("CFTime",
     #' @return `TRUE` if the calendar support conversion to POSIXt, `FALSE`
     #' otherwise.
     POSIX_compatible = function() {
-      self$cal$POSIX_compatible(self$offsets)
+      private$.cal$POSIX_compatible(private$.offsets)
     },
 
     #' @description Create a factor for a `CFTime` instance.
@@ -508,20 +506,20 @@ CFTime <- R6::R6Class("CFTime",
       }
 
       # breaks is a character vector of multiple timestamps
-      if (self$cal$unit > 4L) stop("Factorizing on a 'month' or 'year' time unit is not supported", call. = FALSE) # nocov
-      time <- self$cal$parse(breaks)
+      if (private$.cal$unit > 4L) stop("Factorizing on a 'month' or 'year' time unit is not supported", call. = FALSE) # nocov
+      time <- private$.cal$parse(breaks)
       if (anyNA(time$year))
         stop("Invalid specification of 'breaks'", call. = FALSE) # nocov
       sorted <- order(time$offset)
       ooff <- time$offset[sorted]
-      intv <- findInterval(self$offsets, ooff)
+      intv <- findInterval(private$.offsets, ooff)
       intv[which(intv %in% c(0L, len))] <- NA
       f <- factor(intv, labels = breaks[sorted][1L:(len-1L)])
 
       # Attributes
       bnds <- rbind(ooff[1L:(len-1L)], ooff[2L:len])
       off  <- bnds[1L, ] + (bnds[2L, ] - bnds[1L, ]) * 0.5
-      t <- CFTime$new(self$cal$definition, self$cal$name, off)
+      t <- CFTime$new(private$.cal$definition, private$.cal$name, off)
       t$set_bounds(bnds)
       attr(f, "period") <- "day"
       attr(f, "era")  <- -1L
@@ -612,14 +610,14 @@ CFTime <- R6::R6Class("CFTime",
     #'   this instance, but with offsets corresponding to the mid-point of the
     #'   factor levels.
     factor = function(period = "month", era = NULL) {
-      if (length(self$offsets) < 10L) stop("Cannot create a factor for very short time series", call. = FALSE) # nocov
+      if (length(private$.offsets) < 10L) stop("Cannot create a factor for very short time series", call. = FALSE) # nocov
 
       period <- tolower(period)
       if (!((length(period) == 1L) && (period %in% CFt$factor_periods)))
         stop("Period specifier must be a single value of a supported period", call. = FALSE) # nocov
 
       # No fine-grained period factors for coarse source data
-      timestep <- CFt$units$seconds[self$cal$unit] * self$resolution;
+      timestep <- CFt$units$seconds[private$.cal$unit] * private$.resolution;
       if ((period == "year") && (timestep > 86400 * 366) ||
           (period %in% c("season", "quarter")) && (timestep > 86400 * 90) || # Somewhat arbitrary
           (period == "month") && (timestep > 86400 * 31) ||
@@ -627,7 +625,7 @@ CFTime <- R6::R6Class("CFTime",
           (period == "day") && (timestep > 86400))           # Must be no longer than a day
         stop("Cannot produce a short period factor from source data with long time interval", call. = FALSE) # nocov
 
-      time <- self$cal$offsets2time(self$offsets)
+      time <- private$.cal$offsets2time(private$.offsets)
       months <- c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
 
       if (is.null(era)) {
@@ -697,19 +695,19 @@ CFTime <- R6::R6Class("CFTime",
                  yr <- as.integer(substring(final, 1, 4))
                  mon <- as.integer(substring(final, 6, 7))
                  day <- as.integer(substring(final, 9, 10))
-                 post <- self$cal$add_day(data.frame(year = yr, month = mon, day = day))
+                 post <- private$.cal$add_day(data.frame(year = yr, month = mon, day = day))
                  post <- sprintf("%04d-%02d-%02d", post$year, post$month, post$day)
                  dt <- c(levels(out), post)
                }
         )
 
         # Convert bounds dates to an array of offsets, find mid-points, create new CFTime instance
-        off  <- self$cal$parse(dt)$offset
+        off  <- private$.cal$parse(dt)$offset
         off[is.na(off)] <- 0     # This can happen only when the time series starts at or close to the origin, for seasons
         noff <- length(off)
         bnds <- rbind(off[1L:(noff - 1L)], off[2L:noff])
         off  <- bnds[1L,] + (bnds[2L,] - bnds[1L,]) * 0.5
-        new_time <- CFTime$new(self$cal$definition, self$cal$name, off)
+        new_time <- CFTime$new(private$.cal$definition, private$.cal$name, off)
         new_time$set_bounds(bnds)
 
         # Bind attributes to the factor
@@ -733,7 +731,7 @@ CFTime <- R6::R6Class("CFTime",
             f <- as.factor(ifelse(time$year %in% years, sprintf("%04d", time$year), NA_character_))
             n <- nlevels(f)
             if (n > 0L) {
-              off <- self$cal$parse(paste0(levels(f), "-07-01"))$offset
+              off <- private$.cal$parse(paste0(levels(f), "-07-01"))$offset
               last <- as.integer(levels(f)[n]) + 1L
               bnds <- c(rep(paste0(levels(f)[1L], "-01-01"), n), rep(paste0(last, "-01-01"), n))
             }
@@ -744,7 +742,7 @@ CFTime <- R6::R6Class("CFTime",
             if (nlevels(f) > 0L) {
               s <- as.integer(substr(levels(f), 2, 2))
               mid_s <- c("-01-16T12", "-04-16", "-07-16T12", "-10-16T12")
-              off <- self$cal$parse(paste0(mid_yr, mid_s[s]))$offset
+              off <- private$.cal$parse(paste0(mid_yr, mid_s[s]))$offset
               bnds <- c(ifelse(s == 1L, sprintf("%d-12-01", yrs[1L] - 1L),
                                         sprintf("%d-%02d-01", yrs[1L], (s - 1L) * 3L)),
                         sprintf("%d-%02d-01", yrs[2L], s * 3L))
@@ -755,7 +753,7 @@ CFTime <- R6::R6Class("CFTime",
             if (nlevels(f) > 0L) {
               q <- as.integer(substr(levels(f), 2, 2))
               mid_q <- c("-02-15", "-05-16T12", "-08-16T12", "-11-16")
-              off <- self$cal$parse(paste0(mid_yr, mid_q[q]))$offset
+              off <- private$.cal$parse(paste0(mid_yr, mid_q[q]))$offset
               bnds <- c(sprintf("%d-%02d-01", yrs[1L], (q - 1L) * 3L + 1L),
                         ifelse(q == 4L, sprintf("%d-01-01", yrs[2L] + 1L),
                                         sprintf("%d-%02d-01", yrs[2L], q * 3L + 1L)))
@@ -766,7 +764,7 @@ CFTime <- R6::R6Class("CFTime",
             if (nlevels(f) > 0L) {
               mons <- as.numeric(levels(f))
               mid_mon <- c("-16T12", "-15", "-16T12", "-16", "-16T12", "-16", "-16T12", "-16T12", "-16", "-16T12", "-16", "-16T12")
-              off <- self$cal$parse(paste0(mid_yr, "-", levels(f), mid_mon[mons]))$offset
+              off <- private$.cal$parse(paste0(mid_yr, "-", levels(f), mid_mon[mons]))$offset
               bnds <- c(paste0(yrs[1L], "-", levels(f), "-01"),
                         ifelse(mons == 12L, sprintf("%d-01-01", yrs[2L] + 1L),
                                             sprintf("%d-%02d-01", yrs[2L], mons + 1L)))
@@ -780,7 +778,7 @@ CFTime <- R6::R6Class("CFTime",
               mid_dek <- c("06", "16", "26T12", "06", "16", "25",    "06", "16", "26T12", "06", "16", "26",
                            "06", "16", "26T12", "06", "16", "26",    "06", "16", "26T12", "06", "16", "26T12",
                            "06", "16", "26",    "06", "16", "26T12", "06", "16", "26",    "06", "16", "26T12")
-              off <- self$cal$parse(sprintf("%d-%02d-%s", mid_yr, mon, mid_dek[dek]))$offset
+              off <- private$.cal$parse(sprintf("%d-%02d-%s", mid_yr, mon, mid_dek[dek]))$offset
               day <- c("01", "11", "21")
               y2 <- rep(yrs[2L], length(dek))
               m2 <- mon
@@ -798,10 +796,10 @@ CFTime <- R6::R6Class("CFTime",
             if (nlevels(f) > 0L) {
               mons <- as.integer(substr(levels(f), 1, 2))
               days <- as.integer(substr(levels(f), 4, 5))
-              off <- self$cal$parse(sprintf("%d-%s-%02dT12", mid_yr, months[mons], days))$offset
+              off <- private$.cal$parse(sprintf("%d-%s-%02dT12", mid_yr, months[mons], days))$offset
               # Add a day to the calendar for the final year
-              y2off1 <- self$cal$parse(paste0(yrs[2L], "-", levels(f)))$offset + CFt$units$per_day[self$cal$unit]
-              y2off1 <- self$cal$offsets2time(y2off1)
+              y2off1 <- private$.cal$parse(paste0(yrs[2L], "-", levels(f)))$offset + CFt$units$per_day[private$.cal$unit]
+              y2off1 <- private$.cal$offsets2time(y2off1)
               bnds <- c(sprintf("%d-%s-%02d", yrs[1L], months[mons], days),
                         sprintf("%d-%02d-%02d", y2off1$year, y2off1$month, y2off1$day))
             }
@@ -810,8 +808,8 @@ CFTime <- R6::R6Class("CFTime",
         attr(f, "era") <- length(years)
         attr(f, "period") <- period
         if (nlevels(f) > 0L) {
-          bnds <- matrix(self$cal$parse(bnds)$offset, nrow = 2L, byrow = TRUE)
-          attr(f, "CFTime") <- CFClimatology$new(self$cal$definition, self$cal$name, off, bnds)
+          bnds <- matrix(private$.cal$parse(bnds)$offset, nrow = 2L, byrow = TRUE)
+          attr(f, "CFTime") <- CFClimatology$new(private$.cal$definition, private$.cal$name, off, bnds)
         }
         f
       })
@@ -858,7 +856,7 @@ CFTime <- R6::R6Class("CFTime",
                               attr(x, "period") %in% CFt$factor_periods)))))
         stop("Argument `f` must be a factor generated by the method `CFTime$factor()`", call. = FALSE) # nocov
 
-      out <- lapply(factors, function(fac) .factor_units(fac, self$cal, CFt$units$per_day[self$cal$unit]))
+      out <- lapply(factors, function(fac) .factor_units(fac, private$.cal, CFt$units$per_day[private$.cal$unit]))
       if (is.factor(f)) out <- out[[1L]]
       out
     },
@@ -885,7 +883,7 @@ CFTime <- R6::R6Class("CFTime",
 
       if (coverage == "relative") {
         out <- lapply(factors, function(fac) {
-          res <- tabulate(fac) / .factor_units(fac, self$cal, CFt$units$per_day[self$cal$unit])
+          res <- tabulate(fac) / .factor_units(fac, private$.cal, CFt$units$per_day[private$.cal$unit])
           yrs <- attr(fac, "era")
           if (yrs > 0) res <- res / yrs
           return(res)
@@ -903,7 +901,7 @@ CFTime <- R6::R6Class("CFTime",
     #' @return A new `CFTime` instance with identical definition and set of
     #'   timestamps.
     copy = function() {
-      new_time <- CFTime$new(self$cal$definition, self$cal$name, self$offsets)
+      new_time <- CFTime$new(private$.cal$definition, private$.cal$name, private$.offsets)
       if (!is.null(private$.bounds))
         new_time$set_bounds(private$.bounds)
       new_time
@@ -916,10 +914,10 @@ CFTime <- R6::R6Class("CFTime",
     #'   timestamps according to the `rng` argument.
     subset = function(rng) {
       rng <- range(rng)
-      if (!is.numeric(rng) || rng[1L] < 1L || rng[2L] > length(self$offsets))
+      if (!is.numeric(rng) || rng[1L] < 1L || rng[2L] > length(private$.offsets))
         stop("Range to subset is invalid.", call. = FALSE) # nocov
 
-      new_time <- CFTime$new(self$cal$definition, self$cal$name, self$offsets[rng[1L]:rng[2L]])
+      new_time <- CFTime$new(private$.cal$definition, private$.cal$name, private$.offsets[rng[1L]:rng[2L]])
       if (!is.null(private$.bounds))
         new_time$set_bounds(private$.bounds[ , rng[1L]:rng[2L]])
       new_time
@@ -930,20 +928,41 @@ CFTime <- R6::R6Class("CFTime",
     #'   descendant of the [CFCalendar] class.
     calendar = function(value) {
       if (missing(value))
-        self$cal
+        private$.cal
+    },
+
+    #' @field cal (read-only) DEPRECATED. Use the `calendar` field instead.
+    cal = function(value) {
+      if (missing(value))
+        private$.cal
     },
 
     #' @field unit (read-only) The unit string of the calendar and time series.
     unit = function(value) {
       if (missing(value))
-        CFt$units$name[self$cal$unit]
+        CFt$units$name[private$.cal$unit]
+    },
+
+    #' @field offsets (read-only) A numeric vector of offsets from the origin of
+    #'   the calendar.
+    offsets = function(value) {
+      if (missing(value))
+        private$.offsets
+    },
+
+    #' @field resolution (read-only) The average number of time units between
+    #'   offsets.
+    resolution = function(value) {
+      if (missing(value)) {
+        private$.resolution
+      }
     },
 
     #' @field length (read-only) Retrieve the number of offsets in the time
     #'   series.
     length = function(value) {
       if (missing(value))
-        length(self$offsets)
+        length(private$.offsets)
     },
 
     #' @field bounds Retrieve or set the bounds for the offsets. On setting, a
@@ -974,8 +993,8 @@ CFTime <- R6::R6Class("CFTime",
 #' @param ... Ignored.
 #' @export
 str.CFTime <- function(object, ...) {
-  cat(object$friendlyClassName, " with origin [", object$cal$definition,
-      "] using calendar [", object$cal$name,
+  cat(object$friendlyClassName, " with origin [", object$calendar$definition,
+      "] using calendar [", object$calendar$name,
       "] having ", length(object$offsets), " offset values", sep = "")
 }
 
