@@ -259,9 +259,9 @@ Packages <code>RNetCDF</code> and <code>ncdf4</code> can work with
 <code>CFtime</code> as well but then the “intelligence” built into
 <code>ncdfCF</code> is not available, such as automatically identifying
 axes and data orientation. Other packages like <code>terra</code> and
-<code>stars</code> are not recommended because they do not provide
+<code>stars</code> are not recommended because they do not provide full
 access to the specifics of the time dimension of the data and do not
-consider any calendars other than “proleptic_gregorian”.</p>
+properly consider any calendars other than “proleptic_gregorian”.</p>
 </blockquote>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("ncdfCF")</span></span>
@@ -621,7 +621,7 @@ data sets have a definition like <code>days since 2016-01-01</code> with
 offset values for the middle of the month like
 <code>15, 44, 74, 104, ...</code>. Even in these scenarios you can
 verify that your data set is complete with the function
-<code>CFcomplete()</code>.</p>
+<code><a href="../reference/is_complete.html">is_complete()</a></code>.</p>
 </div>
 </div>
 <div class="section level2">

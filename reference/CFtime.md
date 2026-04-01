@@ -16,7 +16,7 @@ indexing of time values is supported, as is the generation of factors.
 
 ## References
 
-https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate
+https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate
 
 ## Active bindings
 
@@ -96,6 +96,8 @@ https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions
 - [`CFTime$copy()`](#method-CFTime-copy)
 
 - [`CFTime$subset()`](#method-CFTime-subset)
+
+- [`CFTime$doy()`](#method-CFTime-doy)
 
 - [`CFTime$clone()`](#method-CFTime-clone)
 
@@ -736,6 +738,32 @@ including any boundary values.
 
 A new `CFTime` instance with identical definition and set of timestamps
 according to the `rng` argument.
+
+------------------------------------------------------------------------
+
+### Method `doy()`
+
+Retrieve the day-of-year number, either from the timestamps in the
+current instance or from the supplied `data.frame` of year, month and
+day. The `doy` is calendar-aware.
+
+#### Usage
+
+    CFTime$doy(ymd)
+
+#### Arguments
+
+- `ymd`:
+
+  Optional `data.frame` with dates parsed into their parts in columns
+  `year`, `month` and `day`. Any other columns are disregarded.
+
+#### Returns
+
+An integer vector of the same length as argument `ymd` or the internal
+offsets if `ymd` is not specified with the day-of-year in the calendar
+of this instance. Rows in argument `ymd` that do not hold a valid date
+are returned as `NA`.
 
 ------------------------------------------------------------------------
 

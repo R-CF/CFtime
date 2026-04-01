@@ -11,6 +11,8 @@ Maintenance release
 - When extending a `CFTime` or `CFClimatology` instance with another
   such instance using the `+` operator, bounds are preserved if both
   instances have bounds set.
+- Added method `CFTime$doy()` to calculate the day-of-year from offsets
+  or supplied dates, using the calendar of the instance.
 - Documentation updated.
 
 ## CFtime 1.7.2

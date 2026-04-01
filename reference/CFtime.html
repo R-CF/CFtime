@@ -76,7 +76,7 @@ time values is supported, as is the generation of factors.</p>
 
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate</p>
+    <p>https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate</p>
     </div>
     <div class="section level2">
     <h2 id="active-bindings">Active bindings<a class="anchor" aria-label="anchor" href="#active-bindings"></a></h2>
@@ -145,6 +145,7 @@ purposes.</p></dd>
 <li><p><a href="#method-CFTime-factor_coverage"><code>CFTime$factor_coverage()</code></a></p></li>
 <li><p><a href="#method-CFTime-copy"><code>CFTime$copy()</code></a></p></li>
 <li><p><a href="#method-CFTime-subset"><code>CFTime$subset()</code></a></p></li>
+<li><p><a href="#method-CFTime-doy"><code>CFTime$doy()</code></a></p></li>
 <li><p><a href="#method-CFTime-clone"><code>CFTime$clone()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-CFTime-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
@@ -745,15 +746,41 @@ instance, including any boundary values.</p><div class="section">
 timestamps according to the <code>rng</code> argument.</p>
 </div>
 
-</div><p></p><hr><a id="method-CFTime-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
-<p>The objects of this class are cloneable with this method.</p><div class="section">
+</div><p></p><hr><a id="method-CFTime-doy"></a><div class="section">
+<h3 id="method-doy-">Method <code>doy()</code><a class="anchor" aria-label="anchor" href="#method-doy-"></a></h3>
+<p>Retrieve the day-of-year number, either from the timestamps
+in the current instance or from the supplied <code>data.frame</code> of year,
+month and day. The <code>doy</code> is calendar-aware.</p><div class="section">
 <h4 id="usage-17">Usage<a class="anchor" aria-label="anchor" href="#usage-17"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">CFTime</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">CFTime</span><span class="op">$</span><span class="fu">doy</span><span class="op">(</span><span class="va">ymd</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-14">Arguments<a class="anchor" aria-label="anchor" href="#arguments-14"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>ymd</code></dt>
+<dd><p>Optional <code>data.frame</code> with dates parsed into their parts in
+columns <code>year</code>, <code>month</code> and <code>day</code>. Any other columns are disregarded.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-16">Returns<a class="anchor" aria-label="anchor" href="#returns-16"></a></h4>
+<p>An integer vector of the same length as argument <code>ymd</code> or the
+internal offsets if <code>ymd</code> is not specified with the day-of-year in the
+calendar of this instance. Rows in argument <code>ymd</code> that do not hold a
+valid date are returned as <code>NA</code>.</p>
+</div>
+
+</div><p></p><hr><a id="method-CFTime-clone"></a><div class="section">
+<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+<p>The objects of this class are cloneable with this method.</p><div class="section">
+<h4 id="usage-18">Usage<a class="anchor" aria-label="anchor" href="#usage-18"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">CFTime</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-15">Arguments<a class="anchor" aria-label="anchor" href="#arguments-15"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 

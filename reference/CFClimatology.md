@@ -11,7 +11,7 @@ query the structure of the climatological data.
 
 ## References
 
-https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#climatological-statistics
+https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#climatological-statistics
 
 ## Super class
 
@@ -50,6 +50,7 @@ Inherited methods
 - [`CFtime::CFTime$as_timestamp()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-as_timestamp)
 - [`CFtime::CFTime$copy()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-copy)
 - [`CFtime::CFTime$cut()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-cut)
+- [`CFtime::CFTime$doy()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-doy)
 - [`CFtime::CFTime$equidistant()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-equidistant)
 - [`CFtime::CFTime$factor()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-factor)
 - [`CFtime::CFTime$factor_coverage()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-factor_coverage)

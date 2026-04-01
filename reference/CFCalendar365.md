@@ -23,6 +23,8 @@ This calendar supports dates before year 1 and includes the year 0.
 
 - [`CFCalendar365$leap_year()`](#method-CFCalendar365-leap_year)
 
+- [`CFCalendar365$doy()`](#method-CFCalendar365-doy)
+
 - [`CFCalendar365$date2offset()`](#method-CFCalendar365-date2offset)
 
 - [`CFCalendar365$offset2date()`](#method-CFCalendar365-offset2date)
@@ -130,6 +132,29 @@ Indicate which years are leap years.
 Logical vector with the same length as argument `yr`. Since this
 calendar does not use leap days, all values will be `FALSE`, or `NA`
 where argument `yr` is `NA`.
+
+------------------------------------------------------------------------
+
+### Method `doy()`
+
+Retrieve the day-of-year number for the supplied `data.frame` of year,
+month and day, using this calendar.
+
+#### Usage
+
+    CFCalendar365$doy(ymd)
+
+#### Arguments
+
+- `ymd`:
+
+  `data.frame` with dates parsed into their parts in columns `year`,
+  `month` and `day`. Any other columns are disregarded.
+
+#### Returns
+
+Integer vector as long as argument `ymd` has rows with the day-of-year
+for each row.
 
 ------------------------------------------------------------------------
 

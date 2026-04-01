@@ -9,13 +9,13 @@ Intergovernmental Panel on Climate Change (IPCC). This package
 specifically allows the user to work with any of the CF-compliant
 calendars (many of which are not compliant with POSIXt). The CF time
 coordinate is formally defined in the [CF Metadata Conventions
-document](https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate).
+document](https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate).
 
 ## Details
 
 This package also supports the creation of a "time" dimension, using
 class `CFClimatology`, for climatological statistics as defined
-[here](https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#climatological-statistics).
+[here](https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#climatological-statistics).
 
 The package can create a
 [CFTime](https://r-cf.github.io/CFtime/reference/CFtime.md) or
@@ -74,6 +74,9 @@ the two main options are
 - [`month_days()`](https://r-cf.github.io/CFtime/reference/month_days.md):
   How many days are there in a month using the calendar of the `CFTime`
   instance?
+
+- `CFTime$doy()`: Retrieve the day-of-year of offsets in the `CFTime`
+  instance or from supplied dates.
 
 **Factors and coverage**
 

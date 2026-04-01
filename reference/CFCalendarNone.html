@@ -64,6 +64,7 @@ experiments simulating a fixed time in the year.</p>
 <li><p><a href="#method-CFCalendarNone-valid_days"><code>CFCalendarNone$valid_days()</code></a></p></li>
 <li><p><a href="#method-CFCalendarNone-month_days"><code>CFCalendarNone$month_days()</code></a></p></li>
 <li><p><a href="#method-CFCalendarNone-leap_year"><code>CFCalendarNone$leap_year()</code></a></p></li>
+<li><p><a href="#method-CFCalendarNone-doy"><code>CFCalendarNone$doy()</code></a></p></li>
 <li><p><a href="#method-CFCalendarNone-date2offset"><code>CFCalendarNone$date2offset()</code></a></p></li>
 <li><p><a href="#method-CFCalendarNone-offset2date"><code>CFCalendarNone$offset2date()</code></a></p></li>
 <li><p><a href="#method-CFCalendarNone-clone"><code>CFCalendarNone$clone()</code></a></p></li>
@@ -172,18 +173,40 @@ class.</p><div class="section">
 <p>Vector with the same length as argument <code>yr</code> with <code>NA</code> values.</p>
 </div>
 
+</div><p></p><hr><a id="method-CFCalendarNone-doy"></a><div class="section">
+<h3 id="method-doy-">Method <code>doy()</code><a class="anchor" aria-label="anchor" href="#method-doy-"></a></h3>
+<p>Retrieve the day-of-year number of the fixed data of this
+calendar, using the Gregorian calendar.</p><div class="section">
+<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">CFCalendarNone</span><span class="op">$</span><span class="fu">doy</span><span class="op">(</span><span class="va">ymd</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>ymd</code></dt>
+<dd><p><code>data.frame</code> with fixed date parsed into its parts in columns
+<code>year</code>, <code>month</code> and <code>day</code>. Any other columns are disregarded.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
+<p>Integer with the day-of-year of the fixed date for this calendar.</p>
+</div>
+
 </div><p></p><hr><a id="method-CFCalendarNone-date2offset"></a><div class="section">
 <h3 id="method-date-offset-">Method <code>date2offset()</code><a class="anchor" aria-label="anchor" href="#method-date-offset-"></a></h3>
 <p>Calculate difference in days between a <code>data.frame</code> of time
 parts and the origin. The difference is always 0, given that
 this is not a true calendar and there can be no calculations to
 determine any difference.</p><div class="section">
-<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
+<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">CFCalendarNone</span><span class="op">$</span><span class="fu">date2offset</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
+<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>x</code></dt>
 <dd><p><code>data.frame</code>. Dates to calculate the difference for.</p></dd>
 
@@ -191,7 +214,7 @@ determine any difference.</p><div class="section">
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
+<h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
 <p>Integer vector of a length equal to the number of rows in
 argument <code>x</code> indicating 0 for the days that equal the origin
 of the calendar, or <code>NA</code> otherwise.</p>
@@ -203,12 +226,12 @@ of the calendar, or <code>NA</code> otherwise.</p>
 This always returns 0's for the year, month and day as other values are
 not valid in this calendar. Hour-minute-second datetime parts are
 handled in <a href="CFCalendar.html">CFCalendar</a>.</p><div class="section">
-<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
+<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">CFCalendarNone</span><span class="op">$</span><span class="fu">offset2date</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
+<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>x</code></dt>
 <dd><p>Integer vector of days to add to the origin.</p></dd>
 
@@ -216,7 +239,7 @@ handled in <a href="CFCalendar.html">CFCalendar</a>.</p><div class="section">
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
+<h4 id="returns-6">Returns<a class="anchor" aria-label="anchor" href="#returns-6"></a></h4>
 <p>A <code>data.frame</code> with columns 'year', 'month' and 'day' and as many
 rows as the length of vector <code>x</code>. Rows with values of <code>x</code> other than 0
 will return the values for the origin of the calendar nonetheless, in
@@ -226,12 +249,12 @@ accordance with the CF Metadata Conventions.</p>
 </div><p></p><hr><a id="method-CFCalendarNone-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
+<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">CFCalendarNone</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 

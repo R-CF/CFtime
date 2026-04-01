@@ -21,6 +21,8 @@ experiments simulating a fixed time in the year.
 
 - [`CFCalendarNone$leap_year()`](#method-CFCalendarNone-leap_year)
 
+- [`CFCalendarNone$doy()`](#method-CFCalendarNone-doy)
+
 - [`CFCalendarNone$date2offset()`](#method-CFCalendarNone-date2offset)
 
 - [`CFCalendarNone$offset2date()`](#method-CFCalendarNone-offset2date)
@@ -132,6 +134,28 @@ Indicate which years are leap years. This always returns a vector of
 #### Returns
 
 Vector with the same length as argument `yr` with `NA` values.
+
+------------------------------------------------------------------------
+
+### Method `doy()`
+
+Retrieve the day-of-year number of the fixed data of this calendar,
+using the Gregorian calendar.
+
+#### Usage
+
+    CFCalendarNone$doy(ymd)
+
+#### Arguments
+
+- `ymd`:
+
+  `data.frame` with fixed date parsed into its parts in columns `year`,
+  `month` and `day`. Any other columns are disregarded.
+
+#### Returns
+
+Integer with the day-of-year of the fixed date for this calendar.
 
 ------------------------------------------------------------------------
 

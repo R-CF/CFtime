@@ -94,7 +94,7 @@ when the Gregorian calendar was adopted.</p></li>
 
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#calendar</p>
+    <p>https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#calendar</p>
     </div>
     <div class="section level2">
     <h2 id="active-bindings">Active bindings<a class="anchor" aria-label="anchor" href="#active-bindings"></a></h2>
@@ -153,6 +153,7 @@ origin of the calendar.</p></dd>
 <li><p><a href="#method-CFCalendar-is_compatible"><code>CFCalendar$is_compatible()</code></a></p></li>
 <li><p><a href="#method-CFCalendar-is_equivalent"><code>CFCalendar$is_equivalent()</code></a></p></li>
 <li><p><a href="#method-CFCalendar-parse"><code>CFCalendar$parse()</code></a></p></li>
+<li><p><a href="#method-CFCalendar-doy"><code>CFCalendar$doy()</code></a></p></li>
 <li><p><a href="#method-CFCalendar-offsets2time"><code>CFCalendar$offsets2time()</code></a></p></li>
 <li><p><a href="#method-CFCalendar-clone"><code>CFCalendar$clone()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-CFCalendar-new"></a><div class="section">
@@ -341,6 +342,31 @@ instance.</p><div class="section">
 second, time zone, and offset. Invalid input data will appear as <code>NA</code>.</p>
 </div>
 
+</div><p></p><hr><a id="method-CFCalendar-doy"></a><div class="section">
+<h3 id="method-doy-">Method <code>doy()</code><a class="anchor" aria-label="anchor" href="#method-doy-"></a></h3>
+<p>Retrieve the day-of-year number for the supplied
+<code>data.frame</code> of year, month and day, using this calendar. This method
+tests for leap years - calendars without leap years may override this
+method for efficiency.</p><div class="section">
+<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">CFCalendar</span><span class="op">$</span><span class="fu">doy</span><span class="op">(</span><span class="va">ymd</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>ymd</code></dt>
+<dd><p><code>data.frame</code> with dates parsed into their parts in columns
+<code>year</code>, <code>month</code> and <code>day</code>. Any other columns are disregarded.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-7">Returns<a class="anchor" aria-label="anchor" href="#returns-7"></a></h4>
+<p>Integer vector as long as argument <code>ymd</code> has rows with the
+day-of-year for each row.</p>
+</div>
+
 </div><p></p><hr><a id="method-CFCalendar-offsets2time"></a><div class="section">
 <h3 id="method-offsets-time-">Method <code>offsets2time()</code><a class="anchor" aria-label="anchor" href="#method-offsets-time-"></a></h3>
 <p>Decompose a vector of offsets, in units of the calendar, to
@@ -348,12 +374,12 @@ their timestamp values. This adds a specified amount of time to the
 origin of a <code>CFTime</code> object.</p>
 <p>This method may introduce inaccuracies where the calendar unit is
 "months" or "years", due to the ambiguous definition of these units.</p><div class="section">
-<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
+<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">CFCalendar</span><span class="op">$</span><span class="fu">offsets2time</span><span class="op">(</span>offsets <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
+<h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>offsets</code></dt>
 <dd><p>Vector of numeric offsets to add to the origin of the
 calendar.</p></dd>
@@ -362,7 +388,7 @@ calendar.</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-7">Returns<a class="anchor" aria-label="anchor" href="#returns-7"></a></h4>
+<h4 id="returns-8">Returns<a class="anchor" aria-label="anchor" href="#returns-8"></a></h4>
 <p>A <code>data.frame</code> with columns for the timestamp elements and as
 many rows as there are offsets.</p>
 </div>
@@ -370,12 +396,12 @@ many rows as there are offsets.</p>
 </div><p></p><hr><a id="method-CFCalendar-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
+<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">CFCalendar</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
+<h4 id="arguments-10">Arguments<a class="anchor" aria-label="anchor" href="#arguments-10"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 

@@ -39,7 +39,7 @@ The following calendars are supported:
 
 ## References
 
-https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#calendar
+https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#calendar
 
 ## Active bindings
 
@@ -97,6 +97,8 @@ https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions
 - [`CFCalendar$is_equivalent()`](#method-CFCalendar-is_equivalent)
 
 - [`CFCalendar$parse()`](#method-CFCalendar-parse)
+
+- [`CFCalendar$doy()`](#method-CFCalendar-doy)
 
 - [`CFCalendar$offsets2time()`](#method-CFCalendar-offsets2time)
 
@@ -287,6 +289,30 @@ Parsing a vector of date-time character strings into parts.
 
 A `data.frame` with columns year, month, day, hour, minute, second, time
 zone, and offset. Invalid input data will appear as `NA`.
+
+------------------------------------------------------------------------
+
+### Method `doy()`
+
+Retrieve the day-of-year number for the supplied `data.frame` of year,
+month and day, using this calendar. This method tests for leap years -
+calendars without leap years may override this method for efficiency.
+
+#### Usage
+
+    CFCalendar$doy(ymd)
+
+#### Arguments
+
+- `ymd`:
+
+  `data.frame` with dates parsed into their parts in columns `year`,
+  `month` and `day`. Any other columns are disregarded.
+
+#### Returns
+
+Integer vector as long as argument `ymd` has rows with the day-of-year
+for each row.
 
 ------------------------------------------------------------------------
 

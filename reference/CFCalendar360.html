@@ -67,6 +67,7 @@ compatible with the standard POSIXt calendar.</p>
 <li><p><a href="#method-CFCalendar360-valid_days"><code>CFCalendar360$valid_days()</code></a></p></li>
 <li><p><a href="#method-CFCalendar360-month_days"><code>CFCalendar360$month_days()</code></a></p></li>
 <li><p><a href="#method-CFCalendar360-leap_year"><code>CFCalendar360$leap_year()</code></a></p></li>
+<li><p><a href="#method-CFCalendar360-doy"><code>CFCalendar360$doy()</code></a></p></li>
 <li><p><a href="#method-CFCalendar360-date2offset"><code>CFCalendar360$date2offset()</code></a></p></li>
 <li><p><a href="#method-CFCalendar360-offset2date"><code>CFCalendar360$offset2date()</code></a></p></li>
 <li><p><a href="#method-CFCalendar360-clone"><code>CFCalendar360$clone()</code></a></p></li>
@@ -172,16 +173,39 @@ calendar does not use leap days, all values will be <code>FALSE</code>, or <code
 where argument <code>yr</code> is <code>NA</code>.</p>
 </div>
 
-</div><p></p><hr><a id="method-CFCalendar360-date2offset"></a><div class="section">
-<h3 id="method-date-offset-">Method <code>date2offset()</code><a class="anchor" aria-label="anchor" href="#method-date-offset-"></a></h3>
-<p>Calculate difference in days between a <code>data.frame</code> of time
-parts and the origin.</p><div class="section">
+</div><p></p><hr><a id="method-CFCalendar360-doy"></a><div class="section">
+<h3 id="method-doy-">Method <code>doy()</code><a class="anchor" aria-label="anchor" href="#method-doy-"></a></h3>
+<p>Retrieve the day-of-year number for the supplied
+<code>data.frame</code> of year, month and day, using this calendar.</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">CFCalendar360</span><span class="op">$</span><span class="fu">date2offset</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">CFCalendar360</span><span class="op">$</span><span class="fu">doy</span><span class="op">(</span><span class="va">ymd</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>ymd</code></dt>
+<dd><p><code>data.frame</code> with dates parsed into their parts in columns
+<code>year</code>, <code>month</code> and <code>day</code>. Any other columns are disregarded.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
+<p>Integer vector as long as argument <code>ymd</code> has rows with the
+day-of-year for each row.</p>
+</div>
+
+</div><p></p><hr><a id="method-CFCalendar360-date2offset"></a><div class="section">
+<h3 id="method-date-offset-">Method <code>date2offset()</code><a class="anchor" aria-label="anchor" href="#method-date-offset-"></a></h3>
+<p>Calculate difference in days between a <code>data.frame</code> of time
+parts and the origin.</p><div class="section">
+<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">CFCalendar360</span><span class="op">$</span><span class="fu">date2offset</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>x</code></dt>
 <dd><p><code>data.frame</code>. Dates to calculate the difference for.</p></dd>
 
@@ -189,7 +213,7 @@ parts and the origin.</p><div class="section">
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
+<h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
 <p>Integer vector of a length equal to the number of rows in
 argument <code>x</code> indicating the number of days between <code>x</code> and the <code>origin</code>,
 or <code>NA</code> for rows in <code>x</code> with <code>NA</code> values.</p>
@@ -200,12 +224,12 @@ or <code>NA</code> for rows in <code>x</code> with <code>NA</code> values.</p>
 <p>Calculate date parts from day differences from the origin.
 This only deals with days as these are impacted by the calendar.
 Hour-minute-second timestamp parts are handled in <a href="CFCalendar.html">CFCalendar</a>.</p><div class="section">
-<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
+<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">CFCalendar360</span><span class="op">$</span><span class="fu">offset2date</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
+<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>x</code></dt>
 <dd><p>Integer vector of days to add to the origin.</p></dd>
 
@@ -213,7 +237,7 @@ Hour-minute-second timestamp parts are handled in <a href="CFCalendar.html">CFCa
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
+<h4 id="returns-6">Returns<a class="anchor" aria-label="anchor" href="#returns-6"></a></h4>
 <p>A <code>data.frame</code> with columns 'year', 'month' and 'day' and as many
 rows as the length of vector <code>x</code>.</p>
 </div>
@@ -221,12 +245,12 @@ rows as the length of vector <code>x</code>.</p>
 </div><p></p><hr><a id="method-CFCalendar360-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
+<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">CFCalendar360</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 

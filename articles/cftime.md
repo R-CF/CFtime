@@ -187,8 +187,9 @@ for a CMIP6 file of daily precipitation.
 > the “intelligence” built into `ncdfCF` is not available, such as
 > automatically identifying axes and data orientation. Other packages
 > like `terra` and `stars` are not recommended because they do not
-> provide access to the specifics of the time dimension of the data and
-> do not consider any calendars other than “proleptic_gregorian”.
+> provide full access to the specifics of the time dimension of the data
+> and do not properly consider any calendars other than
+> “proleptic_gregorian”.
 
 ``` r
 # install.packages("ncdfCF")
@@ -565,7 +566,8 @@ recommend that the coarsest time unit is “day”, many files with monthly
 data sets have a definition like `days since 2016-01-01` with offset
 values for the middle of the month like `15, 44, 74, 104, ...`. Even in
 these scenarios you can verify that your data set is complete with the
-function `CFcomplete()`.
+function
+[`is_complete()`](https://r-cf.github.io/CFtime/reference/is_complete.md).
 
 ## CFtime and POSIXt
 
