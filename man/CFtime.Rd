@@ -20,7 +20,7 @@ information when processing data from netCDF files. Filtering and indexing of
 time values is supported, as is the generation of factors.
 }
 \references{
-https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate
+https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -71,6 +71,7 @@ purposes.}
 \item \href{#method-CFTime-factor_coverage}{\code{CFTime$factor_coverage()}}
 \item \href{#method-CFTime-copy}{\code{CFTime$copy()}}
 \item \href{#method-CFTime-subset}{\code{CFTime$subset()}}
+\item \href{#method-CFTime-doy}{\code{CFTime$doy()}}
 \item \href{#method-CFTime-clone}{\code{CFTime$clone()}}
 }
 }
@@ -680,6 +681,32 @@ instance, including any boundary values.
 \subsection{Returns}{
 A new \code{CFTime} instance with identical definition and set of
 timestamps according to the \code{rng} argument.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-CFTime-doy"></a>}}
+\if{latex}{\out{\hypertarget{method-CFTime-doy}{}}}
+\subsection{Method \code{doy()}}{
+Retrieve the day-of-year number, either from the timestamps
+in the current instance or from the supplied \code{data.frame} of year,
+month and day. The \code{doy} is calendar-aware.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{CFTime$doy(ymd)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{ymd}}{Optional \code{data.frame} with dates parsed into their parts in
+columns \code{year}, \code{month} and \code{day}. Any other columns are disregarded.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+An integer vector of the same length as argument \code{ymd} or the
+internal offsets if \code{ymd} is not specified with the day-of-year in the
+calendar of this instance. Rows in argument \code{ymd} that do not hold a
+valid date are returned as \code{NA}.
 }
 }
 \if{html}{\out{<hr>}}

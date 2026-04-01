@@ -16,7 +16,7 @@
 #'
 #' @export
 #' @references
-#'   https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate
+#'   https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate
 #' @docType class
 CFTime <- R6::R6Class("CFTime",
   private = list(
@@ -921,6 +921,28 @@ CFTime <- R6::R6Class("CFTime",
       if (!is.null(private$.bounds))
         new_time$set_bounds(private$.bounds[ , rng[1L]:rng[2L]])
       new_time
+    },
+
+    #' @description Retrieve the day-of-year number, either from the timestamps
+    #'   in the current instance or from the supplied `data.frame` of year,
+    #'   month and day. The `doy` is calendar-aware.
+    #' @param ymd Optional `data.frame` with dates parsed into their parts in
+    #'   columns `year`, `month` and `day`. Any other columns are disregarded.
+    #' @return An integer vector of the same length as argument `ymd` or the
+    #'   internal offsets if `ymd` is not specified with the day-of-year in the
+    #'   calendar of this instance. Rows in argument `ymd` that do not hold a
+    #'   valid date are returned as `NA`.
+    doy = function(ymd) {
+      if (missing(ymd) || is.null(ymd))
+        ymd <- private$.cal$offsets2time(private$.offsets)
+      else {
+        valid <- private$.cal$valid_days(ymd)
+        ymd$day[!valid] <- NA_integer_
+      }
+      if (!nrow(ymd))
+        return(integer(0))
+
+      private$.cal$doy(ymd)
     }
   ),
   active = list(
@@ -933,8 +955,7 @@ CFTime <- R6::R6Class("CFTime",
 
     #' @field cal (read-only) DEPRECATED. Use the `calendar` field instead.
     cal = function(value) {
-      if (missing(value))
-        private$.cal
+      self$calendar
     },
 
     #' @field unit (read-only) The unit string of the calendar and time series.

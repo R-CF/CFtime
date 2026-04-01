@@ -14,7 +14,7 @@ climatological bounds values and includes methods to query the structure of
 the climatological data.
 }
 \references{
-https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#climatological-statistics
+https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#climatological-statistics
 }
 \section{Super class}{
 \code{\link[CFtime:CFTime]{CFtime::CFTime}} -> \code{CFClimatology}
@@ -48,6 +48,7 @@ purposes.}
 <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="as_timestamp"><a href='../../CFtime/html/CFTime.html#method-CFTime-as_timestamp'><code>CFtime::CFTime$as_timestamp()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="copy"><a href='../../CFtime/html/CFTime.html#method-CFTime-copy'><code>CFtime::CFTime$copy()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="cut"><a href='../../CFtime/html/CFTime.html#method-CFTime-cut'><code>CFtime::CFTime$cut()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="doy"><a href='../../CFtime/html/CFTime.html#method-CFTime-doy'><code>CFtime::CFTime$doy()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="equidistant"><a href='../../CFtime/html/CFTime.html#method-CFTime-equidistant'><code>CFtime::CFTime$equidistant()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="factor"><a href='../../CFtime/html/CFTime.html#method-CFTime-factor'><code>CFtime::CFTime$factor()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="factor_coverage"><a href='../../CFtime/html/CFTime.html#method-CFTime-factor_coverage'><code>CFtime::CFTime$factor_coverage()</code></a></span></li>

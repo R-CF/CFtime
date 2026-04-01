@@ -19,6 +19,7 @@ experiments simulating a fixed time in the year.
 \item \href{#method-CFCalendarNone-valid_days}{\code{CFCalendarNone$valid_days()}}
 \item \href{#method-CFCalendarNone-month_days}{\code{CFCalendarNone$month_days()}}
 \item \href{#method-CFCalendarNone-leap_year}{\code{CFCalendarNone$leap_year()}}
+\item \href{#method-CFCalendarNone-doy}{\code{CFCalendarNone$doy()}}
 \item \href{#method-CFCalendarNone-date2offset}{\code{CFCalendarNone$date2offset()}}
 \item \href{#method-CFCalendarNone-offset2date}{\code{CFCalendarNone$offset2date()}}
 \item \href{#method-CFCalendarNone-clone}{\code{CFCalendarNone$clone()}}
@@ -131,6 +132,28 @@ class.
 }
 \subsection{Returns}{
 Vector with the same length as argument \code{yr} with \code{NA} values.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-CFCalendarNone-doy"></a>}}
+\if{latex}{\out{\hypertarget{method-CFCalendarNone-doy}{}}}
+\subsection{Method \code{doy()}}{
+Retrieve the day-of-year number of the fixed data of this
+calendar, using the Gregorian calendar.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{CFCalendarNone$doy(ymd)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{ymd}}{\code{data.frame} with fixed date parsed into its parts in columns
+\code{year}, \code{month} and \code{day}. Any other columns are disregarded.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Integer with the day-of-year of the fixed date for this calendar.
 }
 }
 \if{html}{\out{<hr>}}

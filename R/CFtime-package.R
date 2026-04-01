@@ -8,10 +8,10 @@
 #' Climate Change (IPCC). This package specifically allows the user to work
 #' with any of the CF-compliant calendars (many of which are not compliant with
 #' POSIXt). The CF time coordinate is formally defined in the
-#' [CF Metadata Conventions document](https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate).
+#' [CF Metadata Conventions document](https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate).
 #'
 #' This package also supports the creation of a "time" dimension, using class
-#' `CFClimatology`, for climatological statistics as defined [here](https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#climatological-statistics).
+#' `CFClimatology`, for climatological statistics as defined [here](https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#climatological-statistics).
 #'
 #' The package can create a [CFTime] or [CFClimatology] instance from scratch or, more commonly, it
 #' can use the dimension attributes and dimension variable values from a netCDF
@@ -38,6 +38,7 @@
 #' * `subset()`: Create a new CFTime instance which is a subset by index positions of another CFTime instance
 #' * [is_complete()]: Does the `CFTime` instance have a complete time series between endpoints?
 #' * [month_days()]: How many days are there in a month using the calendar of the `CFTime` instance?
+#' * `CFTime$doy()`: Retrieve the day-of-year of offsets in the `CFTime` instance or from supplied dates.
 #'
 #' **Factors and coverage**
 #' * [CFfactor()] and [cut()]: Create factors for different time periods

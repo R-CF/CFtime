@@ -62,6 +62,17 @@ CFCalendar365 <- R6::R6Class("CFCalendar365",
       res
     },
 
+    #' @description Retrieve the day-of-year number for the supplied
+    #'   `data.frame` of year, month and day, using this calendar.
+    #' @param ymd `data.frame` with dates parsed into their parts in columns
+    #'   `year`, `month` and `day`. Any other columns are disregarded.
+    #' @return Integer vector as long as argument `ymd` has rows with the
+    #'   day-of-year for each row.
+    doy = function(ymd) {
+      cum_month <- c(0L, 31L, 59L, 90L, 120L, 151L, 181L, 212L, 243L, 273L, 304L, 334L)
+      cum_month[ymd$month] + ymd$day
+    },
+
     #' @description Calculate difference in days between a `data.frame` of time
     #'   parts and the origin.
     #'

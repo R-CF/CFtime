@@ -70,7 +70,7 @@ CFCalendarProleptic <- R6::R6Class("CFCalendarProleptic",
     #' @description Indicate if the time series described using this calendar
     #'   can be safely converted to a standard date-time type (`POSIXct`,
     #'   `POSIXlt`, `Date`).
-   #' @param offsets The offsets from the CFtime instance.
+    #' @param offsets The offsets from the CFtime instance.
     #' @return `TRUE`.
     POSIX_compatible = function(offsets) {
       TRUE # nocov

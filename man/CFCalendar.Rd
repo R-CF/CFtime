@@ -27,7 +27,7 @@ when the Gregorian calendar was adopted.
 }
 }
 \references{
-https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#calendar
+https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#calendar
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -68,6 +68,7 @@ origin of the calendar.}
 \item \href{#method-CFCalendar-is_compatible}{\code{CFCalendar$is_compatible()}}
 \item \href{#method-CFCalendar-is_equivalent}{\code{CFCalendar$is_equivalent()}}
 \item \href{#method-CFCalendar-parse}{\code{CFCalendar$parse()}}
+\item \href{#method-CFCalendar-doy}{\code{CFCalendar$doy()}}
 \item \href{#method-CFCalendar-offsets2time}{\code{CFCalendar$offsets2time()}}
 \item \href{#method-CFCalendar-clone}{\code{CFCalendar$clone()}}
 }
@@ -257,6 +258,31 @@ Parsing a vector of date-time character strings into parts.
 \subsection{Returns}{
 A \code{data.frame} with columns year, month, day, hour, minute,
 second, time zone, and offset. Invalid input data will appear as \code{NA}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-CFCalendar-doy"></a>}}
+\if{latex}{\out{\hypertarget{method-CFCalendar-doy}{}}}
+\subsection{Method \code{doy()}}{
+Retrieve the day-of-year number for the supplied
+\code{data.frame} of year, month and day, using this calendar. This method
+tests for leap years - calendars without leap years may override this
+method for efficiency.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{CFCalendar$doy(ymd)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{ymd}}{\code{data.frame} with dates parsed into their parts in columns
+\code{year}, \code{month} and \code{day}. Any other columns are disregarded.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Integer vector as long as argument \code{ymd} has rows with the
+day-of-year for each row.
 }
 }
 \if{html}{\out{<hr>}}

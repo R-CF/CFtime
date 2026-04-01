@@ -23,9 +23,9 @@ commit](https://img.shields.io/github/last-commit/R-CF/CFtime)](https://github.c
 <!-- badges: end -->
 
 CFtime is an R package that supports working with [CF Metadata
-Conventions](https://cfconventions.org) time coordinates, specifically
-geared to time-referencing data sets of climate projections such as
-those produced under the [World Climate Research
+Conventions](https://cf-convention.github.io/) time coordinates,
+specifically geared to time-referencing data sets of climate projections
+such as those produced under the [World Climate Research
 Programme](https://www.wcrp-climate.org) and re-analysis data such as
 ERA5 from the European Centre for Medium-range Weather Forecasts
 (ECMWF).

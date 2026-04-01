@@ -55,6 +55,19 @@ CFCalendarNone <- R6::R6Class("CFCalendarNone",
       rep(NA, length(yr))
     },
 
+    #' @description Retrieve the day-of-year number of the fixed data of this
+    #'   calendar, using the Gregorian calendar.
+    #' @param ymd `data.frame` with fixed date parsed into its parts in columns
+    #'   `year`, `month` and `day`. Any other columns are disregarded.
+    #' @return Integer with the day-of-year of the fixed date for this calendar.
+    doy = function(ymd) {
+      cum_month <- c(0L, 31L, 59L, 90L, 120L, 151L, 181L, 212L, 243L, 273L, 304L, 334L) # days in year before the month
+      doy <- cum_month[ymd$month] + ymd$day
+      if (((ymd$year %% 4L == 0L) & (ymd$year %% 100L > 0L)) | (ymd$year %% 400L == 0L))
+        doy <- doy + 1L
+      doy
+    },
+
     #' @description Calculate difference in days between a `data.frame` of time
     #'   parts and the origin. The difference is always 0, given that
     #'   this is not a true calendar and there can be no calculations to

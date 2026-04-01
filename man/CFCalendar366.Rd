@@ -21,6 +21,7 @@ This calendar supports dates before year 1 and includes the year 0.
 \item \href{#method-CFCalendar366-valid_days}{\code{CFCalendar366$valid_days()}}
 \item \href{#method-CFCalendar366-month_days}{\code{CFCalendar366$month_days()}}
 \item \href{#method-CFCalendar366-leap_year}{\code{CFCalendar366$leap_year()}}
+\item \href{#method-CFCalendar366-doy}{\code{CFCalendar366$doy()}}
 \item \href{#method-CFCalendar366-date2offset}{\code{CFCalendar366$date2offset()}}
 \item \href{#method-CFCalendar366-offset2date}{\code{CFCalendar366$offset2date()}}
 \item \href{#method-CFCalendar366-clone}{\code{CFCalendar366$clone()}}
@@ -127,6 +128,29 @@ Indicate which years are leap years.
 Logical vector with the same length as argument \code{yr}. Since in
 this calendar all years have a leap day, all values will be \code{TRUE}, or
 \code{NA} where argument \code{yr} is \code{NA}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-CFCalendar366-doy"></a>}}
+\if{latex}{\out{\hypertarget{method-CFCalendar366-doy}{}}}
+\subsection{Method \code{doy()}}{
+Retrieve the day-of-year number for the supplied
+\code{data.frame} of year, month and day, using this calendar.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{CFCalendar366$doy(ymd)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{ymd}}{\code{data.frame} with dates parsed into their parts in columns
+\code{year}, \code{month} and \code{day}. Any other columns are disregarded.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Integer vector as long as argument \code{ymd} has rows with the
+day-of-year for each row.
 }
 }
 \if{html}{\out{<hr>}}

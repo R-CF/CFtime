@@ -24,7 +24,7 @@ NULL
 #'   \item [`360_day`][CFCalendar360], all years have 360 days, divided over 12 months of 30 days.
 #' }
 #' @references
-#'   https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#calendar
+#'   https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#calendar
 #' @docType class
 CFCalendar <- R6::R6Class("CFCalendar",
   private = list(
@@ -323,6 +323,21 @@ CFCalendar <- R6::R6Class("CFCalendar",
                              (CFt$units$seconds[private$.unit] * pref), 6)
       }
       cap
+    },
+
+    #' @description Retrieve the day-of-year number for the supplied
+    #'   `data.frame` of year, month and day, using this calendar. This method
+    #'   tests for leap years - calendars without leap years may override this
+    #'   method for efficiency.
+    #' @param ymd `data.frame` with dates parsed into their parts in columns
+    #'   `year`, `month` and `day`. Any other columns are disregarded.
+    #' @return Integer vector as long as argument `ymd` has rows with the
+    #'   day-of-year for each row.
+    doy = function(ymd) {
+      cum_month <- c(0L, 31L, 59L, 90L, 120L, 151L, 181L, 212L, 243L, 273L, 304L, 334L) # days in year before the month
+      doy <- cum_month[ymd$month] + ymd$day
+      doy <- ifelse(self$leap_year(ymd$year) & ymd$month > 2L, doy + 1L, doy)
+      doy
     },
 
     #' @description Decompose a vector of offsets, in units of the calendar, to

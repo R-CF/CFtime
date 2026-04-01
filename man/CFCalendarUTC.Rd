@@ -32,6 +32,7 @@ not allowed as there is no practical way to maintain leap second accuracy.
 <details><summary>Inherited methods</summary>
 <ul>
 <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="add_day"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-add_day'><code>CFtime::CFCalendar$add_day()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="doy"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-doy'><code>CFtime::CFCalendar$doy()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="is_compatible"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-is_compatible'><code>CFtime::CFCalendar$is_compatible()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="is_equivalent"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-is_equivalent'><code>CFtime::CFCalendar$is_equivalent()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="print"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-print'><code>CFtime::CFCalendar$print()</code></a></span></li>

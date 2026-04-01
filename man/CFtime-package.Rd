@@ -13,11 +13,11 @@ data used by climate change scientists and the Intergovernmental Panel on
 Climate Change (IPCC). This package specifically allows the user to work
 with any of the CF-compliant calendars (many of which are not compliant with
 POSIXt). The CF time coordinate is formally defined in the
-\href{https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate}{CF Metadata Conventions document}.
+\href{https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate}{CF Metadata Conventions document}.
 }
 \details{
 This package also supports the creation of a "time" dimension, using class
-\code{CFClimatology}, for climatological statistics as defined \href{https://cfconventions.org/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#climatological-statistics}{here}.
+\code{CFClimatology}, for climatological statistics as defined \href{https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#climatological-statistics}{here}.
 
 The package can create a \link{CFTime} or \link{CFClimatology} instance from scratch or, more commonly, it
 can use the dimension attributes and dimension variable values from a netCDF
@@ -45,6 +45,7 @@ are \href{https://cran.r-project.org/package=RNetCDF}{RNetCDF} and
 \item \code{subset()}: Create a new CFTime instance which is a subset by index positions of another CFTime instance
 \item \code{\link[=is_complete]{is_complete()}}: Does the \code{CFTime} instance have a complete time series between endpoints?
 \item \code{\link[=month_days]{month_days()}}: How many days are there in a month using the calendar of the \code{CFTime} instance?
+\item \code{CFTime$doy()}: Retrieve the day-of-year of offsets in the \code{CFTime} instance or from supplied dates.
 }
 
 \strong{Factors and coverage}

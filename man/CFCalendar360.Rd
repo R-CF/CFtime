@@ -21,6 +21,7 @@ This calendar supports dates before year 1 and includes the year 0.
 \item \href{#method-CFCalendar360-valid_days}{\code{CFCalendar360$valid_days()}}
 \item \href{#method-CFCalendar360-month_days}{\code{CFCalendar360$month_days()}}
 \item \href{#method-CFCalendar360-leap_year}{\code{CFCalendar360$leap_year()}}
+\item \href{#method-CFCalendar360-doy}{\code{CFCalendar360$doy()}}
 \item \href{#method-CFCalendar360-date2offset}{\code{CFCalendar360$date2offset()}}
 \item \href{#method-CFCalendar360-offset2date}{\code{CFCalendar360$offset2date()}}
 \item \href{#method-CFCalendar360-clone}{\code{CFCalendar360$clone()}}
@@ -130,6 +131,29 @@ Indicate which years are leap years.
 Logical vector with the same length as argument \code{yr}. Since this
 calendar does not use leap days, all values will be \code{FALSE}, or \code{NA}
 where argument \code{yr} is \code{NA}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-CFCalendar360-doy"></a>}}
+\if{latex}{\out{\hypertarget{method-CFCalendar360-doy}{}}}
+\subsection{Method \code{doy()}}{
+Retrieve the day-of-year number for the supplied
+\code{data.frame} of year, month and day, using this calendar.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{CFCalendar360$doy(ymd)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{ymd}}{\code{data.frame} with dates parsed into their parts in columns
+\code{year}, \code{month} and \code{day}. Any other columns are disregarded.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Integer vector as long as argument \code{ymd} has rows with the
+day-of-year for each row.
 }
 }
 \if{html}{\out{<hr>}}
