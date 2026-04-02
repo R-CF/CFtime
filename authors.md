@@ -10,13 +10,13 @@ Source:
 [`DESCRIPTION`](https://github.com/R-CF/CFtime/blob/main/DESCRIPTION)
 
 Van Laake P (2026). *CFtime: Using CF-Compliant Calendars with Climate
-Projection Data*. R package version 1.7.2.9000,
+Projection Data*. R package version 1.7.3,
 <https://r-cf.github.io/CFtime/>.
 
     @Manual{,
       title = {CFtime: Using CF-Compliant Calendars with Climate Projection Data},
       author = {Patrick {Van Laake}},
       year = {2026},
-      note = {R package version 1.7.2.9000},
+      note = {R package version 1.7.3},
       url = {https://r-cf.github.io/CFtime/},
     }
