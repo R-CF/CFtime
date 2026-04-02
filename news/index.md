@@ -1,5 +1,7 @@
 # Changelog
 
+## CFtime (development version)
+
 ## CFtime 1.7.3
 
 CRAN release: 2026-04-02
