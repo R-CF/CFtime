@@ -58,7 +58,6 @@
 </h1></div>
 <!-- badges: start -->
 
-<!-- badges: end -->
 <p>CFtime is an R package that supports working with <a href="https://cf-convention.github.io/" class="external-link">CF Metadata Conventions</a> time coordinates, specifically geared to time-referencing data sets of climate projections such as those produced under the <a href="https://www.wcrp-climate.org" class="external-link">World Climate Research Programme</a> and re-analysis data such as ERA5 from the European Centre for Medium-range Weather Forecasts (ECMWF).</p>
 <p>The data sets include in their metadata an epoch, or origin, a point in time from which other points in time are calculated. This epoch takes the form of <code>days since 1949-12-01</code>, with each data collection (Coupled Model Intercomparison Project (CMIP) generation, model, etc) having its own epoch. The data itself has a temporal dimension if a coordinate variable in the netCDF file has an attribute <code>units</code> with a string value describing an epoch. The coordinate variable, say “time”, has data values such as 43289, which are offsets from the epoch in units of the epoch string (“days” in this case). To convert this offset to a date, using a specific calendar, is what this package does. Given that the calendars supported by the CF Metadata Conventions are not compatible with <code>POSIXt</code>, this conversion is not trivial because the standard R date-time operations do not give correct results. That it is important to account for these differences is easily demonstrated:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -164,12 +163,12 @@
 <ul class="list-unstyled">
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/Lifecycle-Stable-green.svg" alt="Lifecycle: Stable"></a></li>
 <li><a href="https://cran.r-project.org/package=CFtime" class="external-link"><img src="https://www.r-pkg.org/badges/version/CFtime" alt="CRAN Status"></a></li>
-<li><a href="https://cran.r-project.org/package=CFtime" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/CFtime" alt="CRAN Downloads"></a></li>
+<li><a href="https://cran.r-project.org/package=CFtime" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/CFtime" alt="CRAN Downloads"></a></li>
 <li><a href="https://mit-license.org" class="external-link"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: GPL v3"></a></li>
 <li><a href="https://GitHub.com/R-CF/CFtime/commit/main/" class="external-link"><img src="https://img.shields.io/github/commits-since/R-CF/CFtime/latest.svg?color=green" alt="Commits since release"></a></li>
 <li><a href="https://github.com/R-CF/CFtime/commits/main" class="external-link"><img src="https://img.shields.io/github/last-commit/R-CF/CFtime" alt="Last commit"></a></li>
 <li><a href="https://github.com/R-CF/CFtime/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/R-CF/CFtime/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/gh/R-CF/CFtime" class="external-link"><img src="https://codecov.io/gh/R-CF/CFtime/branch/main/graph/badge.svg" alt="codecov"></a></li>
+<li><a href="https://app.codecov.io/gh/R-CF/CFtime" class="external-link"><img src="https://codecov.io/gh/R-CF/CFtime/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
 
