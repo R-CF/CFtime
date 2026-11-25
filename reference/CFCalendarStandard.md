@@ -15,14 +15,14 @@ OSes.
 
 ## Super class
 
-[`CFtime::CFCalendar`](https://r-cf.github.io/CFtime/reference/CFCalendar.md)
+[`CFCalendar`](https://r-cf.github.io/CFtime/reference/CFCalendar.md)
 -\> `CFCalendarStandard`
 
 ## Methods
 
 ### Public methods
 
-- [`CFCalendarStandard$new()`](#method-CFCalendarStandard-new)
+- [`CFCalendarStandard$new()`](#method-CFCalendarStandard-initialize)
 
 - [`CFCalendarStandard$valid_days()`](#method-CFCalendarStandard-valid_days)
 
@@ -42,17 +42,17 @@ OSes.
 
 Inherited methods
 
-- [`CFtime::CFCalendar$add_day()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-add_day)
-- [`CFtime::CFCalendar$doy()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-doy)
-- [`CFtime::CFCalendar$is_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_compatible)
-- [`CFtime::CFCalendar$is_equivalent()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_equivalent)
-- [`CFtime::CFCalendar$offsets2time()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-offsets2time)
-- [`CFtime::CFCalendar$parse()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-parse)
-- [`CFtime::CFCalendar$print()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-print)
+- [`CFCalendar$add_day()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-add_day)
+- [`CFCalendar$doy()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-doy)
+- [`CFCalendar$is_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_compatible)
+- [`CFCalendar$is_equivalent()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_equivalent)
+- [`CFCalendar$offsets2time()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-offsets2time)
+- [`CFCalendar$parse()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-parse)
+- [`CFCalendar$print()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-print)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `CFCalendarStandard$new()`
 
 Create a new CF calendar. When called with the deprecated 'gregorian' it
 is automatically converted to the equivalent 'standard'.
@@ -79,7 +79,7 @@ A new instance of this class.
 
 ------------------------------------------------------------------------
 
-### Method `valid_days()`
+### `CFCalendarStandard$valid_days()`
 
 Indicate which of the supplied dates are valid.
 
@@ -102,7 +102,7 @@ row in argument `ymd` has `NA` values.
 
 ------------------------------------------------------------------------
 
-### Method `is_gregorian_date()`
+### `CFCalendarStandard$is_gregorian_date()`
 
 Indicate which of the supplied dates are in the Gregorian part of the
 calendar, e.g. 1582-10-15 or after.
@@ -126,7 +126,7 @@ otherwise, or `NA` where the row in argument `ymd` has `NA` values.
 
 ------------------------------------------------------------------------
 
-### Method `POSIX_compatible()`
+### `CFCalendarStandard$POSIX_compatible()`
 
 Indicate if the time series described using this calendar can be safely
 converted to a standard date-time type (`POSIXct`, `POSIXlt`, `Date`).
@@ -149,7 +149,7 @@ the start of the Gregorian calendar, 1582-10-15 00:00:00.
 
 ------------------------------------------------------------------------
 
-### Method [`month_days()`](https://r-cf.github.io/CFtime/reference/month_days.md)
+### `CFCalendarStandard$month_days()`
 
 Determine the number of days in the month of the calendar.
 
@@ -172,7 +172,7 @@ without a leap day.
 
 ------------------------------------------------------------------------
 
-### Method `leap_year()`
+### `CFCalendarStandard$leap_year()`
 
 Indicate which years are leap years.
 
@@ -193,7 +193,7 @@ where elements in argument `yr` are `NA`.
 
 ------------------------------------------------------------------------
 
-### Method `date2offset()`
+### `CFCalendarStandard$date2offset()`
 
 Calculate difference in days between a `data.frame` of time parts and
 the origin.
@@ -216,7 +216,7 @@ calendar, or `NA` for rows in `x` with `NA` values.
 
 ------------------------------------------------------------------------
 
-### Method `offset2date()`
+### `CFCalendarStandard$offset2date()`
 
 Calculate date parts from day differences from the origin. This only
 deals with days as these are impacted by the calendar.
@@ -240,7 +240,7 @@ as the length of vector `x`.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `CFCalendarStandard$clone()`
 
 The objects of this class are cloneable with this method.
 

@@ -99,7 +99,7 @@ tail(as_timestamp(t2))
 #> [6] "2002-02-10"
 
 tail(as_timestamp(t2 + 1.5))
-#> Warning: Offsets not monotonically increasing.
+#> Warning: Offsets not monotonically increasing
 #> [1] "2002-02-06T00:00:00" "2002-02-07T00:00:00" "2002-02-08T00:00:00"
 #> [4] "2002-02-09T00:00:00" "2002-02-10T00:00:00" "2002-01-22T12:00:00"
 ```

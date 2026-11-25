@@ -72,9 +72,7 @@
   : Equivalence of CFTime objects
 
 - [`format(`*`<CFTime>`*`)`](https://r-cf.github.io/CFtime/reference/format.CFTime.md)
-  :
-
-  Format the timestamps in the `CFTime` instance
+  : Format timestamps
 
 - [`indexOf()`](https://r-cf.github.io/CFtime/reference/indexOf.md) :
   Find the index of timestamps in the time series

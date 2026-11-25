@@ -13,16 +13,16 @@ accuracy.
 
 ## Super classes
 
-[`CFtime::CFCalendar`](https://r-cf.github.io/CFtime/reference/CFCalendar.md)
+[`CFCalendar`](https://r-cf.github.io/CFtime/reference/CFCalendar.md)
 -\>
-[`CFtime::CFCalendarProleptic`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.md)
+[`CFCalendarProleptic`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.md)
 -\> `CFCalendarUTC`
 
 ## Methods
 
 ### Public methods
 
-- [`CFCalendarUTC$new()`](#method-CFCalendarUTC-new)
+- [`CFCalendarUTC$new()`](#method-CFCalendarUTC-initialize)
 
 - [`CFCalendarUTC$valid_days()`](#method-CFCalendarUTC-valid_days)
 
@@ -34,20 +34,20 @@ accuracy.
 
 Inherited methods
 
-- [`CFtime::CFCalendar$add_day()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-add_day)
-- [`CFtime::CFCalendar$doy()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-doy)
-- [`CFtime::CFCalendar$is_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_compatible)
-- [`CFtime::CFCalendar$is_equivalent()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_equivalent)
-- [`CFtime::CFCalendar$print()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-print)
-- [`CFtime::CFCalendarProleptic$POSIX_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-POSIX_compatible)
-- [`CFtime::CFCalendarProleptic$date2offset()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-date2offset)
-- [`CFtime::CFCalendarProleptic$leap_year()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-leap_year)
-- [`CFtime::CFCalendarProleptic$month_days()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-month_days)
-- [`CFtime::CFCalendarProleptic$offset2date()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-offset2date)
+- [`CFCalendar$add_day()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-add_day)
+- [`CFCalendar$doy()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-doy)
+- [`CFCalendar$is_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_compatible)
+- [`CFCalendar$is_equivalent()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_equivalent)
+- [`CFCalendar$print()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-print)
+- [`CFCalendarProleptic$POSIX_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-POSIX_compatible)
+- [`CFCalendarProleptic$date2offset()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-date2offset)
+- [`CFCalendarProleptic$leap_year()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-leap_year)
+- [`CFCalendarProleptic$month_days()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-month_days)
+- [`CFCalendarProleptic$offset2date()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-offset2date)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `CFCalendarUTC$new()`
 
 Create a new CF UTC calendar.
 
@@ -68,7 +68,7 @@ Create a new CF UTC calendar.
 
 ------------------------------------------------------------------------
 
-### Method `valid_days()`
+### `CFCalendarUTC$valid_days()`
 
 Indicate which of the supplied dates are valid.
 
@@ -91,7 +91,7 @@ row in argument `ymd` has `NA` values.
 
 ------------------------------------------------------------------------
 
-### Method [`parse()`](https://rdrr.io/r/base/parse.html)
+### `CFCalendarUTC$parse()`
 
 Parsing a vector of date-time character strings into parts. This
 includes any leap seconds. Time zone indications are not allowed.
@@ -115,7 +115,7 @@ with results from other calendars.
 
 ------------------------------------------------------------------------
 
-### Method `offsets2time()`
+### `CFCalendarUTC$offsets2time()`
 
 Decompose a vector of offsets, in units of the calendar, to their
 timestamp values. This adds a specified amount of time to the origin of
@@ -138,7 +138,7 @@ as there are offsets.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `CFCalendarUTC$clone()`
 
 The objects of this class are cloneable with this method.
 

@@ -113,3 +113,7 @@ Useful links:
 
 **Maintainer**: Patrick Van Laake <patrick@vanlaake.net> \[copyright
 holder\]
+
+Authors:
+
+- Patrick Van Laake <patrick@vanlaake.net> \[copyright holder\]

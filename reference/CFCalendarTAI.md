@@ -8,9 +8,9 @@ do not apply.
 
 ## Super classes
 
-[`CFtime::CFCalendar`](https://r-cf.github.io/CFtime/reference/CFCalendar.md)
+[`CFCalendar`](https://r-cf.github.io/CFtime/reference/CFCalendar.md)
 -\>
-[`CFtime::CFCalendarProleptic`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.md)
+[`CFCalendarProleptic`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.md)
 -\> `CFCalendarTAI`
 
 ## Methods
@@ -23,23 +23,23 @@ do not apply.
 
 Inherited methods
 
-- [`CFtime::CFCalendar$add_day()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-add_day)
-- [`CFtime::CFCalendar$doy()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-doy)
-- [`CFtime::CFCalendar$is_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_compatible)
-- [`CFtime::CFCalendar$is_equivalent()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_equivalent)
-- [`CFtime::CFCalendar$offsets2time()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-offsets2time)
-- [`CFtime::CFCalendar$parse()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-parse)
-- [`CFtime::CFCalendar$print()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-print)
-- [`CFtime::CFCalendarProleptic$POSIX_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-POSIX_compatible)
-- [`CFtime::CFCalendarProleptic$date2offset()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-date2offset)
-- [`CFtime::CFCalendarProleptic$initialize()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-initialize)
-- [`CFtime::CFCalendarProleptic$leap_year()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-leap_year)
-- [`CFtime::CFCalendarProleptic$month_days()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-month_days)
-- [`CFtime::CFCalendarProleptic$offset2date()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-offset2date)
+- [`CFCalendar$add_day()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-add_day)
+- [`CFCalendar$doy()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-doy)
+- [`CFCalendar$is_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_compatible)
+- [`CFCalendar$is_equivalent()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_equivalent)
+- [`CFCalendar$offsets2time()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-offsets2time)
+- [`CFCalendar$parse()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-parse)
+- [`CFCalendar$print()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-print)
+- [`CFCalendarProleptic$POSIX_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-POSIX_compatible)
+- [`CFCalendarProleptic$date2offset()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-date2offset)
+- [`CFCalendarProleptic$initialize()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-initialize)
+- [`CFCalendarProleptic$leap_year()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-leap_year)
+- [`CFCalendarProleptic$month_days()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-month_days)
+- [`CFCalendarProleptic$offset2date()`](https://r-cf.github.io/CFtime/reference/CFCalendarProleptic.html#method-offset2date)
 
 ------------------------------------------------------------------------
 
-### Method `valid_days()`
+### `CFCalendarTAI$valid_days()`
 
 Indicate which of the supplied dates are valid.
 
@@ -63,7 +63,7 @@ row in argument `ymd` has `NA` values.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `CFCalendarTAI$clone()`
 
 The objects of this class are cloneable with this method.
 

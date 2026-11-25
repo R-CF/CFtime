@@ -85,6 +85,7 @@ for a data set that uses the `360_day` calendar, that should yield a
 date some 120 years after the origin:
 
 ``` r
+
 # POSIXt calculations on a standard calendar - INCORRECT
 as.Date("1949-12-01") + 43289
 #> [1] "2068-06-08"
@@ -148,6 +149,7 @@ specified *offset* of a certain *unit*. This approach is encapsulated in
 the `CFtime` package by the R6 class `CFTime`.
 
 ``` r
+
 # Create a CFTime object from a definition string, a calendar and some offsets
 (t <- CFtime("days since 1949-12-01", "360_day", 19830:90029))
 #> CF calendar:
@@ -192,13 +194,15 @@ for a CMIP6 file of daily precipitation.
 > “proleptic_gregorian”.
 
 ``` r
+
 # install.packages("ncdfCF")
 library(ncdfCF)
 
 # Opening a data file that is included with the package.
 # Usually you would `list.files()` on a directory of your choice.
 fn <- list.files(path = system.file("extdata", package = "CFtime"), full.names = TRUE)[1]
-(ds <- ncdfCF::open_ncdf(fn))
+ds <- ncdfCF::open_ncdf(fn)
+print(ds, width = 30)
 #> <Dataset> pr_day_GFDL-ESM4_ssp245_r1i1p1f1_gr1_20150101-20991231_v20180701 
 #> Resource   : /home/runner/work/_temp/Library/CFtime/extdata/pr_day_GFDL-ESM4_ssp245_r1i1p1f1_gr1_20150101-20991231_v20180701.nc 
 #> Format     : netcdf4 
@@ -353,6 +357,7 @@ package. If you are using the `RNetCDF` or `ncdf4` package, checking for
 CF conventions and then creating a `CFTime` instance goes like this:
 
 ``` r
+
 library(RNetCDF)
 nc <- open.nc(fn)
 att.get.nc(nc, -1, "Conventions")
@@ -372,6 +377,7 @@ The character representations of the time series can be easily
 generated:
 
 ``` r
+
 dates <- t$as_timestamp(format = "date")
 dates[1:10]
 #>  [1] "2015-01-01" "2015-01-02" "2015-01-03" "2015-01-04" "2015-01-05"
@@ -381,6 +387,7 @@ dates[1:10]
 …as well as the range of the time series:
 
 ``` r
+
 t$range()
 #> [1] "2015-01-01T12:00:00" "2099-12-31T12:00:00"
 ```
@@ -411,6 +418,7 @@ It is easy to generate the factors that you need once you have a
 `CFTime` instance prepared:
 
 ``` r
+
 # Create a dekad factor for the whole `t` time series that was created above
 f_k <- t$factor("dekad")
 str(f_k)
@@ -474,6 +482,7 @@ result, the methods in this package return that `CFTime` instance as an
 attribute:
 
 ``` r
+
   (new_time <- attr(f_k, "CFTime"))
 #> CF calendar:
 #>   Origin  : 1850-01-01T00:00:00
@@ -506,6 +515,7 @@ daily data from further processing or apply weights based on the actual
 coverage.
 
 ``` r
+
 # Is the time series complete?
 is_complete(t)
 #> [1] TRUE
@@ -529,13 +539,14 @@ series data out of 30 years of the baseline factor.
 An artificial example of missing data:
 
 ``` r
+
 # 4 years of data on a `365_day` calendar, keep 80% of values
 n <- 365 * 4
 cov <- 0.8
 offsets <- sample(0:(n-1), n * cov)
 
 (t <- CFtime("days since 2020-01-01", "365_day", offsets))
-#> Warning: Offsets not monotonically increasing.
+#> Warning: Offsets not monotonically increasing
 #> CF calendar:
 #>   Origin  : 2020-01-01T00:00:00
 #>   Units   : days
@@ -580,6 +591,7 @@ Network Time Protocol servers that report UTC time. The problem is
 easily demonstrated:
 
 ``` r
+
 # 1972-01-01 is the origin of UTC, when leap seconds came into existence
 difftime(as.POSIXct("2024-01-01"), as.POSIXct("1972-01-01"), units = "sec")
 #> Time difference of 1640995200 secs
@@ -641,6 +653,7 @@ incompatible calendars to `POSIXct` or `Date` is likely to produce
 problems. This is most pronounced for the `360_day` calendar:
 
 ``` r
+
 # Days in January and February
 t <- CFtime("days since 2023-01-01", "360_day", 0:59)
 ts_days <- t$as_timestamp("date")
@@ -733,3 +746,10 @@ data”](https://r-cf.github.io/CFtime/articles/Processing.md).
   “seconds”. The authors have no knowledge of published climate
   projection data that requires milli-second precision so for the
   intended use of the package this issue is marginal.
+- Use of units “month” and “year” is STRONGLY DISCOURAGED as their
+  definition does not align with the common understanding and use of
+  calendar month and calendar year. To support use of existing data sets
+  using these units, they are allowed on constructing a `CFTime`
+  instance but any fractional part in the offsets is discarded so data
+  consistently comes out at the date and time specified in the
+  “definition” of the instance for each month and year.

@@ -8,14 +8,14 @@ This calendar supports dates before year 1 and includes the year 0.
 
 ## Super class
 
-[`CFtime::CFCalendar`](https://r-cf.github.io/CFtime/reference/CFCalendar.md)
+[`CFCalendar`](https://r-cf.github.io/CFtime/reference/CFCalendar.md)
 -\> `CFCalendar365`
 
 ## Methods
 
 ### Public methods
 
-- [`CFCalendar365$new()`](#method-CFCalendar365-new)
+- [`CFCalendar365$new()`](#method-CFCalendar365-initialize)
 
 - [`CFCalendar365$valid_days()`](#method-CFCalendar365-valid_days)
 
@@ -33,17 +33,17 @@ This calendar supports dates before year 1 and includes the year 0.
 
 Inherited methods
 
-- [`CFtime::CFCalendar$POSIX_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-POSIX_compatible)
-- [`CFtime::CFCalendar$add_day()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-add_day)
-- [`CFtime::CFCalendar$is_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_compatible)
-- [`CFtime::CFCalendar$is_equivalent()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_equivalent)
-- [`CFtime::CFCalendar$offsets2time()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-offsets2time)
-- [`CFtime::CFCalendar$parse()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-parse)
-- [`CFtime::CFCalendar$print()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-print)
+- [`CFCalendar$POSIX_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-POSIX_compatible)
+- [`CFCalendar$add_day()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-add_day)
+- [`CFCalendar$is_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_compatible)
+- [`CFCalendar$is_equivalent()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_equivalent)
+- [`CFCalendar$offsets2time()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-offsets2time)
+- [`CFCalendar$parse()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-parse)
+- [`CFCalendar$print()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-print)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `CFCalendar365$new()`
 
 Create a new CF calendar of 365 days per year.
 
@@ -68,7 +68,7 @@ A new instance of this class.
 
 ------------------------------------------------------------------------
 
-### Method `valid_days()`
+### `CFCalendar365$valid_days()`
 
 Indicate which of the supplied dates are valid.
 
@@ -91,7 +91,7 @@ row in argument `ymd` has `NA` values.
 
 ------------------------------------------------------------------------
 
-### Method [`month_days()`](https://r-cf.github.io/CFtime/reference/month_days.md)
+### `CFCalendar365$month_days()`
 
 Determine the number of days in the month of the calendar.
 
@@ -113,7 +113,7 @@ per month for the calendar as a vector of length 12.
 
 ------------------------------------------------------------------------
 
-### Method `leap_year()`
+### `CFCalendar365$leap_year()`
 
 Indicate which years are leap years.
 
@@ -135,7 +135,7 @@ where argument `yr` is `NA`.
 
 ------------------------------------------------------------------------
 
-### Method `doy()`
+### `CFCalendar365$doy()`
 
 Retrieve the day-of-year number for the supplied `data.frame` of year,
 month and day, using this calendar.
@@ -158,7 +158,7 @@ for each row.
 
 ------------------------------------------------------------------------
 
-### Method `date2offset()`
+### `CFCalendar365$date2offset()`
 
 Calculate difference in days between a `data.frame` of time parts and
 the origin.
@@ -181,7 +181,7 @@ rows in `x` with `NA` values.
 
 ------------------------------------------------------------------------
 
-### Method `offset2date()`
+### `CFCalendar365$offset2date()`
 
 Calculate date parts from day differences from the origin. This only
 deals with days as these are impacted by the calendar.
@@ -205,7 +205,7 @@ as the length of vector `x`.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `CFCalendar365$clone()`
 
 The objects of this class are cloneable with this method.
 

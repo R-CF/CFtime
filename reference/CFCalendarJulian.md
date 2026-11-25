@@ -10,14 +10,14 @@ dates before this will generate an error.
 
 ## Super class
 
-[`CFtime::CFCalendar`](https://r-cf.github.io/CFtime/reference/CFCalendar.md)
+[`CFCalendar`](https://r-cf.github.io/CFtime/reference/CFCalendar.md)
 -\> `CFCalendarJulian`
 
 ## Methods
 
 ### Public methods
 
-- [`CFCalendarJulian$new()`](#method-CFCalendarJulian-new)
+- [`CFCalendarJulian$new()`](#method-CFCalendarJulian-initialize)
 
 - [`CFCalendarJulian$valid_days()`](#method-CFCalendarJulian-valid_days)
 
@@ -33,18 +33,18 @@ dates before this will generate an error.
 
 Inherited methods
 
-- [`CFtime::CFCalendar$POSIX_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-POSIX_compatible)
-- [`CFtime::CFCalendar$add_day()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-add_day)
-- [`CFtime::CFCalendar$doy()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-doy)
-- [`CFtime::CFCalendar$is_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_compatible)
-- [`CFtime::CFCalendar$is_equivalent()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_equivalent)
-- [`CFtime::CFCalendar$offsets2time()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-offsets2time)
-- [`CFtime::CFCalendar$parse()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-parse)
-- [`CFtime::CFCalendar$print()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-print)
+- [`CFCalendar$POSIX_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-POSIX_compatible)
+- [`CFCalendar$add_day()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-add_day)
+- [`CFCalendar$doy()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-doy)
+- [`CFCalendar$is_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_compatible)
+- [`CFCalendar$is_equivalent()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_equivalent)
+- [`CFCalendar$offsets2time()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-offsets2time)
+- [`CFCalendar$parse()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-parse)
+- [`CFCalendar$print()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-print)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `CFCalendarJulian$new()`
 
 Create a new CF calendar.
 
@@ -71,7 +71,7 @@ A new instance of this class.
 
 ------------------------------------------------------------------------
 
-### Method `valid_days()`
+### `CFCalendarJulian$valid_days()`
 
 Indicate which of the supplied dates are valid.
 
@@ -94,7 +94,7 @@ row in argument `ymd` has `NA` values.
 
 ------------------------------------------------------------------------
 
-### Method [`month_days()`](https://r-cf.github.io/CFtime/reference/month_days.md)
+### `CFCalendarJulian$month_days()`
 
 Determine the number of days in the month of the calendar.
 
@@ -117,7 +117,7 @@ without a leap day.
 
 ------------------------------------------------------------------------
 
-### Method `leap_year()`
+### `CFCalendarJulian$leap_year()`
 
 Indicate which years are leap years.
 
@@ -138,7 +138,7 @@ where elements in argument `yr` are `NA`.
 
 ------------------------------------------------------------------------
 
-### Method `date2offset()`
+### `CFCalendarJulian$date2offset()`
 
 Calculate difference in days between a `data.frame` of time parts and
 the origin.
@@ -161,7 +161,7 @@ calendar, or `NA` for rows in `x` with `NA` values.
 
 ------------------------------------------------------------------------
 
-### Method `offset2date()`
+### `CFCalendarJulian$offset2date()`
 
 Calculate date parts from day differences from the origin. This only
 deals with days as these are impacted by the calendar.
@@ -185,7 +185,7 @@ as the length of vector `x`.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `CFCalendarJulian$clone()`
 
 The objects of this class are cloneable with this method.
 

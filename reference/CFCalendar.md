@@ -82,7 +82,7 @@ https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conve
 
 ### Public methods
 
-- [`CFCalendar$new()`](#method-CFCalendar-new)
+- [`CFCalendar$new()`](#method-CFCalendar-initialize)
 
 - [`CFCalendar$print()`](#method-CFCalendar-print)
 
@@ -106,7 +106,7 @@ https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conve
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `CFCalendar$new()`
 
 Create a new CF calendar.
 
@@ -128,7 +128,7 @@ Create a new CF calendar.
 
 ------------------------------------------------------------------------
 
-### Method [`print()`](https://rdrr.io/r/base/print.html)
+### `CFCalendar$print()`
 
 Print information about the calendar to the console.
 
@@ -148,7 +148,7 @@ Print information about the calendar to the console.
 
 ------------------------------------------------------------------------
 
-### Method `valid_days()`
+### `CFCalendar$valid_days()`
 
 Indicate which of the supplied dates are valid.
 
@@ -170,7 +170,7 @@ class should be used for this method.
 
 ------------------------------------------------------------------------
 
-### Method `add_day()`
+### `CFCalendar$add_day()`
 
 Add a day to the supplied dates.
 
@@ -191,7 +191,7 @@ A `data.frame` like argument `ymd` but with a day added for every row.
 
 ------------------------------------------------------------------------
 
-### Method `POSIX_compatible()`
+### `CFCalendar$POSIX_compatible()`
 
 Indicate if the time series described using this calendar can be safely
 converted to a standard date-time type (`POSIXct`, `POSIXlt`, `Date`).
@@ -217,7 +217,7 @@ cover the majority of cases.
 
 ------------------------------------------------------------------------
 
-### Method `is_compatible()`
+### `CFCalendar$is_compatible()`
 
 This method tests if the `CFCalendar` instance in argument `cal` is
 compatible with `self`, meaning that they are of the same class and have
@@ -242,7 +242,7 @@ and "all_leap".
 
 ------------------------------------------------------------------------
 
-### Method `is_equivalent()`
+### `CFCalendar$is_equivalent()`
 
 This method tests if the `CFCalendar` instance in argument `cal` is
 equivalent to `self`, meaning that they are of the same class, have the
@@ -271,7 +271,7 @@ instance.
 
 ------------------------------------------------------------------------
 
-### Method [`parse()`](https://rdrr.io/r/base/parse.html)
+### `CFCalendar$parse()`
 
 Parsing a vector of date-time character strings into parts.
 
@@ -292,7 +292,7 @@ zone, and offset. Invalid input data will appear as `NA`.
 
 ------------------------------------------------------------------------
 
-### Method `doy()`
+### `CFCalendar$doy()`
 
 Retrieve the day-of-year number for the supplied `data.frame` of year,
 month and day, using this calendar. This method tests for leap years -
@@ -316,14 +316,19 @@ for each row.
 
 ------------------------------------------------------------------------
 
-### Method `offsets2time()`
+### `CFCalendar$offsets2time()`
 
 Decompose a vector of offsets, in units of the calendar, to their
 timestamp values. This adds a specified amount of time to the origin of
 a `CFTime` object.
 
 This method may introduce inaccuracies where the calendar unit is
-"months" or "years", due to the ambiguous definition of these units.
+"month" or "year", due to the ambiguous definition of these units. Any
+fractional part in the offsets is discarded because the common practice
+is that these units represent calendar months and years, while the CF
+conventions use the UDUNITS definition where a year is 365.242198781
+days and every month is 30.43685 days. Dropping the fractional part
+gives a consistent result.
 
 #### Usage
 
@@ -342,7 +347,7 @@ as there are offsets.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `CFCalendar$clone()`
 
 The objects of this class are cloneable with this method.
 

@@ -69,6 +69,7 @@ calendar of the data files. The method comes in two operating modes:
   (e.g. average March temperature in the era 2041-2060).
 
 ``` r
+
 # Setting up
 library(ncdfCF)
 fn <- list.files(path = system.file("extdata", package = "CFtime"), full.names = TRUE)[1]
@@ -213,6 +214,7 @@ the actual processing of the data into precipitation anomalies for 3
 periods relative to a baseline period could look like this:
 
 ``` r
+
 # Get the data for the "pr" data variable from the netCDF data set.
 # The `CFVariable$array()` method ensures that data are in standard R orientation.
 # Converts units of kg m-2 s-1 to mm.
@@ -270,6 +272,7 @@ ensemble but such are the limitations of including data with packages -
 the example easily extends to a larger set of ensemble members).
 
 ``` r
+
 # Get the list of files that make up the ensemble members, here:
 # GFDL ESM4 and MRI ESM2 models for experiment SSP2-4.5, precipitation, CMIP6 2015-01-01 to 2099-12-31
 lf <- list.files(path = system.file("extdata", package = "CFtime"), full.names = TRUE)
@@ -354,6 +357,7 @@ swap files and very poor performance - use the
 of data to avoid such problems.)
 
 ``` r
+
 library(ncdfCF)
 library(abind)
 

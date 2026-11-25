@@ -24,6 +24,7 @@ date-time operations do not give correct results. That it is important
 to account for these differences is easily demonstrated:
 
 ``` r
+
 library(CFtime)
 
 # POSIXt calculations on a standard calendar
@@ -105,6 +106,7 @@ examples for use of this package.
 Get the latest stable version on CRAN:
 
 ``` r
+
 install.packages("CFtime")
 ```
 
@@ -112,6 +114,7 @@ You can install the development version of CFtime from
 [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("devtools")
 devtools::install_github("R-CF/CFtime")
 ```

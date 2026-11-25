@@ -15,8 +15,8 @@ https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conve
 
 ## Super class
 
-[`CFtime::CFTime`](https://r-cf.github.io/CFtime/reference/CFtime.md)
--\> `CFClimatology`
+[`CFTime`](https://r-cf.github.io/CFtime/reference/CFtime.md) -\>
+`CFClimatology`
 
 ## Active bindings
 
@@ -38,7 +38,7 @@ https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conve
 
 ### Public methods
 
-- [`CFClimatology$new()`](#method-CFClimatology-new)
+- [`CFClimatology$new()`](#method-CFClimatology-initialize)
 
 - [`CFClimatology$print()`](#method-CFClimatology-print)
 
@@ -46,26 +46,26 @@ https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conve
 
 Inherited methods
 
-- [`CFtime::CFTime$POSIX_compatible()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-POSIX_compatible)
-- [`CFtime::CFTime$as_timestamp()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-as_timestamp)
-- [`CFtime::CFTime$copy()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-copy)
-- [`CFtime::CFTime$cut()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-cut)
-- [`CFtime::CFTime$doy()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-doy)
-- [`CFtime::CFTime$equidistant()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-equidistant)
-- [`CFtime::CFTime$factor()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-factor)
-- [`CFtime::CFTime$factor_coverage()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-factor_coverage)
-- [`CFtime::CFTime$factor_units()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-factor_units)
-- [`CFtime::CFTime$format()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-format)
-- [`CFtime::CFTime$get_bounds()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-get_bounds)
-- [`CFtime::CFTime$indexOf()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-indexOf)
-- [`CFtime::CFTime$range()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-range)
-- [`CFtime::CFTime$set_bounds()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-set_bounds)
-- [`CFtime::CFTime$slice()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-slice)
-- [`CFtime::CFTime$subset()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-subset)
+- [`CFTime$POSIX_compatible()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-POSIX_compatible)
+- [`CFTime$as_timestamp()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-as_timestamp)
+- [`CFTime$copy()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-copy)
+- [`CFTime$cut()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-cut)
+- [`CFTime$doy()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-doy)
+- [`CFTime$equidistant()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-equidistant)
+- [`CFTime$factor()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-factor)
+- [`CFTime$factor_coverage()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-factor_coverage)
+- [`CFTime$factor_units()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-factor_units)
+- [`CFTime$format()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-format)
+- [`CFTime$get_bounds()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-get_bounds)
+- [`CFTime$indexOf()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-indexOf)
+- [`CFTime$range()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-range)
+- [`CFTime$set_bounds()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-set_bounds)
+- [`CFTime$slice()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-slice)
+- [`CFTime$subset()`](https://r-cf.github.io/CFtime/reference/CFTime.html#method-subset)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `CFClimatology$new()`
 
 Create a new instance of this class.
 
@@ -99,7 +99,7 @@ Create a new instance of this class.
 
 ------------------------------------------------------------------------
 
-### Method [`print()`](https://rdrr.io/r/base/print.html)
+### `CFClimatology$print()`
 
 Print a summary of the `CFClimatology` object to the console.
 
@@ -119,7 +119,7 @@ Print a summary of the `CFClimatology` object to the console.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `CFClimatology$clone()`
 
 The objects of this class are cloneable with this method.
 

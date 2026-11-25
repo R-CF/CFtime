@@ -6,14 +6,14 @@ experiments simulating a fixed time in the year.
 
 ## Super class
 
-[`CFtime::CFCalendar`](https://r-cf.github.io/CFtime/reference/CFCalendar.md)
+[`CFCalendar`](https://r-cf.github.io/CFtime/reference/CFCalendar.md)
 -\> `CFCalendarNone`
 
 ## Methods
 
 ### Public methods
 
-- [`CFCalendarNone$new()`](#method-CFCalendarNone-new)
+- [`CFCalendarNone$new()`](#method-CFCalendarNone-initialize)
 
 - [`CFCalendarNone$valid_days()`](#method-CFCalendarNone-valid_days)
 
@@ -31,17 +31,17 @@ experiments simulating a fixed time in the year.
 
 Inherited methods
 
-- [`CFtime::CFCalendar$POSIX_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-POSIX_compatible)
-- [`CFtime::CFCalendar$add_day()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-add_day)
-- [`CFtime::CFCalendar$is_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_compatible)
-- [`CFtime::CFCalendar$is_equivalent()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_equivalent)
-- [`CFtime::CFCalendar$offsets2time()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-offsets2time)
-- [`CFtime::CFCalendar$parse()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-parse)
-- [`CFtime::CFCalendar$print()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-print)
+- [`CFCalendar$POSIX_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-POSIX_compatible)
+- [`CFCalendar$add_day()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-add_day)
+- [`CFCalendar$is_compatible()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_compatible)
+- [`CFCalendar$is_equivalent()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-is_equivalent)
+- [`CFCalendar$offsets2time()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-offsets2time)
+- [`CFCalendar$parse()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-parse)
+- [`CFCalendar$print()`](https://r-cf.github.io/CFtime/reference/CFCalendar.html#method-print)
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `CFCalendarNone$new()`
 
 Create a new CF calendar.
 
@@ -68,7 +68,7 @@ A new instance of this class.
 
 ------------------------------------------------------------------------
 
-### Method `valid_days()`
+### `CFCalendarNone$valid_days()`
 
 Indicate which of the supplied dates are valid. In this calendar only
 one date is valid, namely the one that the calendar is initialized with.
@@ -92,7 +92,7 @@ row in argument `ymd` has `NA` values.
 
 ------------------------------------------------------------------------
 
-### Method [`month_days()`](https://r-cf.github.io/CFtime/reference/month_days.md)
+### `CFCalendarNone$month_days()`
 
 Determine the number of days in the month of the calendar. This always
 returns a vector of `NA` values because this method has no meaning for
@@ -116,7 +116,7 @@ no dates are supplied, a vector of `NA` values of length 12.
 
 ------------------------------------------------------------------------
 
-### Method `leap_year()`
+### `CFCalendarNone$leap_year()`
 
 Indicate which years are leap years. This always returns a vector of
 `NA` values because this method has no meaning for this class.
@@ -137,7 +137,7 @@ Vector with the same length as argument `yr` with `NA` values.
 
 ------------------------------------------------------------------------
 
-### Method `doy()`
+### `CFCalendarNone$doy()`
 
 Retrieve the day-of-year number of the fixed data of this calendar,
 using the Gregorian calendar.
@@ -159,7 +159,7 @@ Integer with the day-of-year of the fixed date for this calendar.
 
 ------------------------------------------------------------------------
 
-### Method `date2offset()`
+### `CFCalendarNone$date2offset()`
 
 Calculate difference in days between a `data.frame` of time parts and
 the origin. The difference is always 0, given that this is not a true
@@ -183,7 +183,7 @@ otherwise.
 
 ------------------------------------------------------------------------
 
-### Method `offset2date()`
+### `CFCalendarNone$offset2date()`
 
 Calculate date parts from day differences from the origin. This always
 returns 0's for the year, month and day as other values are not valid in
@@ -209,7 +209,7 @@ accordance with the CF Metadata Conventions.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `CFCalendarNone$clone()`
 
 The objects of this class are cloneable with this method.
 

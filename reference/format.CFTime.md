@@ -1,13 +1,10 @@
-# Format the timestamps in the `CFTime` instance
+# Format timestamps
 
-The formatting is largely oblivious to locale. The reason for this is
-that certain dates in certain calendars are not POSIX-compliant and the
-system functions necessary for locale information thus do not work
-consistently. The main exception to this is the (abbreviated) names of
-months (`bB`), which could be useful for pretty printing in the local
-language. For separators and other locale-specific adornments, use local
-knowledge instead of depending on system locale settings; e.g. specify
-`%m/%d/%Y` instead of `%D`.
+The timestamps in the
+[CFTime](https://r-cf.github.io/CFtime/reference/CFtime.md) instance are
+formatted in character strings using formatting strings similar to the
+[`base::strptime()`](https://rdrr.io/r/base/strptime.html) function,
+with limitations.
 
 ## Usage
 
@@ -46,6 +43,15 @@ format(x, format = "", tz = "", usetz = FALSE, ...)
 
 ## Details
 
+The formatting is largely oblivious to locale. The reason for this is
+that certain dates in certain calendars are not POSIX-compliant and the
+system functions necessary for locale information thus do not work
+consistently. The main exception to this is the (abbreviated) names of
+months (`bB`), which could be useful for pretty printing in the local
+language. For separators and other locale-specific adornments, use local
+knowledge instead of depending on system locale settings; e.g. specify
+`%m/%d/%Y` instead of `%D`.
+
 Week information, including weekday names, is not supported at all as a
 "week" is not defined for non-standard CF calendars and not generally
 useful for climate projection data. If you are working with observed
@@ -55,3 +61,12 @@ method to generate `POSIXct` timestamps (observed data generally uses a
 "standard" calendar) and then use the
 [`base::format()`](https://rdrr.io/r/base/format.html) function which
 supports the full set of specifiers.
+
+## Examples
+
+``` r
+x <- CFtime("days since 2021-01-01", "365_day", 0:9)
+format(x)
+#>  [1] "2021-01-01" "2021-01-02" "2021-01-03" "2021-01-04" "2021-01-05"
+#>  [6] "2021-01-06" "2021-01-07" "2021-01-08" "2021-01-09" "2021-01-10"
+```
