@@ -10,7 +10,7 @@ Stable](https://img.shields.io/badge/Lifecycle-Stable-green.svg)](https://lifecy
 [![CRAN
 Status](https://www.r-pkg.org/badges/version/CFtime)](https://cran.r-project.org/package=CFtime)
 [![CRAN
-Downloads](https://cranlogs.r-pkg.org/badges/grand-total/CFtime)](https://cran.r-project.org/package=CFtime)
+Downloads](https://cranlogs.r-pkg.org/badges/CFtime)](https://cran.r-project.org/package=CFtime)
 [![License: GPL
 v3](https://img.shields.io/badge/License-MIT-blue.svg)](https://mit-license.org)
 [![Commits since
@@ -18,8 +18,8 @@ release](https://img.shields.io/github/commits-since/R-CF/CFtime/latest.svg?colo
 [![Last
 commit](https://img.shields.io/github/last-commit/R-CF/CFtime)](https://github.com/R-CF/CFtime/commits/main)
 [![R-CMD-check](https://github.com/R-CF/CFtime/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/R-CF/CFtime/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/R-CF/CFtime/branch/main/graph/badge.svg)](https://app.codecov.io/gh/R-CF/CFtime)
-
+[![Codecov test
+coverage](https://codecov.io/gh/R-CF/CFtime/graph/badge.svg)](https://app.codecov.io/gh/R-CF/CFtime)
 <!-- badges: end -->
 
 CFtime is an R package that supports working with [CF Metadata
