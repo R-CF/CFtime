@@ -14,7 +14,8 @@
 #' @returns logical. `TRUE` if the offsets are valid, throws an error otherwise.
 #' @noRd
 .validOffsets <- function(offsets) {
-  if (any(is.na(offsets))) stop("Offsets cannot contain `NA` values.", call. = FALSE)
+  if (any(is.na(offsets)))
+    stop("Offsets cannot contain `NA` values", call. = FALSE)
   TRUE
 }
 

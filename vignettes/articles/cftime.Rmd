@@ -79,7 +79,8 @@ library(ncdfCF)
 # Opening a data file that is included with the package.
 # Usually you would `list.files()` on a directory of your choice.
 fn <- list.files(path = system.file("extdata", package = "CFtime"), full.names = TRUE)[1]
-(ds <- ncdfCF::open_ncdf(fn))
+ds <- ncdfCF::open_ncdf(fn)
+print(ds, width = 30)
 
 # "Conventions" global attribute must have a string like "CF-1.*" for this package to work reliably
 
@@ -269,3 +270,4 @@ A complete example of creating a multi-model ensemble is provided in the vignett
 
  - This package is intended to facilitate processing of climate projection data. It is a near-complete implementation of the CF Metadata Conventions "time" component.
  - In parsing and deparsing of offsets and timestamps, data is rounded to 3 digits of precision of the unit of the calendar. When using a description of time that is very different from the calendar unit, this may lead to some loss of precision due to rounding errors. For instance, if milli-second precision is required, use a unit of "seconds". The authors have no knowledge of published climate projection data that requires milli-second precision so for the intended use of the package this issue is marginal.
+ - Use of units "month" and "year" is STRONGLY DISCOURAGED as their definition does not align with the common understanding and use of calendar month and calendar year. To support use of existing data sets using these units, they are allowed on constructing a `CFTime` instance but any fractional part in the offsets is discarded so data consistently comes out at the date and time specified in the "definition" of the instance for each month and year.

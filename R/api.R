@@ -215,7 +215,11 @@ as.character.CFTime <- function(x, ...) {
   x$as_timestamp()
 }
 
-#' Format the timestamps in the `CFTime` instance
+#' Format timestamps
+#'
+#'   The timestamps in the [CFTime] instance are formatted in character strings
+#'   using formatting strings similar to the [base::strptime()] function, with
+#'   limitations.
 #'
 #'   The formatting is largely oblivious to locale. The reason for this is
 #'   that certain dates in certain calendars are not POSIX-compliant and the
@@ -244,6 +248,10 @@ as.character.CFTime <- function(x, ...) {
 #' @param usetz Logical. Should the time zone offset be appended to the output?
 #'   This is always in numerical form, i.e. "-0800", from UTC.
 #' @param ... Ignored.
+#' @export
+#' @examples
+#' x <- CFtime("days since 2021-01-01", "365_day", 0:9)
+#' format(x)
 format.CFTime <- function(x, format = "", tz = "", usetz = FALSE, ...) {
   x$format(format, usetz)
 }

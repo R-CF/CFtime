@@ -2,7 +2,7 @@
 % Please edit documentation in R/api.R
 \name{format.CFTime}
 \alias{format.CFTime}
-\title{Format the timestamps in the \code{CFTime} instance}
+\title{Format timestamps}
 \usage{
 \method{format}{CFTime}(x, format = "", tz = "", usetz = FALSE, ...)
 }
@@ -24,6 +24,11 @@ This is always in numerical form, i.e. "-0800", from UTC.}
 \item{...}{Ignored.}
 }
 \description{
+The timestamps in the \link{CFTime} instance are formatted in character strings
+using formatting strings similar to the \code{\link[base:strptime]{base::strptime()}} function, with
+limitations.
+}
+\details{
 The formatting is largely oblivious to locale. The reason for this is
 that certain dates in certain calendars are not POSIX-compliant and the
 system functions necessary for locale information thus do not work
@@ -32,8 +37,7 @@ months (\code{bB}), which could be useful for pretty printing in the local
 language. For separators and other locale-specific adornments, use
 local knowledge instead of depending on system locale settings; e.g.
 specify \verb{\%m/\%d/\%Y} instead of \verb{\%D}.
-}
-\details{
+
 Week information, including weekday names, is not supported at all as a
 "week" is not defined for non-standard CF calendars and not generally
 useful for climate projection data. If you are working with observed
@@ -41,4 +45,8 @@ data and want to get pretty week formats, use the \code{\link[=as_timestamp]{as_
 method to generate \code{POSIXct} timestamps (observed data generally uses a
 "standard" calendar) and then use the \code{\link[base:format]{base::format()}} function which
 supports the full set of specifiers.
+}
+\examples{
+x <- CFtime("days since 2021-01-01", "365_day", 0:9)
+format(x)
 }

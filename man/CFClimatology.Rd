@@ -17,117 +17,118 @@ the climatological data.
 https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#climatological-statistics
 }
 \section{Super class}{
-\code{\link[CFtime:CFTime]{CFtime::CFTime}} -> \code{CFClimatology}
+\code{\link[CFtime:CFTime]{CFTime}} -> \code{CFClimatology}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{period}}{(read-only) Character string indicating the period during
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{period}}{(read-only) Character string indicating the period during
 the year over which the climatology was calculated.}
 
-\item{\code{years}}{(read-only) Vector of two integer values indicating the
+    \item{\code{years}}{(read-only) Vector of two integer values indicating the
 years over which the climatology was calculated.}
 
-\item{\code{friendlyClassName}}{Character string with class name for display
+    \item{\code{friendlyClassName}}{Character string with class name for display
 purposes.}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-CFClimatology-new}{\code{CFClimatology$new()}}
-\item \href{#method-CFClimatology-print}{\code{CFClimatology$print()}}
-\item \href{#method-CFClimatology-clone}{\code{CFClimatology$clone()}}
+  \itemize{
+    \item \href{#method-CFClimatology-initialize}{\code{CFClimatology$new()}}
+    \item \href{#method-CFClimatology-print}{\code{CFClimatology$print()}}
+    \item \href{#method-CFClimatology-clone}{\code{CFClimatology$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details><summary>Inherited methods</summary>
+\if{html}{\out{<details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="POSIX_compatible"><a href='../../CFtime/html/CFTime.html#method-CFTime-POSIX_compatible'><code>CFtime::CFTime$POSIX_compatible()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="as_timestamp"><a href='../../CFtime/html/CFTime.html#method-CFTime-as_timestamp'><code>CFtime::CFTime$as_timestamp()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="copy"><a href='../../CFtime/html/CFTime.html#method-CFTime-copy'><code>CFtime::CFTime$copy()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="cut"><a href='../../CFtime/html/CFTime.html#method-CFTime-cut'><code>CFtime::CFTime$cut()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="doy"><a href='../../CFtime/html/CFTime.html#method-CFTime-doy'><code>CFtime::CFTime$doy()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="equidistant"><a href='../../CFtime/html/CFTime.html#method-CFTime-equidistant'><code>CFtime::CFTime$equidistant()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="factor"><a href='../../CFtime/html/CFTime.html#method-CFTime-factor'><code>CFtime::CFTime$factor()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="factor_coverage"><a href='../../CFtime/html/CFTime.html#method-CFTime-factor_coverage'><code>CFtime::CFTime$factor_coverage()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="factor_units"><a href='../../CFtime/html/CFTime.html#method-CFTime-factor_units'><code>CFtime::CFTime$factor_units()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="format"><a href='../../CFtime/html/CFTime.html#method-CFTime-format'><code>CFtime::CFTime$format()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="get_bounds"><a href='../../CFtime/html/CFTime.html#method-CFTime-get_bounds'><code>CFtime::CFTime$get_bounds()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="indexOf"><a href='../../CFtime/html/CFTime.html#method-CFTime-indexOf'><code>CFtime::CFTime$indexOf()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="range"><a href='../../CFtime/html/CFTime.html#method-CFTime-range'><code>CFtime::CFTime$range()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="set_bounds"><a href='../../CFtime/html/CFTime.html#method-CFTime-set_bounds'><code>CFtime::CFTime$set_bounds()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="slice"><a href='../../CFtime/html/CFTime.html#method-CFTime-slice'><code>CFtime::CFTime$slice()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="subset"><a href='../../CFtime/html/CFTime.html#method-CFTime-subset'><code>CFtime::CFTime$subset()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="POSIX_compatible"><a href='../../CFtime/html/CFTime.html#method-CFTime-POSIX_compatible'><code>CFTime$POSIX_compatible()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="as_timestamp"><a href='../../CFtime/html/CFTime.html#method-CFTime-as_timestamp'><code>CFTime$as_timestamp()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="copy"><a href='../../CFtime/html/CFTime.html#method-CFTime-copy'><code>CFTime$copy()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="cut"><a href='../../CFtime/html/CFTime.html#method-CFTime-cut'><code>CFTime$cut()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="doy"><a href='../../CFtime/html/CFTime.html#method-CFTime-doy'><code>CFTime$doy()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="equidistant"><a href='../../CFtime/html/CFTime.html#method-CFTime-equidistant'><code>CFTime$equidistant()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="factor"><a href='../../CFtime/html/CFTime.html#method-CFTime-factor'><code>CFTime$factor()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="factor_coverage"><a href='../../CFtime/html/CFTime.html#method-CFTime-factor_coverage'><code>CFTime$factor_coverage()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="factor_units"><a href='../../CFtime/html/CFTime.html#method-CFTime-factor_units'><code>CFTime$factor_units()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="format"><a href='../../CFtime/html/CFTime.html#method-CFTime-format'><code>CFTime$format()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="get_bounds"><a href='../../CFtime/html/CFTime.html#method-CFTime-get_bounds'><code>CFTime$get_bounds()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="indexOf"><a href='../../CFtime/html/CFTime.html#method-CFTime-indexOf'><code>CFTime$indexOf()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="range"><a href='../../CFtime/html/CFTime.html#method-CFTime-range'><code>CFTime$range()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="set_bounds"><a href='../../CFtime/html/CFTime.html#method-CFTime-set_bounds'><code>CFTime$set_bounds()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="slice"><a href='../../CFtime/html/CFTime.html#method-CFTime-slice'><code>CFTime$slice()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFTime" data-id="subset"><a href='../../CFtime/html/CFTime.html#method-CFTime-subset'><code>CFTime$subset()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-CFClimatology-new"></a>}}
-\if{latex}{\out{\hypertarget{method-CFClimatology-new}{}}}
-\subsection{Method \code{new()}}{
-Create a new instance of this class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFClimatology$new(definition, calendar = "standard", offsets, bounds)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{definition}}{Character string of the units and origin of the
+\if{html}{\out{<a id="method-CFClimatology-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-CFClimatology-initialize}{}}}
+\subsection{\code{CFClimatology$new()}}{
+  Create a new instance of this class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFClimatology$new(definition, calendar = "standard", offsets, bounds)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{definition}}{Character string of the units and origin of the
 calendar.}
-
-\item{\code{calendar}}{Character string of the calendar to use. Must be one of
+      \item{\code{calendar}}{Character string of the calendar to use. Must be one of
 the values permitted by the CF Metadata Conventions. If \code{NULL}, the
 "standard" calendar will be used.}
-
-\item{\code{offsets}}{Numeric or character vector. When numeric, a vector of
+      \item{\code{offsets}}{Numeric or character vector. When numeric, a vector of
 offsets from the origin in the time series. When a character vector of
 length 2 or more, timestamps in ISO8601 or UDUNITS format.}
-
-\item{\code{bounds}}{The climatological bounds for the offsets. A \code{matrix} with
+      \item{\code{bounds}}{The climatological bounds for the offsets. A \code{matrix} with
 columns for \code{offsets} and low values in the first row, high values in
 the second row. The bounds will oftentimes overlap or be discontinuous.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFClimatology-print"></a>}}
 \if{latex}{\out{\hypertarget{method-CFClimatology-print}{}}}
-\subsection{Method \code{print()}}{
-Print a summary of the \code{CFClimatology} object to the console.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFClimatology$print(...)}\if{html}{\out{</div>}}
+\subsection{\code{CFClimatology$print()}}{
+  Print a summary of the \code{CFClimatology} object to the console.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFClimatology$print(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{Ignored.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    \code{self} invisibly.
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{Ignored.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{self} invisibly.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFClimatology-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-CFClimatology-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFClimatology$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{CFClimatology$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFClimatology$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

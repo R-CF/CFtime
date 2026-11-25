@@ -65,19 +65,20 @@ CFTime <- R6::R6Class("CFTime",
 
       if (is.numeric(offsets)) {
         dim(offsets) <- NULL
-        stopifnot(.validOffsets(offsets))
+        .validOffsets(offsets)
 
         if (length(offsets) > 1L) {
           private$.resolution <- (max(offsets) - min(offsets)) / (length(offsets) - 1L)
           if (any(diff(offsets) <= 0))
-            warning("Offsets not monotonically increasing.", call. = FALSE)
+            warning("Offsets not monotonically increasing", call. = FALSE)
         } else {
           private$.resolution <- NA_real_
         }
         private$.offsets <- as.numeric(offsets)
       } else if (is.character(offsets)) {
         time <- private$.cal$parse(offsets)
-        if (anyNA(time$year)) stop("Argument `offsets` contains invalid timestamps", call. = FALSE) # nocov
+        if (anyNA(time$year))
+          stop("Argument `offsets` contains invalid timestamps", call. = FALSE) # nocov
 
         private$.offsets <- time$offset
         if (length(offsets) > 1L)
@@ -85,8 +86,9 @@ CFTime <- R6::R6Class("CFTime",
         else
           private$.resolution <- NA_real_
         if (any(diff(private$.offsets) <= 0))
-          warning("Offsets not monotonically increasing.", call. = FALSE)
-      } else if (!is.null(offsets)) stop("Invalid offsets for CFTime object", call. = FALSE)
+          warning("Offsets not monotonically increasing", call. = FALSE)
+      } else if (!is.null(offsets))
+        stop("Invalid offsets for CFTime object", call. = FALSE)
     },
 
     #' @description Print a summary of the `CFTime` object to the console.

@@ -110,8 +110,7 @@ CFCalendar <- R6::R6Class("CFCalendar",
     #' @return `NULL`. A warning will be generated to the effect that a
     #' descendant class should be used for this method.
     valid_days = function(ymd) {
-      warning("Use a descendant class from `CFCalendar` to call this method.", call. = FALSE) # nocov
-      NULL                                                                                    # nocov
+      stop("Use a descendant class from `CFCalendar` to call this method", call. = FALSE) # nocov
     },
 
     #' @description Add a day to the supplied dates.
@@ -312,7 +311,7 @@ CFCalendar <- R6::R6Class("CFCalendar",
       if (sum(invalid) > 0L) cap[invalid,] <- rep(NA, 7)
 
       # Calculate offsets
-      if (nrow(self$origin) == 0L) {        # if there's no origin yet, don't calculate offsets
+      if (nrow(self$origin) == 0L) {        # if there's no origin yet don't calculate offsets
         cap$offset <- rep(0, nrow(cap))     # this happens, f.i., when a CFCalendar is created
       } else {
         days <- self$date2offset(cap)
@@ -345,7 +344,12 @@ CFCalendar <- R6::R6Class("CFCalendar",
     #'   origin of a `CFTime` object.
     #'
     #'   This method may introduce inaccuracies where the calendar unit is
-    #'   "months" or "years", due to the ambiguous definition of these units.
+    #'   "month" or "year", due to the ambiguous definition of these units. Any
+    #'   fractional part in the offsets is discarded because the common practice
+    #'   is that these units represent calendar months and years, while the CF
+    #'   conventions use the UDUNITS definition where a year is 365.242198781
+    #'   days and every month is 30.43685 days. Dropping the fractional part
+    #'   gives a consistent result.
     #' @param offsets Vector of numeric offsets to add to the origin of the
     #'   calendar.
     #' @return A `data.frame` with columns for the timestamp elements and as
@@ -386,11 +390,11 @@ CFCalendar <- R6::R6Class("CFCalendar",
       } else { # Months, years
         out <- private$.origin[rep(1L, len), ]
         if (private$.unit == 5L) { # Offsets are months
-          months <- out$month + offsets * prefix - 1L
+          months <- out$month + as.integer(offsets) * prefix - 1L
           out$month <- months %% 12L + 1L
           out$year <- out$year + months %/% 12L
         } else {               # Offsets are years
-          out$year <- out$year + offsets * prefix
+          out$year <- out$year + as.integer(offsets) * prefix
         }
       }
       out$offset <- offsets

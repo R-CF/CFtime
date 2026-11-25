@@ -23,139 +23,142 @@ time values is supported, as is the generation of factors.
 https://cf-convention.github.io/Data/cf-conventions/cf-conventions-1.13/cf-conventions.html#time-coordinate
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{calendar}}{(read-only) The calendar of this \code{CFTime} instance, a
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{calendar}}{(read-only) The calendar of this \code{CFTime} instance, a
 descendant of the \link{CFCalendar} class.}
 
-\item{\code{cal}}{(read-only) DEPRECATED. Use the \code{calendar} field instead.}
+    \item{\code{cal}}{(read-only) DEPRECATED. Use the \code{calendar} field instead.}
 
-\item{\code{unit}}{(read-only) The unit string of the calendar and time series.}
+    \item{\code{unit}}{(read-only) The unit string of the calendar and time series.}
 
-\item{\code{offsets}}{(read-only) A numeric vector of offsets from the origin of
+    \item{\code{offsets}}{(read-only) A numeric vector of offsets from the origin of
 the calendar.}
 
-\item{\code{resolution}}{(read-only) The average number of time units between
+    \item{\code{resolution}}{(read-only) The average number of time units between
 offsets.}
 
-\item{\code{length}}{(read-only) Retrieve the number of offsets in the time
+    \item{\code{length}}{(read-only) Retrieve the number of offsets in the time
 series.}
 
-\item{\code{bounds}}{Retrieve or set the bounds for the offsets. On setting, a
+    \item{\code{bounds}}{Retrieve or set the bounds for the offsets. On setting, a
 \code{matrix} with columns for \code{offsets} and low values in the first row,
 high values in the second row. This may be simply \code{TRUE} to set regular
 and consecutive bounds.}
 
-\item{\code{friendlyClassName}}{Character string with class name for display
+    \item{\code{friendlyClassName}}{Character string with class name for display
 purposes.}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-CFTime-new}{\code{CFTime$new()}}
-\item \href{#method-CFTime-print}{\code{CFTime$print()}}
-\item \href{#method-CFTime-range}{\code{CFTime$range()}}
-\item \href{#method-CFTime-as_timestamp}{\code{CFTime$as_timestamp()}}
-\item \href{#method-CFTime-format}{\code{CFTime$format()}}
-\item \href{#method-CFTime-indexOf}{\code{CFTime$indexOf()}}
-\item \href{#method-CFTime-get_bounds}{\code{CFTime$get_bounds()}}
-\item \href{#method-CFTime-set_bounds}{\code{CFTime$set_bounds()}}
-\item \href{#method-CFTime-equidistant}{\code{CFTime$equidistant()}}
-\item \href{#method-CFTime-slice}{\code{CFTime$slice()}}
-\item \href{#method-CFTime-POSIX_compatible}{\code{CFTime$POSIX_compatible()}}
-\item \href{#method-CFTime-cut}{\code{CFTime$cut()}}
-\item \href{#method-CFTime-factor}{\code{CFTime$factor()}}
-\item \href{#method-CFTime-factor_units}{\code{CFTime$factor_units()}}
-\item \href{#method-CFTime-factor_coverage}{\code{CFTime$factor_coverage()}}
-\item \href{#method-CFTime-copy}{\code{CFTime$copy()}}
-\item \href{#method-CFTime-subset}{\code{CFTime$subset()}}
-\item \href{#method-CFTime-doy}{\code{CFTime$doy()}}
-\item \href{#method-CFTime-clone}{\code{CFTime$clone()}}
-}
+  \itemize{
+    \item \href{#method-CFTime-initialize}{\code{CFTime$new()}}
+    \item \href{#method-CFTime-print}{\code{CFTime$print()}}
+    \item \href{#method-CFTime-range}{\code{CFTime$range()}}
+    \item \href{#method-CFTime-as_timestamp}{\code{CFTime$as_timestamp()}}
+    \item \href{#method-CFTime-format}{\code{CFTime$format()}}
+    \item \href{#method-CFTime-indexOf}{\code{CFTime$indexOf()}}
+    \item \href{#method-CFTime-get_bounds}{\code{CFTime$get_bounds()}}
+    \item \href{#method-CFTime-set_bounds}{\code{CFTime$set_bounds()}}
+    \item \href{#method-CFTime-equidistant}{\code{CFTime$equidistant()}}
+    \item \href{#method-CFTime-slice}{\code{CFTime$slice()}}
+    \item \href{#method-CFTime-POSIX_compatible}{\code{CFTime$POSIX_compatible()}}
+    \item \href{#method-CFTime-cut}{\code{CFTime$cut()}}
+    \item \href{#method-CFTime-factor}{\code{CFTime$factor()}}
+    \item \href{#method-CFTime-factor_units}{\code{CFTime$factor_units()}}
+    \item \href{#method-CFTime-factor_coverage}{\code{CFTime$factor_coverage()}}
+    \item \href{#method-CFTime-copy}{\code{CFTime$copy()}}
+    \item \href{#method-CFTime-subset}{\code{CFTime$subset()}}
+    \item \href{#method-CFTime-doy}{\code{CFTime$doy()}}
+    \item \href{#method-CFTime-clone}{\code{CFTime$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-CFTime-new"></a>}}
-\if{latex}{\out{\hypertarget{method-CFTime-new}{}}}
-\subsection{Method \code{new()}}{
-Create a new instance of this class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$new(definition, calendar = "standard", offsets = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{definition}}{Character string of the units and origin of the
+\if{html}{\out{<a id="method-CFTime-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-CFTime-initialize}{}}}
+\subsection{\code{CFTime$new()}}{
+  Create a new instance of this class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$new(definition, calendar = "standard", offsets = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{definition}}{Character string of the units and origin of the
 calendar.}
-
-\item{\code{calendar}}{Character string of the calendar to use. Must be one of
+      \item{\code{calendar}}{Character string of the calendar to use. Must be one of
 the values permitted by the CF Metadata Conventions. If \code{NULL}, the
 "standard" calendar will be used.}
-
-\item{\code{offsets}}{Numeric or character vector, optional. When numeric, a
+      \item{\code{offsets}}{Numeric or character vector, optional. When numeric, a
 vector of offsets from the origin in the time series. When a character
 vector of length 2 or more, timestamps in ISO8601 or UDUNITS format.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFTime-print"></a>}}
 \if{latex}{\out{\hypertarget{method-CFTime-print}{}}}
-\subsection{Method \code{print()}}{
-Print a summary of the \code{CFTime} object to the console.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$print(...)}\if{html}{\out{</div>}}
+\subsection{\code{CFTime$print()}}{
+  Print a summary of the \code{CFTime} object to the console.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$print(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{Ignored.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    Self, invisibly.
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{Ignored.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Self, invisibly.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFTime-range"></a>}}
 \if{latex}{\out{\hypertarget{method-CFTime-range}{}}}
-\subsection{Method \code{range()}}{
-This method returns the first and last timestamp of the time
+\subsection{\code{CFTime$range()}}{
+  This method returns the first and last timestamp of the time
 series as a vector. Note that the offsets do not have to be sorted.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$range(format = "", bounds = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{format}}{Value of "date" or "timestamp". Optionally, a
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$range(format = "", bounds = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{format}}{Value of "date" or "timestamp". Optionally, a
 character string that specifies an alternate format.}
-
-\item{\code{bounds}}{Logical to indicate if the extremes from the bounds should
+      \item{\code{bounds}}{Logical to indicate if the extremes from the bounds should
 be used, if set. Defaults to \code{FALSE}.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Vector of two character strings that represent the starting and
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    Vector of two character strings that represent the starting and
 ending timestamps in the time series. If a \code{format} is supplied, that
 format will be used. Otherwise, if all of the timestamps in the time
 series have a time component of \code{00:00:00} the date of the timestamp is
 returned, otherwise the full timestamp (without any time zone
 information).
+  }
 }
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFTime-as_timestamp"></a>}}
 \if{latex}{\out{\hypertarget{method-CFTime-as_timestamp}{}}}
-\subsection{Method \code{as_timestamp()}}{
-This method generates a vector of character strings or
+\subsection{\code{CFTime$as_timestamp()}}{
+  This method generates a vector of character strings or
 \code{POSIXct}s that represent the date and time in a selectable combination
 for each offset.
 
@@ -170,33 +173,34 @@ same is possible for the "standard" and "gregorian" calendars but only
 if all timestamps fall on or after 1582-10-15. If \code{asPOSIX = TRUE} is
 specified while the calendar does not support it, an error will be
 generated.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$as_timestamp(format = NULL, asPOSIX = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{format}}{character. A character string with either of the values
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$as_timestamp(format = NULL, asPOSIX = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{format}}{character. A character string with either of the values
 "date" or "timestamp". If the argument is not specified, the format
 used is "timestamp" if there is time information, "date" otherwise.}
-
-\item{\code{asPOSIX}}{logical. If \code{TRUE}, for "standard", "gregorian" and
+      \item{\code{asPOSIX}}{logical. If \code{TRUE}, for "standard", "gregorian" and
 "proleptic_gregorian" calendars the output is a vector of \code{POSIXct} -
 for other calendars an error will be thrown. Default value is \code{FALSE}.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A character vector where each element represents a moment in
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A character vector where each element represents a moment in
 time according to the \code{format} specifier.
+  }
 }
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFTime-format"></a>}}
 \if{latex}{\out{\hypertarget{method-CFTime-format}{}}}
-\subsection{Method \code{format()}}{
-Format timestamps using a specific format string, using the
+\subsection{\code{CFTime$format()}}{
+  Format timestamps using a specific format string, using the
 specifiers defined for the \code{\link[base:strptime]{base::strptime()}} function, with
 limitations. The only supported specifiers are \verb{bBdeFhHImMpRSTYz\%}.
 Modifiers \code{E} and \code{O} are silently ignored. Other specifiers, including
@@ -219,34 +223,35 @@ data and want to get pretty week formats, use the \code{\link[=as_timestamp]{as_
 method to generate \code{POSIXct} timestamps (observed data generally uses a
 "standard" calendar) and then use the \code{\link[base:format]{base::format()}} function which
 supports the full set of specifiers.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$format(format, usetz = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{format}}{A character string with \code{strptime} format specifiers. If
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$format(format, usetz = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{format}}{A character string with \code{strptime} format specifiers. If
 omitted, the most economical format will be used: a full timestamp when
 time information is available, a date otherwise.}
-
-\item{\code{usetz}}{Logical. Should the time zone offset be appended to the
+      \item{\code{usetz}}{Logical. Should the time zone offset be appended to the
 output? This is always in numerical form, i.e. "-0800", from UTC.
 Default is \code{FALSE}.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A vector of character strings with a properly formatted
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A vector of character strings with a properly formatted
 timestamp. Any format specifiers not recognized or supported will be
 returned verbatim.
+  }
 }
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFTime-indexOf"></a>}}
 \if{latex}{\out{\hypertarget{method-CFTime-indexOf}{}}}
-\subsection{Method \code{indexOf()}}{
-Find the index in the time series for each timestamp given
+\subsection{\code{CFTime$indexOf()}}{
+  Find the index in the time series for each timestamp given
 in argument \code{x}. Alternatively, when \code{x} is a numeric vector of index
 values, return the valid indices of the same vector, with the side
 effect being the attribute "CFTime" associated with the result.
@@ -278,82 +283,86 @@ Using a numeric vector has the side effect that the result has the
 attribute "CFTime" describing the temporal dimension of the slice. If
 index values outside of the range of \code{self} are provided, an error will
 be thrown.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$indexOf(x, method = "constant", rightmost.closed = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{x}}{Vector of \code{character}, \code{POSIXt} or \code{Date} values to find indices
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$indexOf(x, method = "constant", rightmost.closed = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{x}}{Vector of \code{character}, \code{POSIXt} or \code{Date} values to find indices
 for, or a \code{numeric} vector.}
-
-\item{\code{method}}{Single value of "constant" or "linear". If \code{"constant"},
+      \item{\code{method}}{Single value of "constant" or "linear". If \code{"constant"},
 return the index value for each match. If \code{"linear"}, return the index
 value with any fractional value.}
-
-\item{\code{rightmost.closed}}{Whether or not to include the upper limit of
+      \item{\code{rightmost.closed}}{Whether or not to include the upper limit of
 argument \code{x}. Default is \code{FALSE}. This argument is ignored when
 argument \code{x} contains index values.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A numeric vector giving indices into \code{self} for the valid values
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A numeric vector giving indices into \code{self} for the valid values
 of \code{x}. If there is at least 1 valid index, then attribute "CFTime"
 contains an instance of \code{CFTime} that describes the dimension of
 filtering the dataset associated with \code{self} with the result of this
 method, excluding any \code{NA} values.
+  }
 }
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFTime-get_bounds"></a>}}
 \if{latex}{\out{\hypertarget{method-CFTime-get_bounds}{}}}
-\subsection{Method \code{get_bounds()}}{
-Return boundary values.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$get_bounds(format)}\if{html}{\out{</div>}}
+\subsection{\code{CFTime$get_bounds()}}{
+  Return boundary values.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$get_bounds(format)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{format}}{A string specifying a format for output, optional.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    An array with \code{dims(2, length(offsets))} with values for the
+boundaries. \code{NULL} if the boundaries have not been set.
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{format}}{A string specifying a format for output, optional.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-An array with \code{dims(2, length(offsets))} with values for the
-boundaries. \code{NULL} if the boundaries have not been set.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFTime-set_bounds"></a>}}
 \if{latex}{\out{\hypertarget{method-CFTime-set_bounds}{}}}
-\subsection{Method \code{set_bounds()}}{
-Set or delete the boundary values of the \code{CFTime} instance.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$set_bounds(value)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{value}}{The boundary values to set, in units of the offsets. A
+\subsection{\code{CFTime$set_bounds()}}{
+  Set or delete the boundary values of the \code{CFTime} instance.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$set_bounds(value)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{value}}{The boundary values to set, in units of the offsets. A
 matrix \verb{(2, length(private$.offsets))}. If \code{NULL}, the boundaries are
 deleted. If \code{TRUE}, make regular, consecutive boundaries.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    Self, invisibly.
+  }
 }
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Self, invisibly.
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFTime-equidistant"></a>}}
 \if{latex}{\out{\hypertarget{method-CFTime-equidistant}{}}}
-\subsection{Method \code{equidistant()}}{
-This method returns \code{TRUE} if the time series has uniformly
+\subsection{\code{CFTime$equidistant()}}{
+  This method returns \code{TRUE} if the time series has uniformly
 distributed time steps between the extreme values, \code{FALSE} otherwise.
 First test without sorting; this should work for most data sets. If
 not, only then offsets are sorted. For most data sets that will work
@@ -363,44 +372,46 @@ coarser units have a variable number of days per time step, in all
 calendars except for \verb{360_day}. For now, an approximate solution is
 used that should work in all but the most non-conformal exotic
 arrangements.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$equidistant()}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$equidistant()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    \code{TRUE} if all time steps are equidistant, \code{FALSE} otherwise, or
+\code{NA} if no offsets have been set.
+  }
 }
 
-\subsection{Returns}{
-\code{TRUE} if all time steps are equidistant, \code{FALSE} otherwise, or
-\code{NA} if no offsets have been set.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFTime-slice"></a>}}
 \if{latex}{\out{\hypertarget{method-CFTime-slice}{}}}
-\subsection{Method \code{slice()}}{
-Given a vector of character timestamps, return a logical
+\subsection{\code{CFTime$slice()}}{
+  Given a vector of character timestamps, return a logical
 vector of a length equal to the number of time steps in the time series
 with values \code{TRUE} for those time steps that fall between the two
 extreme values of the vector values, \code{FALSE} otherwise.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$slice(extremes, closed = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{extremes}}{Character vector of timestamps that represent the
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$slice(extremes, closed = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{extremes}}{Character vector of timestamps that represent the
 time period of interest. The extreme values are selected. Badly
 formatted timestamps are silently dropped.}
-
-\item{\code{closed}}{Is the right side closed, i.e. included in the result?
+      \item{\code{closed}}{Is the right side closed, i.e. included in the result?
 Default is \code{FALSE}. A specification of \verb{c("2022-01-01", "2023-01-01)}
 will thus include all time steps that fall in the year 2022 when
 \code{closed = FALSE} but include \code{2023-01-01} if that exact value is
 present in the time series.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A logical vector with a length equal to the number of time steps
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A logical vector with a length equal to the number of time steps
 in \code{self} with values \code{TRUE} for those time steps that fall between the
 extreme values, \code{FALSE} otherwise.
 
@@ -408,27 +419,30 @@ An attribute 'CFTime' will have the same definition as \code{self} but with
 offsets corresponding to the time steps falling between the two
 extremes. If there are no values between the extremes, the attribute is
 not set.
+  }
 }
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFTime-POSIX_compatible"></a>}}
 \if{latex}{\out{\hypertarget{method-CFTime-POSIX_compatible}{}}}
-\subsection{Method \code{POSIX_compatible()}}{
-Can the time series be converted to POSIXt?
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$POSIX_compatible()}\if{html}{\out{</div>}}
+\subsection{\code{CFTime$POSIX_compatible()}}{
+  Can the time series be converted to POSIXt?
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$POSIX_compatible()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    \code{TRUE} if the calendar support conversion to POSIXt, \code{FALSE}
+otherwise.
+  }
 }
 
-\subsection{Returns}{
-\code{TRUE} if the calendar support conversion to POSIXt, \code{FALSE}
-otherwise.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFTime-cut"></a>}}
 \if{latex}{\out{\hypertarget{method-CFTime-cut}{}}}
-\subsection{Method \code{cut()}}{
-Create a factor for a \code{CFTime} instance.
+\subsection{\code{CFTime$cut()}}{
+  Create a factor for a \code{CFTime} instance.
 
 When argument \code{breaks} is one of \verb{"year", "season", "quarter", "month", "dekad", "day"}, a factor is generated like by \code{\link[=CFfactor]{CFfactor()}}. When
 \code{breaks} is a vector of character timestamps a factor is produced with
@@ -445,35 +459,37 @@ differences in the arguments: for \code{breaks} the set of options is
 different and no preceding integer is allowed, \code{labels} are always
 assigned using values of \code{breaks}, and the interval is always
 left-closed.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$cut(breaks)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{breaks}}{A character string of a factor period (see \code{\link[=CFfactor]{CFfactor()}} for
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$cut(breaks)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{breaks}}{A character string of a factor period (see \code{\link[=CFfactor]{CFfactor()}} for
 a description), or a character vector of timestamps that conform to the
 calendar of \code{x}, with a length of at least 2. Timestamps must be given
 in ISO8601 format, e.g. "2024-04-10 21:31:43".}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A factor with levels according to the \code{breaks} argument, with
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A factor with levels according to the \code{breaks} argument, with
 attributes 'period', 'era' and 'CFTime'. When \code{breaks} is a factor
 period, attribute 'period' has that value, otherwise it is '"day"'.
 When \code{breaks} is a character vector of timestamps, attribute 'CFTime'
 holds an instance of \code{CFTime} that has the same definition as \code{x}, but
 with (ordered) offsets generated from the \code{breaks}. Attribute 'era'
 is always -1.
+  }
 }
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFTime-factor"></a>}}
 \if{latex}{\out{\hypertarget{method-CFTime-factor}{}}}
-\subsection{Method \code{factor()}}{
-Generate a factor for the offsets, or a part thereof. This
+\subsection{\code{CFTime$factor()}}{
+  Generate a factor for the offsets, or a part thereof. This
 is specifically interesting for creating factors from the date part of
 the time series that aggregate the time series into longer time periods
 (such as month) that can then be used to process daily CF data sets
@@ -533,27 +549,27 @@ describes the temporal dimension of resource 'A' and a factor 'Af' is
 generated from \code{Af <- At$factor()}, then \code{Bt <- attr(Af, "CFTime")}
 describes the temporal dimension of the result of, say, \code{B <- apply(A, 1:2, tapply, Af, FUN)}. The 'CFTime' attribute contains a
 \link{CFClimatology} instance for era factors.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$factor(period = "month", era = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{period}}{character. A character string with one of the values
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$factor(period = "month", era = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{period}}{character. A character string with one of the values
 "year", "season", "quarter", "month" (the default), "dekad" or "day".}
-
-\item{\code{era}}{numeric or list, optional. Vector of years for which to
+      \item{\code{era}}{numeric or list, optional. Vector of years for which to
 construct the factor, or a list whose elements are each a vector of
 years. The extreme values of the supplied vector will be used. Note
 that if a single year is specified that the result is valid, but not a
 climatological statistic. If \code{era} is not specified, the factor will
 use the entire time series for the factor.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-If \code{era} is a single vector or \code{NULL}, a factor with a length
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    If \code{era} is a single vector or \code{NULL}, a factor with a length
 equal to the number of offsets in this instance. If \code{era} is a list, a
 list with the same number of elements and names as \code{era}, each
 containing a factor. Elements in the factor will be set to \code{NA} for
@@ -566,13 +582,14 @@ era, or -1 if no \code{era} is provided. Attribute 'CFTime' holds an
 instance of \code{CFTime} or \code{CFClimatology} that has the same definition as
 this instance, but with offsets corresponding to the mid-point of the
 factor levels.
+  }
 }
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFTime-factor_units"></a>}}
 \if{latex}{\out{\hypertarget{method-CFTime-factor_units}{}}}
-\subsection{Method \code{factor_units()}}{
-Given a factor as produced by \code{CFTime$factor()}, this method
+\subsection{\code{CFTime$factor_units()}}{
+  Given a factor as produced by \code{CFTime$factor()}, this method
 will return a numeric vector with the number of time units in each
 level of the factor.
 
@@ -598,132 +615,143 @@ the factor - the actual number of data points in the time series per
 factor level may be different. Use \code{\link[=CFfactor_coverage]{CFfactor_coverage()}} to determine
 the actual number of data points or the coverage of data points
 relative to the factor level.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$factor_units(f)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{f}}{A factor or a list of factors derived from the method
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$factor_units(f)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{f}}{A factor or a list of factors derived from the method
 \code{CFTime$factor()}.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-If \code{f} is a factor, a numeric vector with a length equal to the
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    If \code{f} is a factor, a numeric vector with a length equal to the
 number of levels in the factor, indicating the number of time units in
 each level of the factor. If \code{f} is a list of factors, a list with each
 element a numeric vector as above.
+  }
 }
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFTime-factor_coverage"></a>}}
 \if{latex}{\out{\hypertarget{method-CFTime-factor_coverage}{}}}
-\subsection{Method \code{factor_coverage()}}{
-Calculate the number of time elements, or the relative
+\subsection{\code{CFTime$factor_coverage()}}{
+  Calculate the number of time elements, or the relative
 coverage, in each level of a factor generated by \code{CFTime$factor()}.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$factor_coverage(f, coverage = "absolute")}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{f}}{A factor or a list of factors derived from the method
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$factor_coverage(f, coverage = "absolute")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{f}}{A factor or a list of factors derived from the method
 \code{CFTime$factor()}.}
-
-\item{\code{coverage}}{"absolute" or "relative".}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-If \code{f} is a factor, a numeric vector with a length equal to the
+      \item{\code{coverage}}{"absolute" or "relative".}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    If \code{f} is a factor, a numeric vector with a length equal to the
 number of levels in the factor, indicating the number of units from the
 time series contained in each level of the factor when
 \code{coverage = "absolute"} or the proportion of units present relative to the
 maximum number when \code{coverage = "relative"}. If \code{f} is a list of factors, a
 list with each element a numeric vector as above.
+  }
 }
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFTime-copy"></a>}}
 \if{latex}{\out{\hypertarget{method-CFTime-copy}{}}}
-\subsection{Method \code{copy()}}{
-Create a copy of the current instance. The copy is
+\subsection{\code{CFTime$copy()}}{
+  Create a copy of the current instance. The copy is
 completely separate from the current instance.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$copy()}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$copy()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A new \code{CFTime} instance with identical definition and set of
+timestamps.
+  }
 }
 
-\subsection{Returns}{
-A new \code{CFTime} instance with identical definition and set of
-timestamps.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFTime-subset"></a>}}
 \if{latex}{\out{\hypertarget{method-CFTime-subset}{}}}
-\subsection{Method \code{subset()}}{
-Get a new \code{CFTime} instance that is a subset of the current
+\subsection{\code{CFTime$subset()}}{
+  Get a new \code{CFTime} instance that is a subset of the current
 instance, including any boundary values.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$subset(rng)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$subset(rng)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{rng}}{The numeric range of indices to subset this instance to.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A new \code{CFTime} instance with identical definition and set of
+timestamps according to the \code{rng} argument.
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{rng}}{The numeric range of indices to subset this instance to.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A new \code{CFTime} instance with identical definition and set of
-timestamps according to the \code{rng} argument.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFTime-doy"></a>}}
 \if{latex}{\out{\hypertarget{method-CFTime-doy}{}}}
-\subsection{Method \code{doy()}}{
-Retrieve the day-of-year number, either from the timestamps
+\subsection{\code{CFTime$doy()}}{
+  Retrieve the day-of-year number, either from the timestamps
 in the current instance or from the supplied \code{data.frame} of year,
 month and day. The \code{doy} is calendar-aware.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$doy(ymd)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{ymd}}{Optional \code{data.frame} with dates parsed into their parts in
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$doy(ymd)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{ymd}}{Optional \code{data.frame} with dates parsed into their parts in
 columns \code{year}, \code{month} and \code{day}. Any other columns are disregarded.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-An integer vector of the same length as argument \code{ymd} or the
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    An integer vector of the same length as argument \code{ymd} or the
 internal offsets if \code{ymd} is not specified with the day-of-year in the
 calendar of this instance. Rows in argument \code{ymd} that do not hold a
 valid date are returned as \code{NA}.
+  }
 }
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFTime-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-CFTime-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFTime$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{CFTime$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFTime$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

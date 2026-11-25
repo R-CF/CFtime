@@ -74,5 +74,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Patrick Van Laake \email{patrick@vanlaake.net} [copyright holder]
 
+Authors:
+\itemize{
+  \item Patrick Van Laake \email{patrick@vanlaake.net} [copyright holder]
+}
+
 }
 \keyword{internal}

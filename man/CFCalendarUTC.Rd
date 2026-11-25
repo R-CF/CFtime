@@ -16,140 +16,147 @@ hour and day are allowed but discouraged. Month and year as time unit are
 not allowed as there is no practical way to maintain leap second accuracy.
 }
 \section{Super classes}{
-\code{\link[CFtime:CFCalendar]{CFtime::CFCalendar}} -> \code{\link[CFtime:CFCalendarProleptic]{CFtime::CFCalendarProleptic}} -> \code{CFCalendarUTC}
+\code{\link[CFtime:CFCalendar]{CFCalendar}} -> \code{\link[CFtime:CFCalendarProleptic]{CFCalendarProleptic}} -> \code{CFCalendarUTC}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-CFCalendarUTC-new}{\code{CFCalendarUTC$new()}}
-\item \href{#method-CFCalendarUTC-valid_days}{\code{CFCalendarUTC$valid_days()}}
-\item \href{#method-CFCalendarUTC-parse}{\code{CFCalendarUTC$parse()}}
-\item \href{#method-CFCalendarUTC-offsets2time}{\code{CFCalendarUTC$offsets2time()}}
-\item \href{#method-CFCalendarUTC-clone}{\code{CFCalendarUTC$clone()}}
+  \itemize{
+    \item \href{#method-CFCalendarUTC-initialize}{\code{CFCalendarUTC$new()}}
+    \item \href{#method-CFCalendarUTC-valid_days}{\code{CFCalendarUTC$valid_days()}}
+    \item \href{#method-CFCalendarUTC-parse}{\code{CFCalendarUTC$parse()}}
+    \item \href{#method-CFCalendarUTC-offsets2time}{\code{CFCalendarUTC$offsets2time()}}
+    \item \href{#method-CFCalendarUTC-clone}{\code{CFCalendarUTC$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details><summary>Inherited methods</summary>
+\if{html}{\out{<details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="add_day"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-add_day'><code>CFtime::CFCalendar$add_day()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="doy"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-doy'><code>CFtime::CFCalendar$doy()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="is_compatible"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-is_compatible'><code>CFtime::CFCalendar$is_compatible()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="is_equivalent"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-is_equivalent'><code>CFtime::CFCalendar$is_equivalent()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="print"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-print'><code>CFtime::CFCalendar$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="POSIX_compatible"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-POSIX_compatible'><code>CFtime::CFCalendarProleptic$POSIX_compatible()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="date2offset"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-date2offset'><code>CFtime::CFCalendarProleptic$date2offset()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="leap_year"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-leap_year'><code>CFtime::CFCalendarProleptic$leap_year()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="month_days"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-month_days'><code>CFtime::CFCalendarProleptic$month_days()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="offset2date"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-offset2date'><code>CFtime::CFCalendarProleptic$offset2date()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="add_day"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-add_day'><code>CFCalendar$add_day()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="doy"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-doy'><code>CFCalendar$doy()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="is_compatible"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-is_compatible'><code>CFCalendar$is_compatible()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="is_equivalent"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-is_equivalent'><code>CFCalendar$is_equivalent()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="print"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-print'><code>CFCalendar$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="POSIX_compatible"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-POSIX_compatible'><code>CFCalendarProleptic$POSIX_compatible()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="date2offset"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-date2offset'><code>CFCalendarProleptic$date2offset()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="leap_year"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-leap_year'><code>CFCalendarProleptic$leap_year()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="month_days"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-month_days'><code>CFCalendarProleptic$month_days()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="offset2date"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-offset2date'><code>CFCalendarProleptic$offset2date()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-CFCalendarUTC-new"></a>}}
-\if{latex}{\out{\hypertarget{method-CFCalendarUTC-new}{}}}
-\subsection{Method \code{new()}}{
-Create a new CF UTC calendar.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFCalendarUTC$new(nm, definition)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{nm}}{The name of the calendar. This must be "utc".}
-
-\item{\code{definition}}{The string that defines the units and the origin, as
+\if{html}{\out{<a id="method-CFCalendarUTC-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-CFCalendarUTC-initialize}{}}}
+\subsection{\code{CFCalendarUTC$new()}}{
+  Create a new CF UTC calendar.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFCalendarUTC$new(nm, definition)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{nm}}{The name of the calendar. This must be "utc".}
+      \item{\code{definition}}{The string that defines the units and the origin, as
 per the CF Metadata Conventions.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFCalendarUTC-valid_days"></a>}}
 \if{latex}{\out{\hypertarget{method-CFCalendarUTC-valid_days}{}}}
-\subsection{Method \code{valid_days()}}{
-Indicate which of the supplied dates are valid.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFCalendarUTC$valid_days(ymd)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{ymd}}{\code{data.frame} with dates parsed into their parts in columns
+\subsection{\code{CFCalendarUTC$valid_days()}}{
+  Indicate which of the supplied dates are valid.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFCalendarUTC$valid_days(ymd)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{ymd}}{\code{data.frame} with dates parsed into their parts in columns
 \code{year}, \code{month} and \code{day}. Any other columns are disregarded.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Logical vector with the same length as argument \code{ymd} has rows
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    Logical vector with the same length as argument \code{ymd} has rows
 with \code{TRUE} for valid days and \code{FALSE} for invalid days, or \code{NA} where
 the row in argument \code{ymd} has \code{NA} values.
+  }
 }
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFCalendarUTC-parse"></a>}}
 \if{latex}{\out{\hypertarget{method-CFCalendarUTC-parse}{}}}
-\subsection{Method \code{parse()}}{
-Parsing a vector of date-time character strings into parts.
+\subsection{\code{CFCalendarUTC$parse()}}{
+  Parsing a vector of date-time character strings into parts.
 This includes any leap seconds. Time zone indications are not allowed.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFCalendarUTC$parse(d)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{d}}{character. A character vector of date-times.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A \code{data.frame} with columns year, month, day, hour, minute,
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFCalendarUTC$parse(d)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{d}}{character. A character vector of date-times.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A \code{data.frame} with columns year, month, day, hour, minute,
 second, time zone, and offset. Invalid input data will appear as \code{NA}.
 Note that the time zone is always "+0000" and is included to maintain
 compatibility with results from other calendars.
+  }
 }
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFCalendarUTC-offsets2time"></a>}}
 \if{latex}{\out{\hypertarget{method-CFCalendarUTC-offsets2time}{}}}
-\subsection{Method \code{offsets2time()}}{
-Decompose a vector of offsets, in units of the calendar, to
+\subsection{\code{CFCalendarUTC$offsets2time()}}{
+  Decompose a vector of offsets, in units of the calendar, to
 their timestamp values. This adds a specified amount of time to the
 origin of a \code{CFTime} object.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFCalendarUTC$offsets2time(offsets = NULL)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFCalendarUTC$offsets2time(offsets = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{offsets}}{Vector of numeric offsets to add to the origin of the
+calendar.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A \code{data.frame} with columns for the timestamp elements and as
+many rows as there are offsets.
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{offsets}}{Vector of numeric offsets to add to the origin of the
-calendar.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A \code{data.frame} with columns for the timestamp elements and as
-many rows as there are offsets.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFCalendarUTC-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-CFCalendarUTC-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFCalendarUTC$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{CFCalendarUTC$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFCalendarUTC$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

@@ -15,7 +15,6 @@ Description: Support for all calendars as specified in the Climate and Forecast
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
 Imports: 
     R6
 Suggests: 
@@ -43,3 +42,4 @@ Collate:
     'helpers.R'
     'zzz.R'
 Config/Needs/website: rmarkdown
+Config/roxygen2/version: 8.1.1

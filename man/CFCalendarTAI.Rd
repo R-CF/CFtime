@@ -12,73 +12,75 @@ clock, the concepts of leap second, time zone and daylight savings time do
 not apply.
 }
 \section{Super classes}{
-\code{\link[CFtime:CFCalendar]{CFtime::CFCalendar}} -> \code{\link[CFtime:CFCalendarProleptic]{CFtime::CFCalendarProleptic}} -> \code{CFCalendarTAI}
+\code{\link[CFtime:CFCalendar]{CFCalendar}} -> \code{\link[CFtime:CFCalendarProleptic]{CFCalendarProleptic}} -> \code{CFCalendarTAI}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-CFCalendarTAI-valid_days}{\code{CFCalendarTAI$valid_days()}}
-\item \href{#method-CFCalendarTAI-clone}{\code{CFCalendarTAI$clone()}}
+  \itemize{
+    \item \href{#method-CFCalendarTAI-valid_days}{\code{CFCalendarTAI$valid_days()}}
+    \item \href{#method-CFCalendarTAI-clone}{\code{CFCalendarTAI$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details><summary>Inherited methods</summary>
+\if{html}{\out{<details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="add_day"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-add_day'><code>CFtime::CFCalendar$add_day()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="doy"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-doy'><code>CFtime::CFCalendar$doy()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="is_compatible"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-is_compatible'><code>CFtime::CFCalendar$is_compatible()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="is_equivalent"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-is_equivalent'><code>CFtime::CFCalendar$is_equivalent()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="offsets2time"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-offsets2time'><code>CFtime::CFCalendar$offsets2time()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="parse"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-parse'><code>CFtime::CFCalendar$parse()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="print"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-print'><code>CFtime::CFCalendar$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="POSIX_compatible"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-POSIX_compatible'><code>CFtime::CFCalendarProleptic$POSIX_compatible()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="date2offset"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-date2offset'><code>CFtime::CFCalendarProleptic$date2offset()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="initialize"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-initialize'><code>CFtime::CFCalendarProleptic$initialize()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="leap_year"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-leap_year'><code>CFtime::CFCalendarProleptic$leap_year()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="month_days"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-month_days'><code>CFtime::CFCalendarProleptic$month_days()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="offset2date"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-offset2date'><code>CFtime::CFCalendarProleptic$offset2date()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="add_day"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-add_day'><code>CFCalendar$add_day()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="doy"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-doy'><code>CFCalendar$doy()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="is_compatible"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-is_compatible'><code>CFCalendar$is_compatible()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="is_equivalent"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-is_equivalent'><code>CFCalendar$is_equivalent()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="offsets2time"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-offsets2time'><code>CFCalendar$offsets2time()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="parse"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-parse'><code>CFCalendar$parse()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendar" data-id="print"><a href='../../CFtime/html/CFCalendar.html#method-CFCalendar-print'><code>CFCalendar$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="POSIX_compatible"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-POSIX_compatible'><code>CFCalendarProleptic$POSIX_compatible()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="date2offset"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-date2offset'><code>CFCalendarProleptic$date2offset()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="initialize"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-initialize'><code>CFCalendarProleptic$initialize()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="leap_year"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-leap_year'><code>CFCalendarProleptic$leap_year()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="month_days"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-month_days'><code>CFCalendarProleptic$month_days()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="CFtime" data-topic="CFCalendarProleptic" data-id="offset2date"><a href='../../CFtime/html/CFCalendarProleptic.html#method-CFCalendarProleptic-offset2date'><code>CFCalendarProleptic$offset2date()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFCalendarTAI-valid_days"></a>}}
 \if{latex}{\out{\hypertarget{method-CFCalendarTAI-valid_days}{}}}
-\subsection{Method \code{valid_days()}}{
-Indicate which of the supplied dates are valid.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFCalendarTAI$valid_days(ymd)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{ymd}}{\code{data.frame} with dates parsed into their parts in columns
+\subsection{\code{CFCalendarTAI$valid_days()}}{
+  Indicate which of the supplied dates are valid.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFCalendarTAI$valid_days(ymd)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{ymd}}{\code{data.frame} with dates parsed into their parts in columns
 \code{year}, \code{month} and \code{day}. If present, the \code{tz} column is checked for
 illegal time zone offsets. Any other columns are disregarded.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Logical vector with the same length as argument \code{ymd} has rows
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    Logical vector with the same length as argument \code{ymd} has rows
 with \code{TRUE} for valid days and \code{FALSE} for invalid days, or \code{NA} where
 the row in argument \code{ymd} has \code{NA} values.
+  }
 }
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CFCalendarTAI-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-CFCalendarTAI-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CFCalendarTAI$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{CFCalendarTAI$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CFCalendarTAI$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }
